@@ -13,6 +13,8 @@ jobs:
       - uses: xu-cheng/latex-action@v3
         with:
           root_file: relazione/main.tex
+          extra_fonts: |
+            ./relazione/fonts/calibri/*ttf
           latexmk_use_lualatex: true
       
       - name: Release
