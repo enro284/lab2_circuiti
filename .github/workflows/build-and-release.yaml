@@ -17,6 +17,9 @@ jobs:
             ./relazione/fonts/calibri/*ttf
           latexmk_use_lualatex: true
       
+      - name: Get timestamp
+        run: echo "TIMESTAMP=$(date +'%Y-%m-%d %T')" >> $GITHUB_ENV
+      
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
