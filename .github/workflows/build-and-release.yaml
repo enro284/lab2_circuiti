@@ -1,0 +1,23 @@
+name: Build and release Relazione
+on: 
+  push
+  
+jobs:
+  presentation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX
+      - uses: xu-cheng/latex-action@v3
+        with:
+          root_file: relazione/main.tex
+          latexmk_use_lualatex: true
+      
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Draft ${{ env.TIMESTAMP }}
+          files: main.pdf
+          draft: true
