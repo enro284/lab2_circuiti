@@ -129,3 +129,120 @@ void voltage_sigma()
     double sigma2 = f2->GetParameter(2);
     std::cout << "250kHz sigma: " << sigma2 << std::endl;
 }
+
+void amplitude_sigma()
+{
+
+    // Parametri istogramma 1
+    const int nBins = 30;
+    const double xMin = 4.989;
+    const double xMax = 4.992;
+
+    // Parametri istogramma 2
+
+    // Istogrammi
+    auto h1 = new TH1F("h1", "20kHz; V; Conteggi", nBins, xMin, xMax);
+    auto h2 = new TH1F("h2", "50kHz; V; Conteggi", nBins, xMin, xMax);
+
+    // Leggi primo file
+    std::ifstream file1("amplitude_20kHz.txt");
+
+    double x;
+    while (file1 >> x)
+    {
+        h1->Fill(x);
+    }
+    file1.close();
+
+    // Leggi secondo file
+    std::ifstream file2("amplitude_50kHz.txt");
+    while (file2 >> x)
+    {
+        h2->Fill(x);
+    }
+    file2.close();
+
+    // Crea canvas diviso in due
+    TCanvas *c = new TCanvas("c", "c", 1200, 600);
+    c->Divide(2, 1);
+
+    // Primo istogramma con fit
+    c->cd(1);
+    gStyle->SetOptFit(1111); // Mostra box statistiche completo
+    h1->SetLineColor(kBlue);
+    h1->Draw();
+    h1->Fit("gaus"); // Mostra info fit
+    TF1 *f1 = h1->GetFunction("gaus");
+    double sigma1 = f1->GetParameter(2);
+    std::cout << "20kHz sigma: " << sigma1 << std::endl;
+
+    // Secondo istogramma con fit
+    c->cd(2);
+    gStyle->SetOptFit(1111);
+    h2->SetLineColor(kRed);
+    h2->Draw();
+    h2->Fit("gaus");
+    TF1 *f2 = h2->GetFunction("gaus");
+    double sigma2 = f2->GetParameter(2);
+    std::cout << "50kHz sigma: " << sigma2 << std::endl;
+}
+
+void phase_sigma()
+{
+
+    // Parametri istogramma 1
+    const int nBins1 = 30;
+    const double xMin1 = 0.4;
+    const double xMax1 = 1.6;
+
+    // Parametri istogramma 2
+    const int nBins2 = 30;
+    const double xMin2 = 1;
+    const double xMax2 = 5;
+
+    // Istogrammi
+    auto h1 = new TH1F("h1", "20kHz; V; Conteggi", nBins1, xMin1, xMax1);
+    auto h2 = new TH1F("h2", "50kHz; V; Conteggi", nBins2, xMin2, xMax2);
+
+    // Leggi primo file
+    std::ifstream file1("phase_20kHz.txt");
+
+    double x;
+    while (file1 >> x)
+    {
+        h1->Fill(x);
+    }
+    file1.close();
+
+    // Leggi secondo file
+    std::ifstream file2("phase_50kHz.txt");
+    while (file2 >> x)
+    {
+        h2->Fill(x);
+    }
+    file2.close();
+
+    // Crea canvas diviso in due
+    TCanvas *c = new TCanvas("c", "c", 1200, 600);
+    c->Divide(2, 1);
+
+    // Primo istogramma con fit
+    c->cd(1);
+    gStyle->SetOptFit(1111); // Mostra box statistiche completo
+    h1->SetLineColor(kBlue);
+    h1->Draw();
+    h1->Fit("gaus"); // Mostra info fit
+    TF1 *f1 = h1->GetFunction("gaus");
+    double sigma1 = f1->GetParameter(2);
+    std::cout << "20kHz sigma: " << sigma1 << std::endl;
+
+    // Secondo istogramma con fit
+    c->cd(2);
+    gStyle->SetOptFit(1111);
+    h2->SetLineColor(kRed);
+    h2->Draw();
+    h2->Fit("gaus");
+    TF1 *f2 = h2->GetFunction("gaus");
+    double sigma2 = f2->GetParameter(2);
+    std::cout << "50kHz sigma: " << sigma2 << std::endl;
+}
