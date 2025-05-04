@@ -1,7 +1,11 @@
+#include <fstream>
 #include "TCanvas.h"
 #include "TGraphErrors.h"
 #include "TMultiGraph.h"
 #include "TF1.h"
+#include "TH1F.h"
+#include "TStyle.h"
+
 #include "formule.cpp" //si lo so, non si fa
 
 const double f_min = 0.;
@@ -55,6 +59,10 @@ void phase(const char *data_w, const char *data_m, const char *data_t)
     mg->Add(graph_w);
     mg->Add(graph_m);
     mg->Add(graph_t);
+
+    mg->GetXaxis()->SetLimits(f_min, f_max);
+    mg->SetMinimum(-95);
+    mg->SetMaximum(+95);
 
     mg->Draw("AP");
 
