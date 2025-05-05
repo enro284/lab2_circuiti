@@ -4,6 +4,8 @@
 \usepackage{fontspec}
 \setmainfont{calibri}
 \usepackage{titlesec}
+\usepackage[american]{circuitikz}
+
 \titleformat{\section}
   {\normalfont\normalsize\itshape}{\thesection.}{1em}{}
 \titlespacing{\section}{0pt}{1em}{0pt}
@@ -28,6 +30,51 @@ comportamento atteso; analogamente per ottica. L’introduzione non è un riassu
 i risultati.
 
 \section*{Apparato sperimentale e svolgimento}
+
+\begin{circuitikz}[scale=1]
+  % input source and top bus
+  \draw
+    (0,0) node[ground]{} 
+      to[vsourcesin,l=$v_{\mathrm{in}}$] (0,3) 
+    -- (6,3) coordinate (bus);
+
+  % ramo 1: L1 - R1
+  \draw
+    (bus) |- (1,3) to[L,l=$L_1$] (1,1.5) 
+            to[R,l=$R_1$] (1,0) node[ground]{}
+    (1,1.5) node[right] {$v_W$};
+
+  % ramo 2: C1 - R1 (midrange)
+  \draw
+    (bus) |- (3,3) to[C,l=$C_1$] (3,1.5) 
+            to[R,l=$R_1$] (3,0) node[ground]{}
+    (3,1.5) node[right] {$v_T$};
+
+  % ramo 3: L2 - C2 - R2
+  \draw
+    (bus) |- (5,3) to[L,l=$L_2$] (5,2) 
+            to[C,l=$C_2$] (5,1) 
+            to[R,l=$R_2$] (5,0) node[ground]{}
+    (5,1) node[right] {$v_M$};
+\end{circuitikz}
+
+Spiegazione rapida:
+
+vsourcesin disegna una sorgente sinusoidale.
+
+to[L,l=$L_i$] e to[C,l=$C_i$] disegnano induttori e condensatori con etichetta L_i e C_i.
+
+Con la sintassi |- si crea rapidamente il ramo parallelo dalla linea superiore (bus) fino al componente.
+
+I nodi di misura sono etichettati subito dopo il punto di giunzione (node[right]{$v_X$}).
+
+Tutti i rami tornano a massa con to[...] (x,0) node[ground]{}.
+
+
+Sentiti libero di spostare le posizioni (1,3), (3,3), (5,3) o scalare il disegno cambiando scale=... per rifinire l’aspetto.
+
+
+
 Descrivere l’apparato utilizzato. Allegare una foto o lo schema dell’apparato sperimentale
 (sarà la Fig. 1); la foto deve permettere di identificare chiaramente i componenti principali
 (eventualmente usare delle frecce e delle etichette per evidenziarli). Riassumere lo svolgimento
