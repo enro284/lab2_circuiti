@@ -11,6 +11,15 @@
 const double f_min = 0.;
 const double f_max = 50E3;
 
+double V_g(double *f, double *par);
+double V_w(double *f, double *par);
+double V_m(double *f, double *par);
+double V_t(double *f, double *par);
+
+double p_w(double *f, double *par);
+double p_m(double *f, double *par);
+double p_t(double *f, double *par);
+
 void amplitude(const char *data_w, const char *data_m, const char *data_t)
 {
     auto canvas = new TCanvas();
@@ -30,18 +39,26 @@ void amplitude(const char *data_w, const char *data_m, const char *data_t)
 
     mg->Draw("AP");
 
-    auto func_w = new TF1("Tensione Woofer", V_w, f_min, f_max, 2);
+    auto func_g = new TF1("Tensione Generatore", V_g, f_min, f_max, 4);
+    func_g->SetParameters(3E3, 47E-3, 4.7E-9, 5.);
+    func_g->SetLineColor(kBlack);
+
+    auto func_w = new TF1("Tensione Woofer", [&, func_g](double *f, double *par)
+                          { return func_g->Eval(f[0]) * V_w(f, par); }, f_min, f_max, 2);
     func_w->SetParameters(3E3, 47E-3);
     func_w->SetLineColor(kBlue);
 
-    auto func_m = new TF1("Tensione Mid", V_m, f_min, f_max, 3);
+    auto func_m = new TF1("Tensione Mid", [&, func_g](double *f, double *par)
+                          { return func_g->Eval(*f) * V_m(f, par); }, f_min, f_max, 3);
     func_m->SetParameters(3E3, 47E-3, 4.7E-9);
     func_m->SetLineColor(kGreen);
 
-    auto func_t = new TF1("Tensione Tweeter", V_t, f_min, f_max, 2);
+    auto func_t = new TF1("Tensione Tweeter", [&, func_g](double *f, double *par)
+                          { return func_g->Eval(*f) * V_t(f, par); }, f_min, f_max, 2);
     func_t->SetParameters(3E3, 4.7E-9);
     func_t->SetLineColor(kRed);
 
+    func_g->Draw("same");
     func_w->Draw("same");
     func_m->Draw("same");
     func_t->Draw("same");
@@ -81,6 +98,23 @@ void phase(const char *data_w, const char *data_m, const char *data_t)
     func_w->Draw("same");
     func_m->Draw("same");
     func_t->Draw("same");
+}
+
+void tempi(){
+    auto canvas = new TCanvas();
+
+    auto g_g = new TGraph("tempi_1.txt", "%lg %lg");
+    auto g_w = new TGraph("tempi_2.txt", "%lg %lg");
+    auto g_m = new TGraph("tempi_3.txt", "%lg %lg");
+    auto g_t = new TGraph("tempi_4.txt", "%lg %lg");
+
+    auto mg = new TMultiGraph();
+    mg->Add(g_g);
+    mg->Add(g_w);
+    mg->Add(g_m);
+    mg->Add(g_t);
+
+    mg->Draw("AP");
 }
 
 void voltage_sigma()
