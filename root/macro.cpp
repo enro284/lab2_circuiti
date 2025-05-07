@@ -64,15 +64,32 @@ void amplitude(const char *data_w, const char *data_m, const char *data_t)
     func_t->Draw("same");
 }
 
-void phase(const char *data_w, const char *data_m, const char *data_t)
+void phase(const char *data_g, const char *data_w, const char *data_m, const char *data_t)
 {
     auto canvas = new TCanvas();
 
+    auto graph_g = new TGraph(data_g, "%lg %lg");
     auto graph_w = new TGraph(data_w, "%lg %lg");
     auto graph_m = new TGraph(data_m, "%lg %lg");
     auto graph_t = new TGraph(data_t, "%lg %lg");
 
+    /* // idea calcolo errori
+
+    for(int i = 0; i < graph_g->GetN(); ++i)
+    {
+        double x, y;
+        graph_g->GetPoint(i, x, y);
+        calcoli ey
+        graph_g->SetPointError(i, 0, ey)
+    }
+    */
+   
+    graph_g->SetMarkerStyle(20);
+    graph_g->SetMarkerSize(2);
+    graph_g->SetMarkerColor(kBlack);
+
     auto mg = new TMultiGraph();
+    mg->Add(graph_g);
     mg->Add(graph_w);
     mg->Add(graph_m);
     mg->Add(graph_t);
@@ -82,6 +99,12 @@ void phase(const char *data_w, const char *data_m, const char *data_t)
     mg->SetMaximum(+95);
 
     mg->Draw("AP");
+
+    auto func_g = new TF1("Fase Generatore", "[0] + [1]*x", f_min, f_max);
+    func_g->SetParameters(0, 0);
+    func_g->SetLineColor(kBlack);
+
+    graph_g->Fit(func_g);
 
     auto func_w = new TF1("Fase Woofer", p_w, f_min, f_max, 2);
     func_w->SetParameters(3E3, 47E-3);
@@ -95,12 +118,14 @@ void phase(const char *data_w, const char *data_m, const char *data_t)
     func_t->SetParameters(3E3, 4.7E-9);
     func_t->SetLineColor(kRed);
 
+    func_g->Draw("same");
     func_w->Draw("same");
     func_m->Draw("same");
     func_t->Draw("same");
 }
 
-void tempi(){
+void tempi()
+{
     auto canvas = new TCanvas();
 
     auto g_g = new TGraph("tempi_1.txt", "%lg %lg");
