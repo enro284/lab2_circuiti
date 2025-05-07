@@ -4,7 +4,7 @@
 \usepackage{fontspec}
 \setmainfont{calibri}
 \usepackage{titlesec}
-\usepackage[american]{circuitikz}
+\usepackage{circuitikz}
 
 \titleformat{\section}
   {\normalfont\normalsize\itshape}{\thesection.}{1em}{}
@@ -17,72 +17,60 @@
 \date{data}
 
 \begin{document}
-\maketitle  
+\maketitle
 \section*{Abstract}
-Lunghezza massima 10 righe, riassumere lo scopo dell’esperimento e i risultati principali
-(osservazioni qualitative e risultati numerici). L’abstract non deve contenere riferimenti a quanto
-riportato nel testo (figure, equazioni o tabelle) e deve essere auto – esplicativo.
+Lunghezza massima 10 righe, riassumere lo scopo dell'esperimento e i risultati principali
+(osservazioni qualitative e risultati numerici). L'abstract non deve contenere riferimenti a quanto
+riportato nel testo (figure, equazioni o tabelle) e deve essere auto - esplicativo.
 
 \section*{Introduzione}
-Descrivere i concetti fisici principali e gli obiettivi dell’esperienza. Per l’esperienza sui circuiti
+Descrivere i concetti fisici principali e gli obiettivi dell'esperienza. Per l'esperienza sui circuiti
 descrivere il circuito progettato, le espressioni algebriche per le grandezze fisiche misurate, il
-comportamento atteso; analogamente per ottica. L’introduzione non è un riassunto, non riportare
+comportamento atteso; analogamente per ottica. L'introduzione non è un riassunto, non riportare
 i risultati.
 
 \section*{Apparato sperimentale e svolgimento}
+\begin{figure}[!h]
+  \centering
+  \begin{circuitikz}[scale=1]
+    % generatore
+    \draw (8,0) --
+    (-1,0) to[sinusoidal voltage source]
+    (-1,5) --
+    (8,5);
+    \draw (-1,4) to[short, -o] (-1.5,4) node[left]{$v_g$};
 
-\begin{circuitikz}[scale=1]
-  % input source and top bus
-  \draw
-    (0,0) node[ground]{} 
-      to[vsourcesin,l=$v_{\mathrm{in}}$] (0,3) 
-    -- (6,3) coordinate (bus);
+    \draw (-1,1) -- (-1.5,1) node[ground]{};
 
-  % ramo 1: L1 - R1
-  \draw
-    (bus) |- (1,3) to[L,l=$L_1$] (1,1.5) 
-            to[R,l=$R_1$] (1,0) node[ground]{}
-    (1,1.5) node[right] {$v_W$};
+    % woofer
+    \draw (3,0) to[R=$R_w$]
+    (3,2) to[L=$L_w$]
+    (3,5);
+    \draw (3,2) to [short, -o] (2.5, 2) node[left]{$v_w$};
 
-  % ramo 2: C1 - R1 (midrange)
-  \draw
-    (bus) |- (3,3) to[C,l=$C_1$] (3,1.5) 
-            to[R,l=$R_1$] (3,0) node[ground]{}
-    (3,1.5) node[right] {$v_T$};
+    % mid
+    \draw (5.5,0) to [R=$R_m$]
+    (5.5,2) to [L=$L_m$]
+    (5.5,3.75) to [C=$C_m$]
+    (5.5,5);
+    \draw (5.5,2) to [short, -o] (5, 2) node[left]{$v_m$};
 
-  % ramo 3: L2 - C2 - R2
-  \draw
-    (bus) |- (5,3) to[L,l=$L_2$] (5,2) 
-            to[C,l=$C_2$] (5,1) 
-            to[R,l=$R_2$] (5,0) node[ground]{}
-    (5,1) node[right] {$v_M$};
-\end{circuitikz}
+    %tweeter
+    \draw (8,0) to[R=$R_t$] (8,2);
+    \draw (8,2) to[C=$C_t$] (8,5);
+    \draw (8,2) to [short, -o] (7.5, 2) node[left]{$v_t$};
 
-Spiegazione rapida:
+  \end{circuitikz}
+\end{figure}
 
-vsourcesin disegna una sorgente sinusoidale.
-
-to[L,l=$L_i$] e to[C,l=$C_i$] disegnano induttori e condensatori con etichetta L_i e C_i.
-
-Con la sintassi |- si crea rapidamente il ramo parallelo dalla linea superiore (bus) fino al componente.
-
-I nodi di misura sono etichettati subito dopo il punto di giunzione (node[right]{$v_X$}).
-
-Tutti i rami tornano a massa con to[...] (x,0) node[ground]{}.
-
-
-Sentiti libero di spostare le posizioni (1,3), (3,3), (5,3) o scalare il disegno cambiando scale=... per rifinire l’aspetto.
-
-
-
-Descrivere l’apparato utilizzato. Allegare una foto o lo schema dell’apparato sperimentale
+Descrivere l'apparato utilizzato. Allegare una foto o lo schema dell'apparato sperimentale
 (sarà la Fig. 1); la foto deve permettere di identificare chiaramente i componenti principali
 (eventualmente usare delle frecce e delle etichette per evidenziarli). Riassumere lo svolgimento
-delle misure e motivare la scelta dei parametri di acquisizione (per esempio: l’intervallo di frequenze
+delle misure e motivare la scelta dei parametri di acquisizione (per esempio: l'intervallo di frequenze
 e la frequenza di acquisizione).
 \section*{Risultati e discussione}
 Riportare i risultati più rappresentativi in forma grafica oppure come foto delle osservazioni
-sull’oscilloscopio analogico (se utilizzato). Non è necessario riportare tutti i dati. Commentare
+sull'oscilloscopio analogico (se utilizzato). Non è necessario riportare tutti i dati. Commentare
 qualitativamente gli andamenti delle grandezze fisiche riportati in forma grafica e/o le forme di riga
 osservate. In tutti i grafici gli assi devono essere chiaramente etichettati e le unità di misura devono
 essere incluse. Quando le incertezze sono note e sono visibili sulla scala utilizzata rappresentarle sul
