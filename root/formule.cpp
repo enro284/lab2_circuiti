@@ -2,11 +2,25 @@
 
 double V_g(double *f, double *par)
 {
-    double V_0 = 5.;
+    double V_0 = par[3];
+    // V_0 1- R/Z (in modulo)
 
-    // ricava
+    double W = 2 * TMath::Pi() * *f;
+    TComplex Z_R{par[0], 0};
+    TComplex Z_L{0, W * par[1]};
+    TComplex Z_C{0, -1 / (W * par[2])};
+    TComplex Z_gen{50., 0.};
+    TComplex Z_LR{118.5, 0.};
 
-    return V_0;
+    TComplex Z_W = Z_R + Z_L + Z_LR;
+    TComplex Z_M = Z_R + Z_L + Z_C + Z_LR;
+    TComplex Z_T = Z_R + Z_C;
+
+    TComplex Z_load = 1. / (1. / Z_W + 1. / Z_M + 1. / Z_T);
+
+    TComplex Z_tot = Z_load + Z_gen;
+
+    return V_0 * (TComplex::Abs(Z_load/(Z_gen + Z_load)));
 }
 
 double V_w(double *f, double *par)
