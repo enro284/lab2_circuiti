@@ -105,9 +105,19 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
 
     auto c2 = new TCanvas();
     c2->cd();
+
     auto graph_w = new TGraphErrors(data_w, "%lg %lg");
     auto graph_m = new TGraphErrors(data_m, "%lg %lg");
     auto graph_t = new TGraphErrors(data_t, "%lg %lg");
+    auto graph_gFlat = new TGraphErrors(graph_g->GetN()); // si può fare meglio?
+
+    for (int i = 0; i < graph_g->GetN(); ++i)
+    {
+        double x, y;
+        graph_g->GetPoint(i, x, y);
+        graph_gFlat->SetPoint(i, x, y);
+        graph_gFlat->SetPointError(i, 0, 0.1); // Set a default error value
+    }
 
     // Subtract the baseline (func_g) from each point in the graphs
     auto subtractBaseline = [&](TGraphErrors *graph)
@@ -124,9 +134,10 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
     subtractBaseline(graph_w);
     subtractBaseline(graph_m);
     subtractBaseline(graph_t);
+    subtractBaseline(graph_gFlat);
 
     auto mg = new TMultiGraph();
-    mg->Add(graph_g);
+    mg->Add(graph_gFlat);
     mg->Add(graph_w);
     mg->Add(graph_m);
     mg->Add(graph_t);
@@ -149,7 +160,7 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
     func_t->SetParameters(3E3, 4.7E-9);
     func_t->SetLineColor(kRed);
 
-    func_g->Draw("same");
+    graph_gFlat->Fit(func_g); // posso fittare con la stessa o devo cambiare func?
     func_w->Draw("same");
     func_m->Draw("same");
     func_t->Draw("same");
