@@ -25,26 +25,31 @@ void amplitude(const char *data_g, const char *data_w, const char *data_m, const
     gStyle->SetOptFit(1111);
     auto canvas = new TCanvas();
 
-    auto graph_w = new TGraph(data_w, "%lg %lg");
-    auto graph_m = new TGraph(data_m, "%lg %lg");
-    auto graph_t = new TGraph(data_t, "%lg %lg");
-    auto graph_g = new TGraph(data_g, "%lg %lg");
+    auto graph_w = new TGraphErrors(data_w, "%lg %lg");
+    auto graph_m = new TGraphErrors(data_m, "%lg %lg");
+    auto graph_t = new TGraphErrors(data_t, "%lg %lg");
+    auto graph_g = new TGraphErrors(data_g, "%lg %lg");
+
+    for (int i = 0; i < graph_g->GetN(); ++i)
+    {
+        double x, y;
+        graph_g->GetPoint(i, x, y);
+        graph_g->SetPointError(i, 0, 0.001);
+    }
 
     auto mg = new TMultiGraph();
-    mg->Add(graph_w);
-    mg->Add(graph_m);
-    mg->Add(graph_t);
+    // mg->Add(graph_w);
+    // mg->Add(graph_m);
+    // mg->Add(graph_t);
     mg->Add(graph_g);
 
     mg->GetXaxis()->SetLimits(f_min, f_max);
-    mg->SetMinimum(0.);
-    mg->SetMaximum(5.5);
 
     mg->Draw("AP");
 
     auto func_g = new TF1("Tensione Generatore", V_g, f_min, f_max, 4);
     func_g->SetParameters(3E3, 47E-3, 4.7E-9, 5.);
-    func_g->SetLineColor(kBlack);
+    func_g->SetLineColor(kRed);
     graph_g->Fit(func_g);
 
     auto func_w = new TF1("Tensione Woofer", [&, func_g](double *f, double *par)
@@ -62,9 +67,9 @@ void amplitude(const char *data_g, const char *data_w, const char *data_m, const
     func_t->SetParameters(3E3, 4.7E-9);
     func_t->SetLineColor(kRed);
 
-    graph_w->Fit(func_w);
-    graph_m->Fit(func_m);
-    graph_t->Fit(func_t);
+    // graph_w->Fit(func_w);
+    // graph_m->Fit(func_m);
+    // graph_t->Fit(func_t);
 }
 
 void phase(const char *data_g, const char *data_w, const char *data_m, const char *data_t)
@@ -100,7 +105,7 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
 
     auto func_g = new TF1("Fase Generatore", "[0] + [1]*x", f_min, f_max);
     func_g->SetParameters(0, 0);
-    func_g->SetLineColor(kBlack);
+    func_g->SetLineColor(kRed);
     graph_g->Fit(func_g, "R");
 
     auto c2 = new TCanvas();
@@ -161,9 +166,10 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
     func_t->SetLineColor(kRed);
 
     graph_gFlat->Fit(func_g); // posso fittare con la stessa o devo cambiare func?
-    func_w->Draw("same");
-    func_m->Draw("same");
-    func_t->Draw("same");
+    graph_w->Fit(func_w);
+    graph_m->Fit(func_m);
+    graph_t->Fit(func_t);
+    
 }
 
 void tempi()
