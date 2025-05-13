@@ -26,20 +26,22 @@ double V_g(double *f, double *par)
 double V_w(double *f, double *par)
 {
     double W = 2 * TMath::Pi() * *f;
-    double R = par[0];
-    double L = par[1];
+    double R= par[0];
+    double RL= par[1];
+    double L = par[2];
 
-    return R / sqrt(R * R + W * W * L * L);
+    return R / sqrt((R+RL) * (R+RL) + W * W * L * L);
 }
 
 double V_m(double *f, double *par)
 {
     double W = 2 * TMath::Pi() * *f;
     double R = par[0];
-    double L = par[1];
-    double C = par[2];
+    double RL = par[1];
+    double L = par[2];
+    double C = par[3];
 
-    return R / sqrt(R * R + (W * L - 1 / (W * C)) * (W * L - 1 / (W * C)));
+    return R / sqrt((R+RL) * (R+RL) + (W * L - 1 / (W * C)) * (W * L - 1 / (W * C)));
 }
 
 double V_t(double *f, double *par)

@@ -8,8 +8,8 @@
 
 #include "formule.cpp" //si lo so, non si fa
 
-const double f_min = 2E3;
-const double f_max = 50E3;
+const double f_min = 5E3;
+const double f_max = 20E3;
 
 double V_g(double *f, double *par);
 double V_w(double *f, double *par);
@@ -34,51 +34,81 @@ void amplitude(const char *data_g, const char *data_w, const char *data_m, const
     {
         double x, y;
         graph_g->GetPoint(i, x, y);
-        graph_g->SetPointError(i, 0, 0.0025);
+        graph_g->SetPointError(i, 0.186, 0.002);
+    }
+    for (int i = 0; i < graph_w->GetN(); ++i)
+    {
+        double x, y;
+        graph_w->GetPoint(i, x, y);
+        graph_w->SetPointError(i, 0.186, 0.002);
+    }
+    for (int i = 0; i < graph_m->GetN(); ++i)
+    {
+        double x, y;
+        graph_m->GetPoint(i, x, y);
+        graph_m->SetPointError(i, 0.186, 0.002);
+    }
+    for (int i = 0; i < graph_t->GetN(); ++i)
+    {
+        double x, y;
+        graph_t->GetPoint(i, x, y);
+        graph_t->SetPointError(i, 0.186, 0.002);
     }
 
     auto mg = new TMultiGraph();
-    /*mg->Add(graph_w);
+    mg->Add(graph_w);
     mg->Add(graph_m);
-    mg->Add(graph_t);*/
+    mg->Add(graph_t);
     mg->Add(graph_g);
 
     graph_g->SetMarkerStyle(20);
     graph_g->SetMarkerSize(0.5);
-    /*graph_w->SetMarkerStyle(20);
+    graph_w->SetMarkerStyle(20);
     graph_w->SetMarkerSize(0.5);
     graph_m->SetMarkerStyle(20);
     graph_m->SetMarkerSize(0.5);
     graph_t->SetMarkerStyle(20);
-    graph_t->SetMarkerSize(0.5);*/
+    graph_t->SetMarkerSize(0.5);
 
     mg->GetXaxis()->SetLimits(f_min, f_max);
 
     mg->Draw("AP");
 
     auto func_g = new TF1("Tensione Generatore", V_g, f_min, f_max, 4);
-    func_g->SetParameters(3E3, 47E-3, 4.7E-9, 5.);
+    func_g->SetParameters(3.3E3, 47E-3, 4.7E-9, 5.);
+    func_g->SetParLimits(0, 3E2, 3.5E3);
+    func_g->SetParLimits(1, 0.04, 0.05);
+    func_g->SetParLimits(2, 4.3E-9, 5.2E-9);
     func_g->SetLineColor(kRed);
     graph_g->Fit(func_g);
 
     auto func_w = new TF1("Tensione Woofer", [&, func_g](double *f, double *par)
-                          { return func_g->Eval(f[0]) * V_w(f, par); }, f_min, f_max, 2);
-    func_w->SetParameters(3E3, 47E-3);
+                          { return func_g->Eval(f[0]) * V_w(f, par); }, f_min, f_max, 3);
+    func_w->SetParameters(3.3E3, 120, 47E-3);
+    func_w->SetParLimits(0, 3E2, 3.5E3);
+    func_w->SetParLimits(1, 100, 150);
+    func_w->SetParLimits(2, 0.04, 0.05);
     func_w->SetLineColor(kBlue);
 
     auto func_m = new TF1("Tensione Mid", [&, func_g](double *f, double *par)
-                          { return func_g->Eval(*f) * V_m(f, par); }, f_min, f_max, 3);
-    func_m->SetParameters(3E3, 47E-3, 4.7E-9);
+                          { return func_g->Eval(f[0]) * V_m(f, par); }, f_min, f_max, 4);
+    func_m->SetParameters(3.3E3, 120, 47E-3, 4.7E-9);
+    func_m->SetParLimits(0, 3E2, 3.5E3);
+    func_m->SetParLimits(1, 100, 150);
+    func_m->SetParLimits(2, 0.04, 0.05);
+    func_m->SetParLimits(3, 4.3E-9, 5.2E-9);
     func_m->SetLineColor(kGreen);
 
     auto func_t = new TF1("Tensione Tweeter", [&, func_g](double *f, double *par)
-                          { return func_g->Eval(*f) * V_t(f, par); }, f_min, f_max, 2);
-    func_t->SetParameters(3E3, 4.7E-9);
+                          { return func_g->Eval(f[0]) * V_t(f, par); }, f_min, f_max, 2);
+    func_t->SetParameters(3.3E3, 4.7E-9);
+    func_t->SetParLimits(0, 3E2, 3.5E3);    
+    func_t->SetParLimits(1, 4.3E-9, 5.2E-9);
     func_t->SetLineColor(kRed);
 
-    /*graph_w->Fit(func_w);
+    graph_w->Fit(func_w);
     graph_m->Fit(func_m);
-    graph_t->Fit(func_t);*/
+    graph_t->Fit(func_t);
 }
 
 void phase(const char *data_g, const char *data_w, const char *data_m, const char *data_t)
@@ -92,31 +122,34 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
     auto graph_t = new TGraphErrors(data_t, "%lg %lg");
     auto graph_gFlat = new TGraphErrors(graph_g->GetN()); // si può fare meglio?
 
-    /* // idea calcolo errori
-
-    for(int i = 0; i < graph_g->GetN(); ++i)
-    {
-        double x, y;
-        graph_g->GetPoint(i, x, y);
-        calcoli ey
-        graph_g->SetPointError(i, 0, ey)
-    }
-    */
-
-    // prova con errori costanti
     for (int i = 0; i < graph_g->GetN(); ++i)
     {
         double x, y;
         graph_g->GetPoint(i, x, y);
+        graph_gFlat->SetPoint(i, x, y);
         graph_g->SetPointError(i, 0.186, 0.003);
-        graph_w->GetPoint(i, x, y);
-        graph_w->SetPointError(i, 0.186, 0.003);
-        graph_m->GetPoint(i, x, y);
-        graph_m->SetPointError(i, 0.186, 0.003);
-        graph_t->GetPoint(i, x, y);
-        graph_t->SetPointError(i, 0.186, 0.003);
         graph_gFlat->GetPoint(i, x, y);
         graph_gFlat->SetPointError(i, 0.186, 0.003);
+    }
+
+    for (int i = 0; i < graph_w->GetN(); ++i)
+    {
+        double x, y;
+        graph_w->GetPoint(i, x, y);
+        graph_w->SetPointError(i, 0.186, 0.003);
+    }
+
+    for (int i = 0; i < graph_m->GetN(); ++i)
+    {
+        double x, y;
+        graph_m->GetPoint(i, x, y);
+        graph_m->SetPointError(i, 0.186, 0.003);
+    }
+    for (int i = 0; i < graph_t->GetN(); ++i)
+    {
+        double x, y;
+        graph_t->GetPoint(i, x, y);
+        graph_t->SetPointError(i, 0.186, 0.003);
     }
 
     graph_g->SetMarkerStyle(20);
@@ -131,14 +164,6 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
 
     auto c2 = new TCanvas();
     c2->cd();
-
-    for (int i = 0; i < graph_g->GetN(); ++i)
-    {
-        double x, y;
-        graph_g->GetPoint(i, x, y);
-        graph_gFlat->SetPoint(i, x, y);
-        graph_gFlat->SetPointError(i, 0, 0.1); // Set a default error value
-    }
 
     // Subtract the baseline (func_g) from each point in the graphs
     auto subtractBaseline = [&](TGraphErrors *graph)
@@ -177,27 +202,29 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
 
     mg->Draw("AP");
 
-    auto func_w = new TF1("Fase Woofer", p_w, f_min, f_max, 2);
-    func_w->SetParameters(3E3, 47E-3);
+    auto func_w = new TF1("Fase Woofer", p_w, f_min, f_max, 3);
+    func_w->SetParameters(3.3E3, 47E-3);
+    // func_w->SetParLimits(0, 3.3E3, 3.5E3);
+    // func_w->SetParLimits(1, 0.04, 0.05);
     func_w->SetLineColor(kBlue);
 
-    auto func_m = new TF1("Fase Mid", p_m, f_min, f_max, 3);
-    func_m->SetParameters(3E3, 47E-3, 4.7E-9);
+    auto func_m = new TF1("Fase Mid", p_m, f_min, f_max, 4);
+    func_m->SetParameters(3.3E3, 47E-3, 4.7E-9);
+    // func_m->SetParLimits(0, 3.3E3, 3.5E3);
+    // func_m->SetParLimits(1, 0.04, 0.05);
+    // func_m->SetParLimits(2, 4.3E-9, 5.2E-9);
     func_m->SetLineColor(kGreen);
 
     auto func_t = new TF1("Fase Tweeter", p_t, f_min, f_max, 2);
-    func_t->SetParameters(3E3, 4.7E-9);
+    func_t->SetParameters(3.3E3, 4.7E-9);
+    // func_t->SetParLimits(0, 3.3E3, 3.5E3);
+    // func_t->SetParLimits(1, 4.3E-9, 5.2E-9);
     func_t->SetLineColor(kRed);
 
-    /*graph_gFlat->Fit(func_g); // posso fittare con la stessa o devo cambiare func?
+    graph_gFlat->Fit(func_g); // posso fittare con la stessa o devo cambiare func?
     graph_w->Fit(func_w);
     graph_m->Fit(func_m);
-    graph_t->Fit(func_t);*/
-
-    func_g->Draw("same");
-    func_w->Draw("same");
-    func_m->Draw("same");
-    func_t->Draw("same");
+    graph_t->Fit(func_t);
 }
 void tempi()
 {
@@ -373,17 +400,97 @@ void phase_sigma(const char *phase1, const char *phase2, const char *phase3, con
         histograms[i]->Fit("gaus");
     }
     // Array con i valori sull'asse x
+    double xValues[6] = {1E3, 10E3, 20E3, 30E3, 40E3};
+
+    // Calcola le deviazioni standard e crea il grafico
+    double yValues[5];
+    double yErrors[5];
+    double errorMean = 0;
+    for (int i = 0; i < 5; ++i)
+    {
+        yValues[i] = histograms[i]->GetStdDev();
+        yErrors[i] = histograms[i]->GetStdDevError();
+        errorMean += yValues[i];
+    }
+    errorMean /= 6;
+
+    auto graph = new TGraphErrors(5, xValues, yValues, nullptr, yErrors);
+    auto f = new TF1("f", "[0] + [1]*x", xMin, xMax);
+    graph->SetTitle("Standard Deviation vs Frequency;Frequency (Hz);Standard Deviation");
+    graph->SetMarkerStyle(21);
+    graph->SetMarkerSize(1);
+    graph->SetMarkerColor(kRed);
+
+    // Disegna il grafico
+    TCanvas *c2 = new TCanvas("c2", "Standard Deviation Graph", 800, 600);
+    c2->cd();
+    graph->Draw("AP");
+    f->SetParameters(0, 0);
+    graph->Fit(f);
+
+    std::cout << "Mean of Std: " << errorMean << std::endl;
+}
+
+void amplitude_sigma(const char *amp1, const char *amp2, const char *amp3, const char *amp4, const char *amp5, const char *amp6)
+{
+    gStyle->SetOptFit(1111);
+
+    // Parametri istogramma
+    const int nBins = 30;
+    const double xMin = 0;
+    const double xMax = 20;
+
+    // Crea un array di istogrammi
+    TH1F *histograms[6];
+    histograms[0] = new TH1F("h1", "1kHz; V; Conteggi", nBins, xMin, xMax);
+    histograms[1] = new TH1F("h2", "10kHz; V; Conteggi", nBins, xMin, xMax);
+    histograms[2] = new TH1F("h3", "20kHz; V; Conteggi", nBins, xMin, xMax);
+    histograms[3] = new TH1F("h4", "30kHz; V; Conteggi", nBins, xMin, xMax);
+    histograms[4] = new TH1F("h5", "40kHz; V; Conteggi", nBins, xMin, xMax);
+    histograms[5] = new TH1F("h6", "50kHz; V; Conteggi", nBins, xMin, xMax);
+
+    // Leggi tutti i file e riempi gli istogrammi in un ciclo
+    const char *fileNames[] = {amp1, amp2, amp3, amp4, amp5, amp6};
+    auto fillHistogram = [](TH1F *hist, const char *fileName)
+    {
+        std::ifstream file(fileName);
+        double x;
+        while (file >> x)
+        {
+            hist->Fill(x);
+        }
+        file.close();
+    };
+
+    for (int i = 0; i < 6; ++i)
+    {
+        fillHistogram(histograms[i], fileNames[i]);
+    }
+
+    TCanvas *c = new TCanvas("c", "c", 1200, 600);
+    c->Divide(3, 2);
+
+    for (int i = 0; i < 6; i++)
+    {
+        c->cd(i + 1); // I pad iniziano da 1
+        histograms[i]->SetLineColor(kBlue);
+        histograms[i]->Draw();
+        histograms[i]->Fit("gaus");
+    }
+    // Array con i valori sull'asse x
     double xValues[6] = {1E3, 10E3, 20E3, 30E3, 40E3, 50E3};
 
     // Calcola le deviazioni standard e crea il grafico
     double yValues[6];
     double yErrors[6];
-
+    double errorMean = 0;
     for (int i = 0; i < 6; ++i)
     {
         yValues[i] = histograms[i]->GetStdDev();
         yErrors[i] = histograms[i]->GetStdDevError();
+        errorMean += yValues[i];
     }
+    errorMean /= 6;
 
     auto graph = new TGraphErrors(6, xValues, yValues, nullptr, yErrors);
     auto f = new TF1("f", "[0] + [1]*x", xMin, xMax);
@@ -398,4 +505,6 @@ void phase_sigma(const char *phase1, const char *phase2, const char *phase3, con
     graph->Draw("AP");
     f->SetParameters(0, 0);
     graph->Fit(f);
+
+    std::cout << "Mean of Std: " << errorMean << std::endl;
 }

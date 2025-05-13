@@ -1,4 +1,3 @@
-Frequency (Hz) - Plot 0	Amplitude (V) - Plot 0	
 1000	4.72784	
 1000	4.72769	
 1100	4.72264	
