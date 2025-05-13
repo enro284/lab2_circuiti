@@ -8,7 +8,7 @@
 
 #include "formule.cpp" //si lo so, non si fa
 
-const double f_min = 0.;
+const double f_min = 2E3;
 const double f_max = 50E3;
 
 double V_g(double *f, double *par);
@@ -34,14 +34,23 @@ void amplitude(const char *data_g, const char *data_w, const char *data_m, const
     {
         double x, y;
         graph_g->GetPoint(i, x, y);
-        graph_g->SetPointError(i, 0, 0.001);
+        graph_g->SetPointError(i, 0, 0.0025);
     }
 
     auto mg = new TMultiGraph();
-    // mg->Add(graph_w);
-    // mg->Add(graph_m);
-    // mg->Add(graph_t);
+    /*mg->Add(graph_w);
+    mg->Add(graph_m);
+    mg->Add(graph_t);*/
     mg->Add(graph_g);
+
+    graph_g->SetMarkerStyle(20);
+    graph_g->SetMarkerSize(0.5);
+    /*graph_w->SetMarkerStyle(20);
+    graph_w->SetMarkerSize(0.5);
+    graph_m->SetMarkerStyle(20);
+    graph_m->SetMarkerSize(0.5);
+    graph_t->SetMarkerStyle(20);
+    graph_t->SetMarkerSize(0.5);*/
 
     mg->GetXaxis()->SetLimits(f_min, f_max);
 
@@ -67,9 +76,9 @@ void amplitude(const char *data_g, const char *data_w, const char *data_m, const
     func_t->SetParameters(3E3, 4.7E-9);
     func_t->SetLineColor(kRed);
 
-    // graph_w->Fit(func_w);
-    // graph_m->Fit(func_m);
-    // graph_t->Fit(func_t);
+    /*graph_w->Fit(func_w);
+    graph_m->Fit(func_m);
+    graph_t->Fit(func_t);*/
 }
 
 void phase(const char *data_g, const char *data_w, const char *data_m, const char *data_t)
@@ -78,6 +87,10 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
     auto c1 = new TCanvas();
     c1->cd();
     auto graph_g = new TGraphErrors(data_g, "%lg %lg");
+    auto graph_w = new TGraphErrors(data_w, "%lg %lg");
+    auto graph_m = new TGraphErrors(data_m, "%lg %lg");
+    auto graph_t = new TGraphErrors(data_t, "%lg %lg");
+    auto graph_gFlat = new TGraphErrors(graph_g->GetN()); // si può fare meglio?
 
     /* // idea calcolo errori
 
@@ -95,7 +108,15 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
     {
         double x, y;
         graph_g->GetPoint(i, x, y);
-        graph_g->SetPointError(i, 0, 0.1);
+        graph_g->SetPointError(i, 0.186, 0.003);
+        graph_w->GetPoint(i, x, y);
+        graph_w->SetPointError(i, 0.186, 0.003);
+        graph_m->GetPoint(i, x, y);
+        graph_m->SetPointError(i, 0.186, 0.003);
+        graph_t->GetPoint(i, x, y);
+        graph_t->SetPointError(i, 0.186, 0.003);
+        graph_gFlat->GetPoint(i, x, y);
+        graph_gFlat->SetPointError(i, 0.186, 0.003);
     }
 
     graph_g->SetMarkerStyle(20);
@@ -110,11 +131,6 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
 
     auto c2 = new TCanvas();
     c2->cd();
-
-    auto graph_w = new TGraphErrors(data_w, "%lg %lg");
-    auto graph_m = new TGraphErrors(data_m, "%lg %lg");
-    auto graph_t = new TGraphErrors(data_t, "%lg %lg");
-    auto graph_gFlat = new TGraphErrors(graph_g->GetN()); // si può fare meglio?
 
     for (int i = 0; i < graph_g->GetN(); ++i)
     {
@@ -150,6 +166,14 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
     mg->GetXaxis()->SetLimits(f_min, f_max);
     mg->SetMinimum(-95);
     mg->SetMaximum(+95);
+    graph_gFlat->SetMarkerSize(0.5);
+    graph_gFlat->SetMarkerStyle(20);
+    graph_w->SetMarkerStyle(20);
+    graph_w->SetMarkerSize(0.5);
+    graph_m->SetMarkerStyle(20);
+    graph_m->SetMarkerSize(0.5);
+    graph_t->SetMarkerStyle(20);
+    graph_t->SetMarkerSize(0.5);
 
     mg->Draw("AP");
 
@@ -165,13 +189,16 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
     func_t->SetParameters(3E3, 4.7E-9);
     func_t->SetLineColor(kRed);
 
-    graph_gFlat->Fit(func_g); // posso fittare con la stessa o devo cambiare func?
+    /*graph_gFlat->Fit(func_g); // posso fittare con la stessa o devo cambiare func?
     graph_w->Fit(func_w);
     graph_m->Fit(func_m);
-    graph_t->Fit(func_t);
-    
-}
+    graph_t->Fit(func_t);*/
 
+    func_g->Draw("same");
+    func_w->Draw("same");
+    func_m->Draw("same");
+    func_t->Draw("same");
+}
 void tempi()
 {
     auto canvas = new TCanvas();
@@ -306,7 +333,7 @@ void phase_sigma(const char *phase1, const char *phase2, const char *phase3, con
     // Parametri istogramma
     const int nBins = 30;
     const double xMin = 0;
-    const double xMax = 5;
+    const double xMax = 20;
 
     // Crea un array di istogrammi
     TH1F *histograms[6];
