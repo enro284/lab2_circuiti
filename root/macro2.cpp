@@ -6,7 +6,7 @@
 #include "TH1F.h"
 #include "TStyle.h"
 
-#include "formule.cpp" //si lo so, non si fa
+#include "formule2.cpp" //si lo so, non si fa
 
 const double f_min = 5E3;
 const double f_max = 20E3;
@@ -74,41 +74,67 @@ void amplitude(const char *data_g, const char *data_w, const char *data_m, const
 
     mg->Draw("AP");
 
-    auto func_g = new TF1("Tensione Generatore", V_g, f_min, f_max, 6);
-    func_g->SetParameters(3.3E3, 47E-3, 4.7E-9, 5., 50, 120);
-    func_g->SetParLimits(0, 3.25E3, 3.35E3);
-    func_g->SetParLimits(1, 0.045, 0.049);
-    func_g->SetParLimits(2, 4.3E-9, 5.2E-9);
-    func_g->SetParLimits(3,4.95,5.05);
-    func_g->SetParLimits(4, 47, 53);
-    func_g->SetParLimits(5, 115, 125);
+    auto func_g = new TF1("Tensione Generatore", V_g, f_min, f_max, 11);
+    func_g->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
+    func_g->SetParLimits(0, 4.5, 5.5);
+    func_g->SetParLimits(1, 3E3, 3.4E3);
+    func_g->SetParLimits(2, 3E3, 3.4E3);
+    func_g->SetParLimits(3, 3E3, 3.4E3);
+    func_g->SetParLimits(4, 110, 130);
+    func_g->SetParLimits(5, 110, 130);
+    func_g->SetParLimits(6, 45, 55);
+    func_g->SetParLimits(7, 0.043, 0.05);
+    func_g->SetParLimits(8, 0.043, 0.05);
+    func_g->SetParLimits(9, 4.3E-9, 5.2E-9);
+    func_g->SetParLimits(10, 4.3E-9, 5.2E-9);
     func_g->SetLineColor(kRed);
-    graph_g->Fit(func_g);
 
-    auto func_w = new TF1("Tensione Woofer", [&, func_g](double *f, double *par)
-                          { return func_g->Eval(f[0]) * V_w(f, par); }, f_min, f_max, 3);
-    func_w->SetParameters(3.3E3, 120, 47E-3);
-    func_w->SetParLimits(0, 3E3, 3.4E3);
-    func_w->SetParLimits(1, 110, 130);
-    func_w->SetParLimits(2, 0.043, 0.05);
+    auto func_w = new TF1("Tensione Woofer", V_w, f_min, f_max, 11);
+    func_w->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
+    func_w->SetParLimits(0, 4.5, 5.5);
+    func_w->SetParLimits(1, 3E3, 3.4E3);
+    func_w->SetParLimits(2, 3E3, 3.4E3);
+    func_w->SetParLimits(3, 3E3, 3.4E3);
+    func_w->SetParLimits(4, 110, 130);
+    func_w->SetParLimits(5, 110, 130);
+    func_w->SetParLimits(6, 45, 55);
+    func_w->SetParLimits(7, 0.043, 0.05);
+    func_w->SetParLimits(8, 0.043, 0.05);
+    func_w->SetParLimits(9, 4.3E-9, 5.2E-9);
+    func_w->SetParLimits(10, 4.3E-9, 5.2E-9);
     func_w->SetLineColor(kBlue);
 
-    auto func_m = new TF1("Tensione Mid", [&, func_g](double *f, double *par)
-                          { return func_g->Eval(f[0]) * V_m(f, par); }, f_min, f_max, 4);
-    func_m->SetParameters(3.3E3, 120, 47E-3, 4.7E-9);
-    func_m->SetParLimits(0, 3E3, 3.4E3);
-    func_m->SetParLimits(1, 110, 130);
-    func_m->SetParLimits(2, 0.043, 0.05);
-    func_m->SetParLimits(3, 4.3E-9, 5.2E-9);
+    auto func_m = new TF1("Tensione Mid", V_m, f_min, f_max, 11);
+    func_m->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
+    func_m->SetParLimits(0, 4.5, 5.5);
+    func_m->SetParLimits(1, 3E3, 3.4E3);
+    func_m->SetParLimits(2, 3E3, 3.4E3);
+    func_m->SetParLimits(3, 3E3, 3.4E3);
+    func_m->SetParLimits(4, 110, 130);
+    func_m->SetParLimits(5, 110, 130);
+    func_m->SetParLimits(6, 45, 55);
+    func_m->SetParLimits(7, 0.043, 0.05);
+    func_m->SetParLimits(8, 0.043, 0.05);
+    func_m->SetParLimits(9, 4.3E-9, 5.2E-9);
+    func_m->SetParLimits(10, 4.3E-9, 5.2E-9);
     func_m->SetLineColor(kGreen);
 
-    auto func_t = new TF1("Tensione Tweeter", [&, func_g](double *f, double *par)
-                          { return func_g->Eval(f[0]) * V_t(f, par); }, f_min, f_max, 2);
-    func_t->SetParameters(3.3E3, 4.7E-9);
-    func_t->SetParLimits(0, 3E3, 3.4E3);
-    func_t->SetParLimits(1, 4.3E-9, 5.2E-9);
+    auto func_t = new TF1("Tensione Tweeter", V_t, f_min, f_max, 11);
+    func_t->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
+    func_t->SetParLimits(0, 4.5, 5.5);
+    func_t->SetParLimits(1, 3E3, 3.4E3);
+    func_t->SetParLimits(2, 3E3, 3.4E3);
+    func_t->SetParLimits(3, 3E3, 3.4E3);
+    func_t->SetParLimits(4, 110, 130);
+    func_t->SetParLimits(5, 110, 130);
+    func_t->SetParLimits(6, 45, 55);
+    func_t->SetParLimits(7, 0.043, 0.05);
+    func_t->SetParLimits(8, 0.043, 0.05);
+    func_t->SetParLimits(9, 4.3E-9, 5.2E-9);    
+    func_t->SetParLimits(10, 4.3E-9, 5.2E-9);
     func_t->SetLineColor(kRed);
 
+    graph_g->Fit(func_g);
     graph_w->Fit(func_w);
     graph_m->Fit(func_m);
     graph_t->Fit(func_t);

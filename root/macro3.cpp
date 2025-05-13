@@ -6,7 +6,7 @@
 #include "TH1F.h"
 #include "TStyle.h"
 
-#include "formule.cpp" //si lo so, non si fa
+#include "formule3.cpp" //si lo so, non si fa
 
 const double f_min = 5E3;
 const double f_max = 20E3;
@@ -34,25 +34,25 @@ void amplitude(const char *data_g, const char *data_w, const char *data_m, const
     {
         double x, y;
         graph_g->GetPoint(i, x, y);
-        graph_g->SetPointError(i, 0.186, 0.002);
+        graph_g->SetPointError(i, 0.186, 0.006); //errori grandi con k=3
     }
     for (int i = 0; i < graph_w->GetN(); ++i)
     {
         double x, y;
         graph_w->GetPoint(i, x, y);
-        graph_w->SetPointError(i, 0.186, 0.002);
+        graph_w->SetPointError(i, 0.186, 0.006);
     }
     for (int i = 0; i < graph_m->GetN(); ++i)
     {
         double x, y;
         graph_m->GetPoint(i, x, y);
-        graph_m->SetPointError(i, 0.186, 0.002);
+        graph_m->SetPointError(i, 0.186, 0.006);
     }
     for (int i = 0; i < graph_t->GetN(); ++i)
     {
         double x, y;
         graph_t->GetPoint(i, x, y);
-        graph_t->SetPointError(i, 0.186, 0.002);
+        graph_t->SetPointError(i, 0.186, 0.006);
     }
 
     auto mg = new TMultiGraph();
@@ -75,39 +75,45 @@ void amplitude(const char *data_g, const char *data_w, const char *data_m, const
     mg->Draw("AP");
 
     auto func_g = new TF1("Tensione Generatore", V_g, f_min, f_max, 6);
-    func_g->SetParameters(3.3E3, 47E-3, 4.7E-9, 5., 50, 120);
-    func_g->SetParLimits(0, 3.25E3, 3.35E3);
-    func_g->SetParLimits(1, 0.045, 0.049);
-    func_g->SetParLimits(2, 4.3E-9, 5.2E-9);
-    func_g->SetParLimits(3,4.95,5.05);
-    func_g->SetParLimits(4, 47, 53);
-    func_g->SetParLimits(5, 115, 125);
+    func_g->SetParameters(5., 3.3E3, 120, 50, 47E-3, 4.7E-9);
+    func_g->SetParLimits(0, 4.5, 5.5);
+    func_g->SetParLimits(1, 3.3E3, 3.4E3);
+    func_g->SetParLimits(2, 110, 130);
+    func_g->SetParLimits(3, 45, 55);
+    func_g->SetParLimits(4, 0.043, 0.05);
+    func_g->SetParLimits(5, 4.3E-9, 5.2E-9);
     func_g->SetLineColor(kRed);
     graph_g->Fit(func_g);
 
-    auto func_w = new TF1("Tensione Woofer", [&, func_g](double *f, double *par)
-                          { return func_g->Eval(f[0]) * V_w(f, par); }, f_min, f_max, 3);
-    func_w->SetParameters(3.3E3, 120, 47E-3);
-    func_w->SetParLimits(0, 3E3, 3.4E3);
-    func_w->SetParLimits(1, 110, 130);
-    func_w->SetParLimits(2, 0.043, 0.05);
+    auto func_w = new TF1("Tensione Woofer", V_w, f_min, f_max, 6);
+    func_w->SetParameters(5., 3.3E3, 120, 50, 47E-3, 4.7E-9);
+    func_w->SetParLimits(0, 4.5, 5.5);
+    func_w->SetParLimits(1, 3.3E3, 3.4E3);
+    func_w->SetParLimits(2, 110, 130);
+    func_w->SetParLimits(3, 45, 55);
+    func_w->SetParLimits(4, 0.043, 0.05);
+    func_w->SetParLimits(5, 4.3E-9, 5.2E-9);
     func_w->SetLineColor(kBlue);
 
-    auto func_m = new TF1("Tensione Mid", [&, func_g](double *f, double *par)
-                          { return func_g->Eval(f[0]) * V_m(f, par); }, f_min, f_max, 4);
-    func_m->SetParameters(3.3E3, 120, 47E-3, 4.7E-9);
-    func_m->SetParLimits(0, 3E3, 3.4E3);
-    func_m->SetParLimits(1, 110, 130);
-    func_m->SetParLimits(2, 0.043, 0.05);
-    func_m->SetParLimits(3, 4.3E-9, 5.2E-9);
+    auto func_m = new TF1("Tensione Mid", V_m, f_min, f_max, 6);
+    func_m->SetParameters(5., 3.3E3, 120, 50, 47E-3, 4.7E-9);
+    func_m->SetParLimits(0, 4.5, 5.5);
+    func_m->SetParLimits(1, 3.3E3, 3.4E3);
+    func_m->SetParLimits(2, 110, 130);
+    func_m->SetParLimits(3, 45, 55);
+    func_m->SetParLimits(4, 0.043, 0.05);
+    func_m->SetParLimits(5, 4.3E-9, 5.2E-9);
     func_m->SetLineColor(kGreen);
 
-    auto func_t = new TF1("Tensione Tweeter", [&, func_g](double *f, double *par)
-                          { return func_g->Eval(f[0]) * V_t(f, par); }, f_min, f_max, 2);
-    func_t->SetParameters(3.3E3, 4.7E-9);
-    func_t->SetParLimits(0, 3E3, 3.4E3);
-    func_t->SetParLimits(1, 4.3E-9, 5.2E-9);
-    func_t->SetLineColor(kRed);
+    auto func_t = new TF1("Tensione Tweeter", V_t, f_min, f_max, 6);
+    func_t->SetParameters(5., 3.3E3, 120, 50, 47E-3, 4.7E-9);
+    func_t->SetParLimits(0, 4.5, 5.5);
+    func_t->SetParLimits(1, 3.3E3, 3.4E3);
+    func_t->SetParLimits(2, 110, 130);
+    func_t->SetParLimits(3, 45, 55);
+    func_t->SetParLimits(4, 0.043, 0.05);
+    func_t->SetParLimits(5, 4.3E-9, 5.2E-9);
+    func_t->SetLineColor(kMagenta);
 
     graph_w->Fit(func_w);
     graph_m->Fit(func_m);
@@ -226,6 +232,8 @@ void phase(const char *data_g, const char *data_w, const char *data_m, const cha
     func_t->SetParLimits(1, 4.3E-9, 5.2E-9);
     func_t->SetLineColor(kPink);
 
+    func_g->SetParameter(0, 0);
+    func_g->SetParameter(1, 0);
     graph_gFlat->Fit(func_g); // posso fittare con la stessa o devo cambiare func?
     graph_w->Fit(func_w);
     graph_m->Fit(func_m);
