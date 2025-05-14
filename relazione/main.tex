@@ -1,16 +1,20 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,italian]{article}
 \usepackage[italian]{babel}
 \usepackage[a4paper, margin=2cm]{geometry}
-\usepackage{fontspec}
-\setmainfont{calibri}
-\usepackage{titlesec}
+\usepackage{amsmath}
 \usepackage{circuitikz}
-
-\titleformat{\section}
-  {\normalfont\normalsize\itshape}{\thesection.}{1em}{}
-\titlespacing{\section}{0pt}{1em}{0pt}
-
+\usepackage{caption}
 \usepackage{cleveref}
+
+\newcommand{\prof}[1]{\textcolor{blue}{#1}}
+\newcommand{\err}[1]{\textcolor{red}{#1}}
+
+%\usepackage{fontspec} \setmainfont{calibri}
+%\usepackage{titlesec}
+%\titleformat{\section}
+%{\normalfont\normalsize\itshape}{\thesection.}{1em}{}
+%\titlespacing{\section}{0pt}{1em}{0pt}
+
 
 \title{TITOLO}
 \author{Enrico Barbuio \\ 0001117553 \and Giacomo Cicala} 
@@ -19,67 +23,110 @@
 \begin{document}
 \maketitle
 \section*{Abstract}
-Lunghezza massima 10 righe, riassumere lo scopo dell'esperimento e i risultati principali
-(osservazioni qualitative e risultati numerici). L'abstract non deve contenere riferimenti a quanto
-riportato nel testo (figure, equazioni o tabelle) e deve essere auto - esplicativo.
+\prof{ Lunghezza massima 10 righe, riassumere lo scopo dell'esperimento e i
+  risultati principali (osservazioni qualitative e risultati numerici).
+  L'abstract non deve contenere riferimenti a quanto riportato nel testo
+  (figure, equazioni o tabelle) e deve essere auto - esplicativo. }
 
 \section*{Introduzione}
-Descrivere i concetti fisici principali e gli obiettivi dell'esperienza. Per l'esperienza sui circuiti
-descrivere il circuito progettato, le espressioni algebriche per le grandezze fisiche misurate, il
-comportamento atteso; analogamente per ottica. L'introduzione non è un riassunto, non riportare
-i risultati.
+\prof{ Descrivere i concetti fisici principali e gli obiettivi dell'esperienza.
+  Per l'esperienza sui circuiti descrivere il circuito progettato, le
+  espressioni algebriche per le grandezze fisiche misurate, il comportamento
+  atteso; analogamente per ottica. L'introduzione non è un riassunto, non
+  riportare i risultati. }
 
 \section*{Apparato sperimentale e svolgimento}
-\begin{figure}[!h]
+\prof{ Descrivere l'apparato utilizzato. Allegare una foto o lo schema
+  dell'apparato sperimentale (sarà la Fig. 1); la foto deve permettere di
+  identificare chiaramente i componenti principali (eventualmente usare delle
+  frecce e delle etichette per evidenziarli). Riassumere lo svolgimento delle
+  misure e motivare la scelta dei parametri di acquisizione (per esempio:
+  l'intervallo di frequenze e la frequenza di acquisizione). }
+
+Per l'analisi in frequenza di ampiezza e fase è stato acquisito ciascun canale
+separatamente, con sweep ripetuti. In ogni prova l'analog input $A1$ è stato
+collegato al canale di interesse mentre il canale $A0$ è rimasto collegato al
+generatore di tensione, utilizzandolo come trigger e riferimento per la fase.
+Come range di frequenze è stato scelto: \err{range?}; questo per evidenziare il
+punto di crossover ma anche per vedere l'andamento a basse e alte frequenze. Al
+fine di massimizzare la frequenza di campionamento, le tensioni sono state
+misurate in modalità referenced single ended collegando a massa il ramo in
+comune alle resistenze. Ciò ha permesso un campionamento a $500$ kHz per
+canale, con $2000$ sample per ciascuna acquisizione, abbastanza per includere
+\err{diversi periodi} anche per le frequenze inferiori.
+
+I componenti del circuito sono stati misurati tramilte il multimetro di Elvis
+II, i loro valori si trovano in \cref{tab:componenti}.
+
+\noindent
+\begin{minipage}[b]{0.6\textwidth}
+  \vspace{0pt}
   \centering
   \begin{circuitikz}[scale=1]
     % generatore
     \draw (8,0) --
-    (-1,0) to[sinusoidal voltage source]
-    (-1,5) --
+    (-0,0) to[sinusoidal voltage source]
+    (0,5) --
     (8,5);
-    \draw (-1,4) to[short, -o] (-1.5,4) node[left]{$v_g$};
 
-    \draw (-1,1) -- (-1.5,1) node[ground]{};
+    \draw(-0,4) to[short, -o]
+    (-0.5,4) node[left]{$v_g$};
+    \draw (-0,1) -- (-0.5,1) node[ground]{};
 
     % woofer
-    \draw (3,0) to[R=$R_w$]
-    (3,2) to[L=$L_w$]
-    (3,5);
-    \draw (3,2) to [short, -o] (2.5, 2) node[left]{$v_w$};
+    \draw (3,5) to[L=$L_w$] (3,2) to[R=$R_w$] (3,0);
+    \draw (3,2) to [short, -o] (3.5, 2) node[right]{$v_w$};
 
     % mid
-    \draw (5.5,0) to [R=$R_m$]
-    (5.5,2) to [L=$L_m$]
-    (5.5,3.75) to [C=$C_m$]
-    (5.5,5);
-    \draw (5.5,2) to [short, -o] (5, 2) node[left]{$v_m$};
+    \draw (5.5,5) to [C=$C_m$] (5.5,3.75) to [L=$L_m$] (5.5,2) to[R=$R_m$] (5.5,0);
+
+    \draw (5.5,2) to [short, -o] (6, 2) node[right]{$v_m$};
 
     %tweeter
-    \draw (8,0) to[R=$R_t$] (8,2);
-    \draw (8,2) to[C=$C_t$] (8,5);
-    \draw (8,2) to [short, -o] (7.5, 2) node[left]{$v_t$};
+    \draw (8,5) to[C=$C_t$]
+    (8,2) to[R=$R_t$] (8,0);
 
+    \draw (8,2) to
+    [short, -o] (8.5, 2) node[right]{$v_t$};
   \end{circuitikz}
-\end{figure}
+  \label{fig:schema_elettrico}
+  \captionof{figure}{Schema elettrico del circuito ideale. I punti $v_g, v_w, v_m, v_t$ sono stati collegati agli analog input di Elvis II per le relative misure di tensione.}
+\end{minipage}
+\begin{minipage}[b]{0.4\textwidth}
+  \vspace{0pt}
+  \centering
+  \begin{alignat*}{2}
+     & R_w    &  & =(3293 \pm 2) \text{ \Omega}      \\
+     & L_w    &  & =(47.2 \pm 0.5) \text{ mH}        \\
+     & R_{Lw} &  & =(120.00 \pm 0.15) \text{ \Omega} \\[1em]
+     & R_m    &  & =(3287 \pm 2) \text{ \Omega}      \\
+     & L_m    &  & =(46.8 \pm 0.5) \text{ mH}        \\
+     & R_{Lm} &  & =(120.70 \pm 0.15) \text{ \Omega} \\
+     & C_m    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
+     & R_t    &  & =(3295 \pm 2) \text{ \Omega}      \\
+     & C_t    &  & =(4.76 \pm 0.05) \text{ nF}
+  \end{alignat*}
+  \captionof{table}{Valori componenti.}
+  \label{tab:componenti}
+\end{minipage}
 
-Descrivere l'apparato utilizzato. Allegare una foto o lo schema dell'apparato sperimentale
-(sarà la Fig. 1); la foto deve permettere di identificare chiaramente i componenti principali
-(eventualmente usare delle frecce e delle etichette per evidenziarli). Riassumere lo svolgimento
-delle misure e motivare la scelta dei parametri di acquisizione (per esempio: l'intervallo di frequenze
-e la frequenza di acquisizione).
 \section*{Risultati e discussione}
-Riportare i risultati più rappresentativi in forma grafica oppure come foto delle osservazioni
-sull'oscilloscopio analogico (se utilizzato). Non è necessario riportare tutti i dati. Commentare
-qualitativamente gli andamenti delle grandezze fisiche riportati in forma grafica e/o le forme di riga
-osservate. In tutti i grafici gli assi devono essere chiaramente etichettati e le unità di misura devono
-essere incluse. Quando le incertezze sono note e sono visibili sulla scala utilizzata rappresentarle sul
-grafico come barre di errore. Porre particolare attenzione alla leggibilità, utilizzando caratteri
-sufficientemente grandi.
-Descrivere come sono stati elaborati i dati e riportare i risultati numerici (miglior stima ed
-incertezza), in forma tabellare se necessario. Commentare i valori ottenuti. Non è necessario
-riportare il calcolo esplicito delle incertezze (eventualmente usare una appendice), ma è importante
-segnalare se si tratta di risoluzione strumentale, di errore casuale oppure di errore sistematico.
+\prof{ Riportare i risultati più rappresentativi in forma grafica oppure come
+  foto delle osservazioni sull'oscilloscopio analogico (se utilizzato). Non è
+  necessario riportare tutti i dati. Commentare qualitativamente gli andamenti
+  delle grandezze fisiche riportati in forma grafica e/o le forme di riga
+  osservate. In tutti i grafici gli assi devono essere chiaramente etichettati e
+  le unità di misura devono essere incluse. Quando le incertezze sono note e
+  sono visibili sulla scala utilizzata rappresentarle sul grafico come barre di
+  errore. Porre particolare attenzione alla leggibilità, utilizzando caratteri
+  sufficientemente grandi. Descrivere come sono stati elaborati i dati e
+  riportare i risultati numerici (miglior stima ed incertezza), in forma
+  tabellare se necessario. Commentare i valori ottenuti. Non è necessario
+  riportare il calcolo esplicito delle incertezze (eventualmente usare una
+  appendice), ma è importante segnalare se si tratta di risoluzione strumentale,
+  di errore casuale oppure di errore sistematico. }
+
 \section*{Conclusioni}
-Conclusioni finali, particolarmente importanti nel caso di risultati anomali.
+\prof{Conclusioni finali, particolarmente importanti nel caso di risultati
+  anomali.}
 \end{document}
