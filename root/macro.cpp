@@ -87,12 +87,21 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     graph_w->Fit(func_w);
     graph_m->Fit(func_m);
     graph_t->Fit(func_t);
+
+    auto diff_func = new TF1("diff_func", [&](double *x, double *)
+                             { return func_w->Eval(x[0]) - func_t->Eval(x[0]); }, f_min, f_max, 0);
+    double cross_freq = diff_func->GetX(0, f_min, f_max);
+    std::cout << "Crossover frequency = " << cross_freq << std::endl;
+
+    
+    double res_freq = func_m->GetMaximumX(f_min, f_max);
+    std::cout << "Resonance frequency = " << res_freq << std::endl;
 }
 
 void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/phase_w.txt", const char *data_m = "data/phase_m.txt", const char *data_t = "data/phase_t.txt")
 {
     // gStyle->SetOptFit(1111);
-    
+
     /*
     //  CALCOLO BASELINE
     */
@@ -179,4 +188,12 @@ void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/p
     graph_w->Fit(func_w);
     graph_m->Fit(func_m);
     graph_t->Fit(func_t);
+
+    double cross_freqW = func_w->GetX(-45, f_min, f_max);
+    double cross_freqT = func_t->GetX(45, f_min, f_max);
+    double res_freq = func_m->GetX(0, f_min, f_max);
+
+    std::cout << "Crossover frequency (Woofer) = " << cross_freqW << std::endl;
+    std::cout << "Crossover frequency (Tweeter) = " << cross_freqT << std::endl;
+    std::cout << "Resonance frequency = " << res_freq << std::endl;
 }
