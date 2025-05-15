@@ -5,7 +5,6 @@
 \usepackage{circuitikz}
 \usepackage{caption}
 \usepackage{cleveref}
-\usepackage{amsfonts}
 
 \newcommand{\prof}[1]{\textcolor{blue}{#1}}
 \newcommand{\err}[1]{\textcolor{red}{#1}}
@@ -36,95 +35,7 @@
   atteso; analogamente per ottica. L'introduzione non è un riassunto, non
   riportare i risultati.}
 
-L'esperimento svolto in laboratorio è incentrato sulla progettazione di un
-circuito RLC sulla breadboard di Elvis II, sullo studio analitico del
-comportamento atteso e sul confroto di questo con le misure effettuate. Il
-circuito scelto è un crossover a tre vie, un circuito filtrante a regime
-sinusoidale dato dalla combinazione di un filtro passa-basso (woofer), un
-filtro passa-alto (tweeter) e un filtro passa-banda (midrange) che suddivide il
-segnale audio in tre bande di frequenza distinte (bassi, alti, medi), al fine
-di ottimizzare la riproduzione sonora per tutta la gamma di frequenze.
-
-Dalla legge di Ohm simbolica $\textbf{V} = \mathbb{Z} \textbf{I}$, utilizzando
-il metodo dei fasori, possiamo ricavare l'andamento dell'ampiezza della
-differenza di potenziale ai capi del generatore e ai capi delle resistenze di
-woofer, medi e tweeter [\ref{sec:tensioni}]%usare Z "spessa"?
-
-\begin{equation}
-  \left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{\mathbb{Z}_{load}(\omega)}
-  {R_{g}+\mathbb{Z}_{load}(\omega)}\right|V
-  \label{eq:Vg}
-\end{equation}
-
-\begin{equation}
-  \left| \mathbf{V_{w}}(\omega) \right| = \left| \frac{R_{w}}
-  {\mathbb{Z}_{w}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{w}}
-  {R_{w}+R_{Lw} + j \omega L_w}\right|\left| \mathbf{V_{g}}(\omega) \right|
-  \label{eq:Vw}
-\end{equation}
-
-\begin{equation}
-  \left| \mathbf{V_{m}}(\omega) \right| = \left| \frac{R_{m}}
-  {\mathbb{Z}_{m}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{m}}{R_{m}+R_{Lm} + j (\omega L_m - \frac{1}{\omega C_{m}})} \right| \left| \mathbf{V_{g}}(\omega) \right|
-  \label{eq:Vm}
-\end{equation}
-
-\begin{equation}
-  \left| \mathbf{V_{t}}(\omega) \right| = \left| \frac{R_{t}}
-  {\mathbb{Z}_{t}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{t}}{R_{t} + j (-\frac{1}{\omega C_{t}})}\right|\left| \mathbf{V_{g}}(\omega) \right|
-  \label{eq:Vt}
-\end{equation}
-\\
-e delle rispettive fasi [\ref{sec:fasi}]
-\begin{equation}
-  \phi_{w}(\omega) = - \arctan\left(\frac{\omega L_{w}}{R_{w}+R_{Lws}}\right)
-\end{equation}
-
-\begin{equation}
-  \phi_{m}(\omega) = - \arctan\left(\frac{\omega L_{m} - \frac{1}{\omega C_{m}}}{R_{m}+R_{Lm}}\right)
-\end{equation}
-
-\begin{equation}
-  \phi_{t}(\omega) = \arctan\left(\frac{1}{\omega R_{t} C_{t}}\right)
-\end{equation}
-\\
-tutto in funzione della pulsazione.
-
-Per quanto riguarda le ampiezze delle tensioni in funzione della frequenza, per
-il woofer ci aspettiamo un andamento decrescente asintoticamente a zero, per il
-tweeter ci aspettiamo un andamento crescente asintoticamente al generatore,
-mentre per il midrange ci aspettiamo un picco alla frequenza di risonanza.
-Invece, per quanto riguarda le fasi, ci aspettiamo che il woofer e il tweeter
-siano in fase con il generatore rispettivamente a basse e alte frequenze, e che
-siano in opposizione di fase nel caso contrario; il midrange, invece, ci
-aspettiamo che sia in fase con il generatore alla frequenza di risonanza.
-
-Da \eqref{eq:Vw} e \eqref{eq:Vt} è possibile ricavare il valore atteso della
-frequenza di crossover [\ref{sec:crossFreq}], cioè la frequenza alla quale il
-woofer e il tweeter hanno la tensione di ampiezza uguale.
-
-\begin{equation}
-  f_{c} = \frac{1}{2\pi}\sqrt{\frac{\sqrt{4 (R_{w} R_{t} L_{w})^2 + C_{t}^2(2
-        R_{w} R_{Lw} R_{t}^2 + (R_{Lw} R_{t})^2)^2}}{2 C _{t} (L_{w} R_{t})^2 } -
-    \frac{R_{w} R_{Lw}}{L_{w}^2} - \frac{R_{Lw}^2}{2 L_{w}^2}}
-  \label{eq:fc}
-\end{equation}
-
-\noindent
-Inoltre, da \eqref{eq:Vm} è possibile calcolare la frequenza di risonanza attesa del midrange [\ref{sec:resFreq}].
-\err{è approssimata}
-
-\begin{equation}
-  f_{r} = \frac{1}{2\pi}\sqrt{\frac{1}{L_{m} C_{m}}}  %equazione approssimata
-  \label{eq:fr}
-\end{equation}
-
-\noindent
-Infine, si può ottenere il fattore di qualità del midrange.
-
-\begin{equation}
-  booh non so se farlo
-\end{equation}
+L'esperimento svolto in laboratorio si è incentrato sullo sviluppo di un circuito RLC sulla breadboard defvefveverve tbrtb ebrbf
 
 \section*{Apparato sperimentale e svolgimento}
 \prof{ Descrivere l'apparato utilizzato. Allegare una foto o lo schema
@@ -220,21 +131,4 @@ II, i loro valori si trovano in \cref{tab:componenti}.
 \section*{Conclusioni}
 \prof{Conclusioni finali, particolarmente importanti nel caso di risultati
   anomali.}
-
-\appendix
-\section{Appendici}
-\subsection{Tensioni ai capi delle resistenze}
-\label{sec:tensioni}
-
-\subsection{Fasi delle tensioni}
-\label{sec:fasi}
-
-\subsection{Frequenza di crossover}
-\label{sec:crossFreq}
-
-\subsection{Frequenza di risonanza}
-\label{sec:resFreq}
-
-\subsection{Incertezze}
-
 \end{document}
