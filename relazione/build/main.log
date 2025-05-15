@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2025.5.6)  15 MAY 2025 19:00
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2025.5.6)  15 MAY 2025 22:27
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/home/giacomo/EM_labs/circuiti/relazione/main.tex
@@ -604,16 +604,16 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (2.01434pt too wide) in paragraph at lines 182--184
+Overfull \hbox (2.01434pt too wide) in paragraph at lines 181--183
  [][] 
  []
 
 
-Overfull \hbox (2.60799pt too wide) in paragraph at lines 152--203
+Overfull \hbox (2.60799pt too wide) in paragraph at lines 151--202
 [] [] 
  []
 
-[2] [3] (./build/main.aux
+[2] [3] [4] (./build/main.aux
 Package cleveref Info: loaded `italian' language definitions on input line 4.
 Package cleveref Info: loaded `italian' language definitions on input line 5.
 ))
@@ -621,17 +621,17 @@ Package cleveref Info: loaded `italian' language definitions on input line 5.
 Here is how much of LuaTeX's memory you used:
  33096 strings out of 477805
  100000,1648299 words of node,token memory allocated
- 634 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 53 attribute, 52 glue_spec, 28 attribute_list, 2 write nodes
-   avail lists: 2:5133,3:1575,4:28,5:418,6:35,7:8008,8:61,9:1148,10:7,11:919
+ 718 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 81 attribute, 52 glue_spec, 42 attribute_list, 2 write nodes
+   avail lists: 2:5091,3:1524,4:28,5:418,6:35,7:8008,8:61,9:1557,10:7,11:919
  53061 multiletter control sequences out of 65536+600000
  64 fonts using 4459655 bytes
  115i,12n,111p,467b,899s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf/fonts/opentype/public/lm/lmroman12-bold.otf></usr/share/texmf/fonts/opentype/public/lm/lmroman12-regular.otf></usr/share/texmf/fonts/opentype/public/lm/lmroman17-regular.otf></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (3 pages, 109400 bytes).
+Output written on main.pdf (4 pages, 111692 bytes).
 
-PDF statistics: 78 PDF objects out of 1000 (max. 8388607)
- 53 compressed objects within 1 object stream
+PDF statistics: 81 PDF objects out of 1000 (max. 8388607)
+ 55 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

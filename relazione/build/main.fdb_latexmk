@@ -1,5 +1,5 @@
 # Fdb version 3
-["lualatex"] 1747328448 "/home/giacomo/EM_labs/circuiti/relazione/main.tex" "build/main.pdf" "main" 1747328450
+["lualatex"] 1747340839 "/home/giacomo/EM_labs/circuiti/relazione/main.tex" "build/main.pdf" "main" 1747340841
   "/home/giacomo/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-bold.luc" 1746522362 124110 5d651ed7b24a029d9df49f8fec52c53c ""
   "/home/giacomo/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-regular.luc" 1746522362 123481 17089682d5bd9de7ed2a7f1a5ba9b5e8 ""
   "/home/giacomo/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/lmroman17-regular.luc" 1747298254 124728 bc7170e5ed0c07130af74f28e38b6d66 ""
@@ -8,7 +8,7 @@
   "/home/giacomo/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/lmroman8-bold.luc" 1747304046 124121 868eb943ba055a393587b42fb67bec17 ""
   "/home/giacomo/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/lmroman8-regular.luc" 1747298255 123949 4155eb357ed1cf2ce51e7cc0bba182a9 ""
   "/home/giacomo/.texlive2021/texmf-var/luatex-cache/generic/names/luaotfload-names.luc" 1746522625 1546684 332acb0f54a4c733c0726eaafdcd3aac ""
-  "/home/giacomo/EM_labs/circuiti/relazione/main.tex" 1747328448 9795 31b9834fdbdf03c6b0a9a2a714f1aebb ""
+  "/home/giacomo/EM_labs/circuiti/relazione/main.tex" 1747340839 10847 33ab5dc859588f1cc72b92f48515b664 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -215,8 +215,8 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1746510146 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/tex/generic/config/language.dat" 1746510151 5130 e026ef6ff12c5b9df8a3604e4b0d80d1 ""
   "/var/lib/texmf/web2c/luahbtex/lualatex.fmt" 1746510214 4555474 2eda5d821f2f08cbddb4355c9f6011af ""
-  "build/main.aux" 1747328450 2280 95ea5caa7a756c11eaeac34ecd52d2ab "lualatex"
-  "main.tex" 1747328448 9795 31b9834fdbdf03c6b0a9a2a714f1aebb ""
+  "build/main.aux" 1747340841 2280 70a896f7b3f05fca53c68cf8a71b3b37 "lualatex"
+  "main.tex" 1747340839 10847 33ab5dc859588f1cc72b92f48515b664 ""
   (generated)
   "build/main.aux"
   "build/main.log"

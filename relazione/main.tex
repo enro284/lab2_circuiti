@@ -58,24 +58,23 @@ woofer, medi e tweeter [\ref{sec:tensioni}]%usare Z "spessa"?
 
 \begin{equation}
   \left| \mathbf{V_{w}}(\omega) \right| = \left| \frac{R_{w}}
-  {\mathbb{Z}_{w}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{w}}
-  {R_{w}+R_{Lw} + j \omega L_w}\right|\left| \mathbf{V_{g}}(\omega) \right|
+  {\mathbb{Z}_{w}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right|
   \label{eq:Vw}
 \end{equation}
 
 \begin{equation}
   \left| \mathbf{V_{m}}(\omega) \right| = \left| \frac{R_{m}}
-  {\mathbb{Z}_{m}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{m}}{R_{m}+R_{Lm} + j (\omega L_m - \frac{1}{\omega C_{m}})} \right| \left| \mathbf{V_{g}}(\omega) \right|
+  {\mathbb{Z}_{m}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right|
   \label{eq:Vm}
 \end{equation}
 
 \begin{equation}
   \left| \mathbf{V_{t}}(\omega) \right| = \left| \frac{R_{t}}
-  {\mathbb{Z}_{t}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{t}}{R_{t} + j (-\frac{1}{\omega C_{t}})}\right|\left| \mathbf{V_{g}}(\omega) \right|
+  {\mathbb{Z}_{t}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right|
   \label{eq:Vt}
 \end{equation}
 \\
-e delle rispettive fasi [\ref{sec:fasi}]
+e delle rispettive fasi (\err{sono approssimate | mettere con Arg()?}) [\ref{sec:fasi}]
 \begin{equation}
   \phi_{w}(\omega) = - \arctan\left(\frac{\omega L_{w}}{R_{w}+R_{Lws}}\right)
 \end{equation}
@@ -225,9 +224,41 @@ II, i loro valori si trovano in \cref{tab:componenti}.
 \section{Appendici}
 \subsection{Tensioni ai capi delle resistenze}
 \label{sec:tensioni}
+\begin{equation}
+  \left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{\mathbb{Z}_{load}(\omega)}
+  {R_{g}+\mathbb{Z}_{load}(\omega)}\right|V
+\end{equation}
+
+\begin{equation}
+  \left| \mathbf{V_{w}}(\omega) \right| = \left| \frac{R_{w}}
+  {\mathbb{Z}_{w}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{w}}
+  {R_{w}+R_{Lw} + j \omega L_w}\right|\left| \mathbf{V_{g}}(\omega) \right|
+\end{equation}
+
+\begin{equation}
+  \left| \mathbf{V_{m}}(\omega) \right| = \left| \frac{R_{m}}
+  {\mathbb{Z}_{m}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{m}}{R_{m}+R_{Lm} + j (\omega L_m - \frac{1}{\omega C_{m}})} \right| \left| \mathbf{V_{g}}(\omega) \right|
+\end{equation}
+
+\begin{equation}
+  \left| \mathbf{V_{t}}(\omega) \right| = \left| \frac{R_{t}}
+  {\mathbb{Z}_{t}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{t}}{R_{t} + j (-\frac{1}{\omega C_{t}})}\right|\left| \mathbf{V_{g}}(\omega) \right|
+\end{equation}
 
 \subsection{Fasi delle tensioni}
 \label{sec:fasi}
+
+\begin{equation}
+  \phi_{w}(\omega) = - \arctan\left(\frac{\omega L_{w}}{R_{w}+R_{Lws}}\right)
+\end{equation}
+
+\begin{equation}
+  \phi_{m}(\omega) = - \arctan\left(\frac{\omega L_{m} - \frac{1}{\omega C_{m}}}{R_{m}+R_{Lm}}\right)
+\end{equation}
+
+\begin{equation}
+  \phi_{t}(\omega) = \arctan\left(\frac{1}{\omega R_{t} C_{t}}\right)
+\end{equation}
 
 \subsection{Frequenza di crossover}
 \label{sec:crossFreq}

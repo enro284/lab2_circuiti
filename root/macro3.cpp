@@ -146,27 +146,27 @@ void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/p
         graph_gFlat->SetPoint(i, x, y);
         graph_g->SetPointError(i, 0.186, 0.003);
         graph_gFlat->GetPoint(i, x, y);
-        graph_gFlat->SetPointError(i, 0., 0.003);
+        graph_gFlat->SetPointError(i, 0.186, 0.003);
     }
 
     for (int i = 0; i < graph_w->GetN(); ++i)
     {
         double x, y;
         graph_w->GetPoint(i, x, y);
-        graph_w->SetPointError(i, 0., 0.003);
+        graph_w->SetPointError(i, 0.186, 0.003);
     }
 
     for (int i = 0; i < graph_m->GetN(); ++i)
     {
         double x, y;
         graph_m->GetPoint(i, x, y);
-        graph_m->SetPointError(i, 0., 0.003);
+        graph_m->SetPointError(i, 0.186, 0.003);
     }
     for (int i = 0; i < graph_t->GetN(); ++i)
     {
         double x, y;
         graph_t->GetPoint(i, x, y);
-        graph_t->SetPointError(i, 0., 0.003);
+        graph_t->SetPointError(i, 0.186, 0.003);
     }
 
     graph_g->SetMarkerStyle(20);
@@ -174,22 +174,22 @@ void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/p
     graph_g->SetMarkerColor(kBlack);
     graph_g->Draw("AP");
 
-    auto func_g = new TF1("Fase Generatore", "[0] + [1]*x", f_min, f_max);
-    func_g->SetParameters(0, 0);
-    func_g->SetLineColor(kRed);
-    graph_g->Fit(func_g, "R");
+    auto func_lin = new TF1("Fase Generatore", "[0] + [1]*x", f_min, f_max);
+    func_lin->SetParameters(0, 0);
+    func_lin->SetLineColor(kRed);
+    graph_g->Fit(func_lin, "R");
 
     auto c2 = new TCanvas();
     c2->cd();
 
-    // Subtract the baseline (func_g) from each point in the graphs
+    // Subtract the baseline (func_lin) from each point in the graphs
     auto subtractBaseline = [&](TGraphErrors *graph)
     {
         for (int i = 0; i < graph->GetN(); ++i)
         {
             double x, y;
             graph->GetPoint(i, x, y);
-            double baseline = func_g->Eval(x);
+            double baseline = func_lin->Eval(x);
             graph->SetPoint(i, x, y - baseline);
         }
     };
@@ -218,30 +218,42 @@ void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/p
     graph_t->SetMarkerSize(0.5);
 
     mg->Draw("AP");
+    auto func_g = new TF1("Fase Generatore", p_g, f_min, f_max, 5);
+    func_g->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9);
+    func_g->SetParLimits(0, 3.2E3, 3.4E3);
+    func_g->SetParLimits(1, 110, 130);
+    func_g->SetParLimits(2, 45, 55);
+    func_g->SetParLimits(3, 0.043, 0.05);
+    func_g->SetParLimits(4, 4.3E-9, 5.2E-9);
+    func_g->SetLineColor(kRed);
 
-    auto func_w = new TF1("Fase Woofer", p_w, f_min, f_max, 3);
-    func_w->SetParameters(3.3E3, 47E-3);
-    func_w->SetParLimits(0, 3.3E3, 3.4E3);
+    auto func_w = new TF1("Fase Woofer", p_w, f_min, f_max, 5);
+    func_w->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9);
+    func_w->SetParLimits(0, 3.2E3, 3.4E3);
     func_w->SetParLimits(1, 110, 130);
-    func_w->SetParLimits(2, 0.043, 0.05);
+    func_w->SetParLimits(2, 45, 55);
+    func_w->SetParLimits(3, 0.043, 0.05);
+    func_w->SetParLimits(4, 4.3E-9, 5.2E-9);
     func_w->SetLineColor(kBlue);
 
-    auto func_m = new TF1("Fase Mid", p_m, f_min, f_max, 4);
-    func_m->SetParameters(3.3E3, 47E-3, 4.7E-9);
-    func_m->SetParLimits(0, 3.3E3, 3.4E3);
+    auto func_m = new TF1("Fase Mid", p_m, f_min, f_max, 5);
+    func_m->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9);
+    func_m->SetParLimits(0, 3.2E3, 3.4E3);
     func_m->SetParLimits(1, 110, 130);
-    func_m->SetParLimits(2, 0.04, 0.05);
-    func_m->SetParLimits(3, 4.3E-9, 5.2E-9);
+    func_m->SetParLimits(2, 45, 55);
+    func_m->SetParLimits(3, 0.043, 0.05);
+    func_m->SetParLimits(4, 4.3E-9, 5.2E-9);
     func_m->SetLineColor(kGreen);
 
-    auto func_t = new TF1("Fase Tweeter", p_t, f_min, f_max, 2);
-    func_t->SetParameters(3.3E3, 4.7E-9);
-    func_t->SetParLimits(0, 3.3E3, 3.4E3);
-    func_t->SetParLimits(1, 4.3E-9, 5.2E-9);
+    auto func_t = new TF1("Fase Tweeter", p_t, f_min, f_max, 5);
+    func_t->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9);
+    func_t->SetParLimits(0, 3.2E3, 3.4E3);
+    func_t->SetParLimits(1, 110, 130);
+    func_t->SetParLimits(2, 45, 55);
+    func_t->SetParLimits(3, 0.043, 0.05);
+    func_t->SetParLimits(4, 4.3E-9, 5.2E-9);
     func_t->SetLineColor(kPink);
 
-    func_g->SetParameter(0, 0);
-    func_g->SetParameter(1, 0);
     graph_gFlat->Fit(func_g); // posso fittare con la stessa o devo cambiare func?
     graph_w->Fit(func_w);
     graph_m->Fit(func_m);
