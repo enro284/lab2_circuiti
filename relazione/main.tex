@@ -52,7 +52,7 @@ woofer, medi e tweeter [\ref{sec:tensioni}]%usare Z "spessa"?
 
 \begin{equation}
   \left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{\mathbb{Z}_{load}(\omega)}
-  {R_{g}+\mathbb{Z}_{load}(\omega)}\right|V
+  {R_{g}+\mathbb{Z}_{load}(\omega)}\right| \mathbf{V}
   \label{eq:Vg}
 \end{equation}
 
@@ -95,8 +95,9 @@ tweeter ci aspettiamo un andamento crescente asintoticamente al generatore,
 mentre per il midrange ci aspettiamo un picco alla frequenza di risonanza.
 Invece, per quanto riguarda le fasi, ci aspettiamo che il woofer e il tweeter
 siano in fase con il generatore rispettivamente a basse e alte frequenze, e che
-siano in opposizione di fase nel caso contrario; il midrange, invece, ci
-aspettiamo che sia in fase con il generatore alla frequenza di risonanza.
+siano \err{in opposizione di fase (non opposizione (180°) ma anticipo / ritardo
+  di 90°)} nel caso contrario; il midrange, invece, ci aspettiamo che sia in fase
+con il generatore alla frequenza di risonanza.
 
 Da \eqref{eq:Vw} e \eqref{eq:Vt} è possibile ricavare il valore atteso della
 frequenza di crossover [\ref{sec:crossFreq}], cioè la frequenza alla quale il
@@ -134,16 +135,16 @@ Infine, si può ottenere il fattore di qualità del midrange.
   l'intervallo di frequenze e la frequenza di acquisizione). }
 
 Per l'analisi in frequenza di ampiezza e fase è stato acquisito ciascun canale
-separatamente, con sweep ripetuti. In ogni prova l'analog input $A1$ è stato
-collegato al canale di interesse mentre il canale $A0$ è rimasto collegato al
-generatore di tensione, utilizzandolo come trigger e riferimento per la fase.
-Come range di frequenze è stato scelto: \err{range?}; questo per evidenziare il
-punto di crossover ma anche per vedere l'andamento a basse e alte frequenze. Al
-fine di massimizzare la frequenza di campionamento, le tensioni sono state
-misurate in modalità referenced single ended collegando a massa il ramo in
-comune alle resistenze. Ciò ha permesso un campionamento a $500$ kHz per
-canale, con $2000$ sample per ciascuna acquisizione, abbastanza per includere
-\err{diversi periodi} anche per le frequenze inferiori.
+separatamente, con sweep ripetuti. In ogni prova l'analog input \texttt{A1} è
+stato collegato al canale di interesse mentre il canale \texttt{A0} è rimasto
+collegato al generatore di tensione, utilizzandolo come trigger e riferimento
+per la fase. Come range di frequenze è stato scelto: \err{range?}; questo per
+evidenziare il punto di crossover ma anche per vedere l'andamento a basse e
+alte frequenze. Al fine di massimizzare la frequenza di campionamento, le
+tensioni sono state misurate in modalità referenced single ended collegando a
+massa il ramo in comune alle resistenze. Ciò ha permesso un campionamento a
+$500$ kHz per canale, con $2000$ sample per ciascuna acquisizione, abbastanza
+per includere \err{diversi periodi} anche per le frequenze inferiori.
 
 I componenti del circuito sono stati misurati tramilte il multimetro di Elvis
 II, i loro valori si trovano in \cref{tab:componenti}.
@@ -155,32 +156,43 @@ II, i loro valori si trovano in \cref{tab:componenti}.
   \begin{circuitikz}[scale=1]
     % generatore
     \draw (8,0) --
-    (-0,0) to[sinusoidal voltage source]
-    (0,5) --
-    (8,5);
+    (0,0) --
+    (0,1.5) to[sinusoidal voltage source]
+    (0,3) to[R, l=$R_g$, color=blue, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
+    (0,4) --
+    (0,5.5) --
+    (8,5.5);
 
-    \draw(-0,4) to[short, -o]
-    (-0.5,4) node[left]{$v_g$};
-    \draw (-0,1) -- (-0.5,1) node[ground]{};
+    \draw(-0,4.5) to[short, -o]
+    (-0.6,4.5) node[left]{$v_g$};
+    \draw (-0,1) -- (-0.6,1) node[ground]{};
 
     % woofer
-    \draw (3,5) to[L=$L_w$] (3,2) to[R=$R_w$] (3,0);
+    \draw (3,5.5) --
+    (3,4.5) to[L=$L_w$]
+    (3,3.5) to[R, l=$R_{Lw}$, color=blue, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
+    (3,2.5) --
+    (3,2) to[R=$R_w$] (3,0);
     \draw (3,2) to [short, -o] (3.5, 2) node[right]{$v_w$};
 
     % mid
-    \draw (5.5,5) to [C=$C_m$] (5.5,3.75) to [L=$L_m$] (5.5,2) to[R=$R_m$] (5.5,0);
+    \draw (5.5,5.5) to [C=$C_m$]
+    (5.5,4.25) to [L=$L_m$]
+    (5.5,3.25) to [R, l=$R_{Lm}$, color=blue, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
+    (5.5,2.25) --
+    (5.5,2) to[R=$R_m$] (5.5,0);
 
     \draw (5.5,2) to [short, -o] (6, 2) node[right]{$v_m$};
 
     %tweeter
-    \draw (8,5) to[C=$C_t$]
+    \draw (8,5.5) to[C=$C_t$]
     (8,2) to[R=$R_t$] (8,0);
 
     \draw (8,2) to
     [short, -o] (8.5, 2) node[right]{$v_t$};
   \end{circuitikz}
   \label{fig:schema_elettrico}
-  \captionof{figure}{Schema elettrico del circuito ideale. I punti $v_g, v_w, v_m, v_t$ sono stati collegati agli analog input di Elvis II per le relative misure di tensione.}
+  \captionof{figure}{Schema elettrico del circuito, in blu i componenti non ideali. I punti $v_g, v_w, v_m, v_t$ sono stati collegati agli analog input di Elvis II per le relative misure di tensione.}
 \end{minipage}
 \begin{minipage}[b]{0.4\textwidth}
   \vspace{0pt}
@@ -194,7 +206,8 @@ II, i loro valori si trovano in \cref{tab:componenti}.
      & R_{Lm} &  & =(120.70 \pm 0.15) \text{ \Omega} \\
      & C_m    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
      & R_t    &  & =(3295 \pm 2) \text{ \Omega}      \\
-     & C_t    &  & =(4.76 \pm 0.05) \text{ nF}
+     & C_t    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
+     & R_g    &  & =(\err{50}) \text{ \Omega}
   \end{alignat*}
   \captionof{table}{Valori componenti.}
   \label{tab:componenti}
@@ -226,7 +239,7 @@ II, i loro valori si trovano in \cref{tab:componenti}.
 \label{sec:tensioni}
 \begin{equation}
   \left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{\mathbb{Z}_{load}(\omega)}
-  {R_{g}+\mathbb{Z}_{load}(\omega)}\right|V
+  {R_{g}+\mathbb{Z}_{load}(\omega)}\right| \mathbf{V}
 \end{equation}
 
 \begin{equation}
