@@ -82,14 +82,15 @@ filtro passa-alto (tweeter) e un filtro passa-banda (midrange) che suddivide il
 segnale audio in tre bande di frequenza distinte (bassi, alti, medi), al fine
 di ottimizzare la riproduzione sonora per tutta la gamma di frequenze.
 
-Dalla legge di Ohm simbolica $\textbf{V} = \mathbb{Z} \textbf{I}$, utilizzando
-il metodo dei fasori, possiamo ricavare l'andamento dell'ampiezza della
-differenza di potenziale ai capi del generatore e ai capi delle resistenze di
-woofer, medi e tweeter [\ref{sec:tensioni}]%usare Z "spessa"?
+Dalla legge di Ohm e dalle leggi di Kirchhoff simboliche per tensioni e
+correnti (\err{inserire eq. fondamentali inline oppure fare appendice dove si
+	ricava tutto?}), utilizzando il metodo dei fasori, possiamo ricavare
+l'andamento dell'ampiezza della differenza di potenziale ai capi del generatore
+e ai capi delle resistenze di woofer, medi e tweeter [\ref{sec:tensioni} \err{farlo o no?}]
 
 \begin{equation}
 	\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{\mathbb{Z}_{load}(\omega)}
-	{R_{g}+\mathbb{Z}_{load}(\omega)}\right| \mathbf{V}
+	{R_{g}+\mathbb{Z}_{load}(\omega)}\right| V_{0}
 	\label{eq:Vg}
 \end{equation}
 
@@ -275,6 +276,29 @@ II, i loro valori si trovano in \cref{tab:componenti}.
 \section{Appendici}
 \subsection{Tensioni ai capi delle resistenze}
 \label{sec:tensioni}
+
+Ricaviamo per esempio \eqref{eq:Vw} : dalla legge di Kirchhoff simbolica per le
+tensioni e correnti abbiamo che
+
+\begin{equation}
+	\begin{cases}
+		\mathbf{V_{w}} = \mathbf{I_{w}} \mathbb{Z}_{w}                                                                \\
+		\mathbf{I_{tot}} = \mathbf{I_{w}} + \mathbf{I_{m}} + \mathbf{I_{t}} = \frac{V_{0}}{R_{g} + \mathbb{Z}_{load}} \\
+		\mathbf{I_{w}} \mathbb{Z}_{w} = \mathbf{I_{m}} \mathbb{Z}_{m} = \mathbf{I_{t}} \mathbb{Z}_{t}                 \\
+	\end{cases}
+\end{equation}
+
+\noindent
+da cui si ricava che \err{ha senso ricavarle o possiamo evitare questa appendice?}
+
+\begin{equation}
+	\mathbf{V_{w}} = \left( \frac{R_{w}}{\mathbb{Z}_{w}} \right) 
+\end{equation}
+
+\begin{equation*}
+	\mathbb{Z}_{load}(\omega) = \left(\frac{1}{\mathbb{Z}_{w}(\omega)} + \frac{1}{\mathbb{Z}_{m}(\omega)} + \frac{1}{\mathbb{Z}_{t}(\omega)}\right)^{-1}
+\end{equation*}
+
 \begin{equation}
 	\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{\mathbb{Z}_{load}(\omega)}
 	{R_{g}+\mathbb{Z}_{load}(\omega)}\right| \mathbf{V}
