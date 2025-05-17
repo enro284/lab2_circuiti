@@ -239,38 +239,63 @@ void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/p
 
     mg->Draw("AP");
 
-    auto func_w = new TF1("Fase Woofer", p_w, f_min, f_max, 3);
-    func_w->SetParameters(3.3E3, 47E-3);
-    func_w->SetParLimits(0, 3.3E3, 3.4E3);
-    func_w->SetParLimits(1, 110, 130);
-    func_w->SetParLimits(2, 0.043, 0.05);
+    auto func_w = new TF1("Fase Woofer", p_w, f_min, f_max, 11);
+    func_w->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
+    func_w->SetParLimits(0, 4.5, 5.5);
+    func_w->SetParLimits(1, 3E3, 3.4E3);
+    func_w->SetParLimits(2, 3E3, 3.4E3);
+    func_w->SetParLimits(3, 3E3, 3.4E3);
+    func_w->SetParLimits(4, 110, 130);
+    func_w->SetParLimits(5, 110, 130);
+    func_w->SetParLimits(6, 45, 55);
+    func_w->SetParLimits(7, 0.043, 0.05);
+    func_w->SetParLimits(8, 0.043, 0.05);
+    func_w->SetParLimits(9, 4.3E-9, 5.2E-9);
+    func_w->SetParLimits(10, 4.3E-9, 5.2E-9);
     func_w->SetLineColor(kBlue);
 
-    auto func_m = new TF1("Fase Mid", p_m, f_min, f_max, 4);
-    func_m->SetParameters(3.3E3, 47E-3, 4.7E-9);
-    func_m->SetParLimits(0, 3.3E3, 3.4E3);
-    func_m->SetParLimits(1, 110, 130);
-    func_m->SetParLimits(2, 0.04, 0.05);
-    func_m->SetParLimits(3, 4.3E-9, 5.2E-9);
+    auto func_m = new TF1("Fase Mid", p_m, f_min, f_max, 11);
+    func_m->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
+    func_m->SetParLimits(0, 4.5, 5.5);
+    func_m->SetParLimits(1, 3E3, 3.4E3);
+    func_m->SetParLimits(2, 3E3, 3.4E3);
+    func_m->SetParLimits(3, 3E3, 3.4E3);
+    func_m->SetParLimits(4, 110, 130);
+    func_m->SetParLimits(5, 110, 130);
+    func_m->SetParLimits(6, 45, 55);
+    func_m->SetParLimits(7, 0.043, 0.05);
+    func_m->SetParLimits(8, 0.043, 0.05);
+    func_m->SetParLimits(9, 4.3E-9, 5.2E-9);
+    func_m->SetParLimits(10, 4.3E-9, 5.2E-9);
     func_m->SetLineColor(kGreen);
 
-    auto func_t = new TF1("Fase Tweeter", p_t, f_min, f_max, 2);
-    func_t->SetParameters(3.3E3, 4.7E-9);
-    func_t->SetParLimits(0, 3.3E3, 3.4E3);
-    func_t->SetParLimits(1, 4.3E-9, 5.2E-9);
-    func_t->SetLineColor(kPink);
+    auto func_t = new TF1("Fase Tweeter", p_t, f_min, f_max, 11);
+    func_t->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
+    func_t->SetParLimits(0, 4.5, 5.5);
+    func_t->SetParLimits(1, 3E3, 3.4E3);
+    func_t->SetParLimits(2, 3E3, 3.4E3);
+    func_t->SetParLimits(3, 3E3, 3.4E3);
+    func_t->SetParLimits(4, 110, 130);
+    func_t->SetParLimits(5, 110, 130);
+    func_t->SetParLimits(6, 45, 55);
+    func_t->SetParLimits(7, 0.043, 0.05);
+    func_t->SetParLimits(8, 0.043, 0.05);
+    func_t->SetParLimits(9, 4.3E-9, 5.2E-9);
+    func_t->SetParLimits(10, 4.3E-9, 5.2E-9);
+    func_t->SetLineColor(kMagenta);
 
     graph_gFlat->Fit(func_g); // posso fittare con la stessa o devo cambiare func?
     graph_w->Fit(func_w);
     graph_m->Fit(func_m);
     graph_t->Fit(func_t);
 
-    double cross_freqW = func_w->GetX(-45, f_min, f_max);
-    double cross_freqT = func_t->GetX(45, f_min, f_max);
+    double cross_freq = 10686;
     double res_freq = func_m->GetX(0, f_min, f_max);
 
-    std::cout << "Crossover frequency (Woofer) = " << cross_freqW << std::endl;
-    std::cout << "Crossover frequency (Tweeter) = " << cross_freqT << std::endl;
+    double phase_diff = func_t->Eval(cross_freq) - func_w->Eval(cross_freq);
+
+    std::cout << "Phase difference = " << phase_diff << std::endl;
+    std::cout << "Crossover frequency = " << cross_freq << std::endl;
     std::cout << "Resonance frequency = " << res_freq << std::endl;
 }
 void tempi()

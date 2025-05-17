@@ -38,9 +38,21 @@ void calc()
     double fr = 1.0 / (2 * M_PI * sqrt(LM * CM));
     std::cout << "Frequenza di risonanza approssimata (midrange) = " << fr << " Hz" << std::endl;
 
-    auto func_m = new TF1("Tensione Mid", V_m, 1E3, 3E4, 11);
-    func_m->SetParameters(5., RW, RM, RT, RLW, RLM, RG, LW, LM, CM, CT);
+    auto amp_m = new TF1("Tensione Mid", V_m, 1E3, 3E4, 11);
+    amp_m->SetParameters(5., RW, RM, RT, RLW, RLM, RG, LW, LM, CM, CT);
 
-    double res_freq = func_m->GetMaximumX(1E3, 3E4);
+    double res_freq = amp_m->GetMaximumX(1E3, 3E4);
     std::cout << "Frequenza di risonanza = " << res_freq << std::endl;
+
+    // calcola differenza di fase twetter e woofer al crossover
+    auto phase_w = new TF1("Fase woofer", p_w, 1E3, 3E4, 11);
+    phase_w->SetParameters(5., RW, RM, RT, RLW, RLM, RG, LW, LM, CM, CT);
+    double phase_w_val = phase_w->Eval(fc);
+    std::cout << "Fase woofer al crossover = " << phase_w_val << std::endl;
+    auto phase_t = new TF1("Fase tweeter", p_t, 1E3, 3E4, 11);
+    phase_t->SetParameters(5., RW, RM, RT, RLW, RLM, RG, LW, LM, CM, CT);
+    double phase_t_val = phase_t->Eval(fc);
+    std::cout << "Fase tweeter al crossover = " << phase_t_val << std::endl;
+    double phase_diff = -phase_w_val + phase_t_val;
+    std::cout << "Differenza di fase woofer-tweeter al crossover = " << phase_diff << std::endl;
 }

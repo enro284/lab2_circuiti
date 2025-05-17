@@ -114,30 +114,79 @@ double deg(double x)
 
 double p_w(double *f, double *par)
 {
+    
     double W = 2 * TMath::Pi() * *f;
-    double R = par[0];
-    double RL = par[1];
-    double L = par[2];
+    double V_0 = par[0];
+    TComplex Z_RW{par[1], 0};
+    TComplex Z_RM{par[2], 0};
+    TComplex Z_RT{par[3], 0};
+    TComplex Z_RWL{par[4], 0};
+    TComplex Z_RML{par[5], 0};
+    TComplex Z_gen{par[6], 0.};
+    TComplex Z_LW{0, W * par[7]};
+    TComplex Z_LM{0, W * par[8]};
+    TComplex Z_CM{0, -1 / (W * par[9])};
+    TComplex Z_CT{0, -1 / (W * par[10])};
 
-    return deg(-atan2(L * W, R + RL));
+    TComplex Z_W = Z_RW + Z_LW + Z_RWL;
+    TComplex Z_M = Z_RM + Z_LM + Z_CM + Z_RML;
+    TComplex Z_T = Z_RT + Z_CT;
+
+    TComplex Z_load = 1. / (1. / Z_W + 1. / Z_M + 1. / Z_T);
+
+    TComplex Hgen = Z_load / (Z_gen + Z_load);
+    TComplex HW = (Z_RW) / (Z_W);
+    return deg((Hgen * HW).Theta());
 }
 
 double p_m(double *f, double *par)
 {
     double W = 2 * TMath::Pi() * *f;
-    double R = par[0];
-    double RL = par[1];
-    double L = par[2];
-    double C = par[3];
+    double V_0 = par[0];
+    TComplex Z_RW{par[1], 0};
+    TComplex Z_RM{par[2], 0};
+    TComplex Z_RT{par[3], 0};
+    TComplex Z_RWL{par[4], 0};
+    TComplex Z_RML{par[5], 0};
+    TComplex Z_gen{par[6], 0.};
+    TComplex Z_LW{0, W * par[7]};
+    TComplex Z_LM{0, W * par[8]};
+    TComplex Z_CM{0, -1 / (W * par[9])};
+    TComplex Z_CT{0, -1 / (W * par[10])};
 
-    return deg(-atan2(W * L - 1 / (W * C), R + RL));
+    TComplex Z_W = Z_RW + Z_LW + Z_RWL;
+    TComplex Z_M = Z_RM + Z_LM + Z_CM + Z_RML;
+    TComplex Z_T = Z_RT + Z_CT;
+
+    TComplex Z_load = 1. / (1. / Z_W + 1. / Z_M + 1. / Z_T);
+
+    TComplex Hgen = Z_load / (Z_gen + Z_load);
+    TComplex HM = (Z_RM) / (Z_M);
+    return deg((Hgen * HM).Theta());
 }
 
 double p_t(double *f, double *par)
 {
     double W = 2 * TMath::Pi() * *f;
-    double R = par[0];
-    double C = par[1];
+    double V_0 = par[0];
+    TComplex Z_RW{par[1], 0};
+    TComplex Z_RM{par[2], 0};
+    TComplex Z_RT{par[3], 0};
+    TComplex Z_RWL{par[4], 0};
+    TComplex Z_RML{par[5], 0};
+    TComplex Z_gen{par[6], 0.};
+    TComplex Z_LW{0, W * par[7]};
+    TComplex Z_LM{0, W * par[8]};
+    TComplex Z_CM{0, -1 / (W * par[9])};
+    TComplex Z_CT{0, -1 / (W * par[10])};
 
-    return deg(atan2(1, C * W * R));
+    TComplex Z_W = Z_RW + Z_LW + Z_RWL;
+    TComplex Z_M = Z_RM + Z_LM + Z_CM + Z_RML;
+    TComplex Z_T = Z_RT + Z_CT;
+
+    TComplex Z_load = 1. / (1. / Z_W + 1. / Z_M + 1. / Z_T);
+
+    TComplex Hgen = Z_load / (Z_gen + Z_load);
+    TComplex HT = (Z_RT) / (Z_T);
+    return deg((Hgen * HT).Theta());
 }

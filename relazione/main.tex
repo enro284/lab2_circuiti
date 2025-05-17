@@ -25,16 +25,53 @@
 \maketitle
 \section*{Abstract}
 \prof{ Lunghezza massima 10 righe, riassumere lo scopo dell'esperimento e i
-  risultati principali (osservazioni qualitative e risultati numerici).
-  L'abstract non deve contenere riferimenti a quanto riportato nel testo
-  (figure, equazioni o tabelle) e deve essere auto - esplicativo. }
+	risultati principali (osservazioni qualitative e risultati numerici).
+	L'abstract non deve contenere riferimenti a quanto riportato nel testo
+	(figure, equazioni o tabelle) e deve essere auto - esplicativo. }
+
+L'esperimento ha avuto come obiettivo la progettazione e la realizzazione, su
+breadboard Elvis II, di un crossover RLC a tre vie (woofer, midrange, tweeter),
+corredato dallo studio analitico del comportamento in regime sinusoidale e dal
+confronto con le misure sperimentali. Dal punto di vista qualitativo si è
+osservato che la risposta in ampiezza del woofer decresce verso zero alle alte
+frequenze, quella del tweeter cresce \err{fino al valore del generatore} e il
+midrange presenta un picco alla risonanza; le misure di fase confermano
+l'inversione di $ \pm 90^\circ $ fuori banda e la coerenza in banda di taglio.
+Il valore teorico della frequenza di crossover tra woofer e tweeter, calcolato
+dalla relazione analitica, è risultato
+
+\begin{equation*}
+	f_{c} = (\cdots \pm \cdots)
+	\ kHz
+\end{equation*},
+
+\noindent
+mentre la misura sperimentale ha fornito
+
+\begin{equation*}
+	f_{c} = (\cdots \pm \cdots) \ kHz
+\end{equation*}.
+
+\noindent
+La frequenza di risonanza del midrange attesa era
+
+\begin{equation*}
+	f_{r} = (\cdots \pm \cdots) \ kHz
+\end{equation*},
+
+\noindent
+e quella misurata
+\begin{equation*}
+	f_{r} = (\cdots \pm \cdots) \ kHz
+\end{equation*}.
+\err{sistemare formattazione eq. con virgole e punti, aggiungere anche differenza di fase al crossover?}
 
 \section*{Introduzione}
 \prof{ Descrivere i concetti fisici principali e gli obiettivi dell'esperienza.
-  Per l'esperienza sui circuiti descrivere il circuito progettato, le
-  espressioni algebriche per le grandezze fisiche misurate, il comportamento
-  atteso; analogamente per ottica. L'introduzione non è un riassunto, non
-  riportare i risultati.}
+	Per l'esperienza sui circuiti descrivere il circuito progettato, le
+	espressioni algebriche per le grandezze fisiche misurate, il comportamento
+	atteso; analogamente per ottica. L'introduzione non è un riassunto, non
+	riportare i risultati.}
 
 L'esperimento svolto in laboratorio è incentrato sulla progettazione di un
 circuito RLC sulla breadboard di Elvis II, sullo studio analitico del
@@ -51,40 +88,41 @@ differenza di potenziale ai capi del generatore e ai capi delle resistenze di
 woofer, medi e tweeter [\ref{sec:tensioni}]%usare Z "spessa"?
 
 \begin{equation}
-  \left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{\mathbb{Z}_{load}(\omega)}
-  {R_{g}+\mathbb{Z}_{load}(\omega)}\right| \mathbf{V}
-  \label{eq:Vg}
+	\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{\mathbb{Z}_{load}(\omega)}
+	{R_{g}+\mathbb{Z}_{load}(\omega)}\right| \mathbf{V}
+	\label{eq:Vg}
 \end{equation}
 
 \begin{equation}
-  \left| \mathbf{V_{w}}(\omega) \right| = \left| \frac{R_{w}}
-  {\mathbb{Z}_{w}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right|
-  \label{eq:Vw}
+	\left| \mathbf{V_{w}}(\omega) \right| = \left| \frac{R_{w}}
+	{\mathbb{Z}_{w}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right|
+	\label{eq:Vw}
 \end{equation}
 
 \begin{equation}
-  \left| \mathbf{V_{m}}(\omega) \right| = \left| \frac{R_{m}}
-  {\mathbb{Z}_{m}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right|
-  \label{eq:Vm}
+	\left| \mathbf{V_{m}}(\omega) \right| = \left| \frac{R_{m}}
+	{\mathbb{Z}_{m}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right|
+	\label{eq:Vm}
 \end{equation}
 
 \begin{equation}
-  \left| \mathbf{V_{t}}(\omega) \right| = \left| \frac{R_{t}}
-  {\mathbb{Z}_{t}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right|
-  \label{eq:Vt}
+	\left| \mathbf{V_{t}}(\omega) \right| = \left| \frac{R_{t}}
+	{\mathbb{Z}_{t}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right|
+	\label{eq:Vt}
 \end{equation}
 \\
-e delle rispettive fasi (\err{sono approssimate | mettere con Arg()?}) [\ref{sec:fasi}]
+e delle rispettive fasi (\err{decidere dove esplicitare e definire simboli}) [\ref{sec:fasi}]
+
 \begin{equation}
-  \phi_{w}(\omega) = - \arctan\left(\frac{\omega L_{w}}{R_{w}+R_{Lws}}\right)
+	\phi_{w}(\omega) = Arg(\mathbf{V_{g}}(\omega)) - Arg(\mathbb{Z}_{w}(\omega))
 \end{equation}
 
 \begin{equation}
-  \phi_{m}(\omega) = - \arctan\left(\frac{\omega L_{m} - \frac{1}{\omega C_{m}}}{R_{m}+R_{Lm}}\right)
+	\phi_{m}(\omega) = Arg(\mathbf{V_{g}}(\omega)) - Arg(\mathbb{Z}_{m}(\omega))
 \end{equation}
 
 \begin{equation}
-  \phi_{t}(\omega) = \arctan\left(\frac{1}{\omega R_{t} C_{t}}\right)
+	\phi_{t}(\omega) =  Arg(\mathbf{V_{g}}(\omega)) - Arg(\mathbb{Z}_{t}(\omega))
 \end{equation}
 \\
 tutto in funzione della pulsazione.
@@ -95,19 +133,19 @@ tweeter ci aspettiamo un andamento crescente asintoticamente al generatore,
 mentre per il midrange ci aspettiamo un picco alla frequenza di risonanza.
 Invece, per quanto riguarda le fasi, ci aspettiamo che il woofer e il tweeter
 siano in fase con il generatore rispettivamente a basse e alte frequenze, e che
-siano \err{in opposizione di fase (non opposizione (180°) ma anticipo / ritardo
-  di 90°)} nel caso contrario; il midrange, invece, ci aspettiamo che sia in fase
-con il generatore alla frequenza di risonanza.
+siano in ritardo e in anticipo di fase di $90^\circ$ nel caso contrario; il
+midrange, invece, ci aspettiamo che sia in fase con il generatore alla
+frequenza di risonanza.
 
 Da \eqref{eq:Vw} e \eqref{eq:Vt} è possibile ricavare il valore atteso della
 frequenza di crossover [\ref{sec:crossFreq}], cioè la frequenza alla quale il
 woofer e il tweeter hanno la tensione di ampiezza uguale.
 
 \begin{equation}
-  f_{c} = \frac{1}{2\pi}\sqrt{\frac{\sqrt{4 (R_{w} R_{t} L_{w})^2 + C_{t}^2(2
-        R_{w} R_{Lw} R_{t}^2 + (R_{Lw} R_{t})^2)^2}}{2 C _{t} (L_{w} R_{t})^2 } -
-    \frac{R_{w} R_{Lw}}{L_{w}^2} - \frac{R_{Lw}^2}{2 L_{w}^2}}
-  \label{eq:fc}
+	f_{c} = \frac{1}{2\pi}\sqrt{\frac{\sqrt{4 (R_{w} R_{t} L_{w})^2 + C_{t}^2(2
+				R_{w} R_{Lw} R_{t}^2 + (R_{Lw} R_{t})^2)^2}}{2 C _{t} (L_{w} R_{t})^2 } -
+		\frac{R_{w} R_{Lw}}{L_{w}^2} - \frac{R_{Lw}^2}{2 L_{w}^2}}
+	\label{eq:fc}
 \end{equation}
 
 \noindent
@@ -115,24 +153,24 @@ Inoltre, da \eqref{eq:Vm} è possibile calcolare la frequenza di risonanza attes
 \err{è approssimata}
 
 \begin{equation}
-  f_{r} = \frac{1}{2\pi}\sqrt{\frac{1}{L_{m} C_{m}}}  %equazione approssimata
-  \label{eq:fr}
+	f_{r} = \frac{1}{2\pi}\sqrt{\frac{1}{L_{m} C_{m}}}  %equazione approssimata
+	\label{eq:fr}
 \end{equation}
 
 \noindent
-Infine, si può ottenere il fattore di qualità del midrange.
+Infine, si può ottenere \err{la differenza d fase tra tweeter e woofer alla frequenza di crossover}.
 
 \begin{equation}
-  booh non so se farlo
+	booh non so se farlo
 \end{equation}
 
 \section*{Apparato sperimentale e svolgimento}
 \prof{ Descrivere l'apparato utilizzato. Allegare una foto o lo schema
-  dell'apparato sperimentale (sarà la Fig. 1); la foto deve permettere di
-  identificare chiaramente i componenti principali (eventualmente usare delle
-  frecce e delle etichette per evidenziarli). Riassumere lo svolgimento delle
-  misure e motivare la scelta dei parametri di acquisizione (per esempio:
-  l'intervallo di frequenze e la frequenza di acquisizione). }
+	dell'apparato sperimentale (sarà la Fig. 1); la foto deve permettere di
+	identificare chiaramente i componenti principali (eventualmente usare delle
+	frecce e delle etichette per evidenziarli). Riassumere lo svolgimento delle
+	misure e motivare la scelta dei parametri di acquisizione (per esempio:
+	l'intervallo di frequenze e la frequenza di acquisizione). }
 
 Per l'analisi in frequenza di ampiezza e fase è stato acquisito ciascun canale
 separatamente, con sweep ripetuti. In ogni prova l'analog input \texttt{A1} è
@@ -151,126 +189,126 @@ II, i loro valori si trovano in \cref{tab:componenti}.
 
 \noindent
 \begin{minipage}[b]{0.6\textwidth}
-  \vspace{0pt}
-  \centering
-  \begin{circuitikz}[scale=1]
-    % generatore
-    \draw (8,0) --
-    (0,0) --
-    (0,1.5) to[sinusoidal voltage source]
-    (0,3) to[R, l=$R_g$, color=blue, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
-    (0,4) --
-    (0,5.5) --
-    (8,5.5);
+	\vspace{0pt}
+	\centering
+	\begin{circuitikz}[scale=1]
+		% generatore
+		\draw (8,0) --
+		(0,0) --
+		(0,1.5) to[sinusoidal voltage source]
+		(0,3) to[R, l=$R_g$, color=blue, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
+		(0,4) --
+		(0,5.5) --
+		(8,5.5);
 
-    \draw(-0,4.5) to[short, -o]
-    (-0.6,4.5) node[left]{$v_g$};
-    \draw (-0,1) -- (-0.6,1) node[ground]{};
+		\draw(-0,4.5) to[short, -o]
+		(-0.6,4.5) node[left]{$v_g$};
+		\draw (-0,1) -- (-0.6,1) node[ground]{};
 
-    % woofer
-    \draw (3,5.5) --
-    (3,4.5) to[L=$L_w$]
-    (3,3.5) to[R, l=$R_{Lw}$, color=blue, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
-    (3,2.5) --
-    (3,2) to[R=$R_w$] (3,0);
-    \draw (3,2) to [short, -o] (3.5, 2) node[right]{$v_w$};
+		% woofer
+		\draw (3,5.5) --
+		(3,4.5) to[L=$L_w$]
+		(3,3.5) to[R, l=$R_{Lw}$, color=blue, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
+		(3,2.5) --
+		(3,2) to[R=$R_w$] (3,0);
+		\draw (3,2) to [short, -o] (3.5, 2) node[right]{$v_w$};
 
-    % mid
-    \draw (5.5,5.5) to [C=$C_m$]
-    (5.5,4.25) to [L=$L_m$]
-    (5.5,3.25) to [R, l=$R_{Lm}$, color=blue, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
-    (5.5,2.25) --
-    (5.5,2) to[R=$R_m$] (5.5,0);
+		% mid
+		\draw (5.5,5.5) to [C=$C_m$]
+		(5.5,4.25) to [L=$L_m$]
+		(5.5,3.25) to [R, l=$R_{Lm}$, color=blue, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
+		(5.5,2.25) --
+		(5.5,2) to[R=$R_m$] (5.5,0);
 
-    \draw (5.5,2) to [short, -o] (6, 2) node[right]{$v_m$};
+		\draw (5.5,2) to [short, -o] (6, 2) node[right]{$v_m$};
 
-    %tweeter
-    \draw (8,5.5) to[C=$C_t$]
-    (8,2) to[R=$R_t$] (8,0);
+		%tweeter
+		\draw (8,5.5) to[C=$C_t$]
+		(8,2) to[R=$R_t$] (8,0);
 
-    \draw (8,2) to
-    [short, -o] (8.5, 2) node[right]{$v_t$};
-  \end{circuitikz}
-  \label{fig:schema_elettrico}
-  \captionof{figure}{Schema elettrico del circuito, in blu i componenti non ideali. I punti $v_g, v_w, v_m, v_t$ sono stati collegati agli analog input di Elvis II per le relative misure di tensione.}
+		\draw (8,2) to
+		[short, -o] (8.5, 2) node[right]{$v_t$};
+	\end{circuitikz}
+	\label{fig:schema_elettrico}
+	\captionof{figure}{Schema elettrico del circuito, in blu i componenti non ideali. I punti $v_g, v_w, v_m, v_t$ sono stati collegati agli analog input di Elvis II per le relative misure di tensione.}
 \end{minipage}
 \begin{minipage}[b]{0.4\textwidth}
-  \vspace{0pt}
-  \centering
-  \begin{alignat*}{2}
-     & R_w    &  & =(3293 \pm 2) \text{ \Omega}      \\
-     & L_w    &  & =(47.2 \pm 0.5) \text{ mH}        \\
-     & R_{Lw} &  & =(120.00 \pm 0.15) \text{ \Omega} \\[1em]
-     & R_m    &  & =(3287 \pm 2) \text{ \Omega}      \\
-     & L_m    &  & =(46.8 \pm 0.5) \text{ mH}        \\
-     & R_{Lm} &  & =(120.70 \pm 0.15) \text{ \Omega} \\
-     & C_m    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
-     & R_t    &  & =(3295 \pm 2) \text{ \Omega}      \\
-     & C_t    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
-     & R_g    &  & =(\err{50}) \text{ \Omega}
-  \end{alignat*}
-  \captionof{table}{Valori componenti.}
-  \label{tab:componenti}
+	\vspace{0pt}
+	\centering
+	\begin{alignat*}{2}
+		 & R_w    &  & =(3293 \pm 2) \text{ \Omega}      \\
+		 & L_w    &  & =(47.2 \pm 0.5) \text{ mH}        \\
+		 & R_{Lw} &  & =(120.00 \pm 0.15) \text{ \Omega} \\[1em]
+		 & R_m    &  & =(3287 \pm 2) \text{ \Omega}      \\
+		 & L_m    &  & =(46.8 \pm 0.5) \text{ mH}        \\
+		 & R_{Lm} &  & =(120.70 \pm 0.15) \text{ \Omega} \\
+		 & C_m    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
+		 & R_t    &  & =(3295 \pm 2) \text{ \Omega}      \\
+		 & C_t    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
+		 & R_g    &  & =(\err{50}) \text{ \Omega}
+	\end{alignat*}
+	\captionof{table}{Valori componenti.}
+	\label{tab:componenti}
 \end{minipage}
 
 \section*{Risultati e discussione}
 \prof{ Riportare i risultati più rappresentativi in forma grafica oppure come
-  foto delle osservazioni sull'oscilloscopio analogico (se utilizzato). Non è
-  necessario riportare tutti i dati. Commentare qualitativamente gli andamenti
-  delle grandezze fisiche riportati in forma grafica e/o le forme di riga
-  osservate. In tutti i grafici gli assi devono essere chiaramente etichettati e
-  le unità di misura devono essere incluse. Quando le incertezze sono note e
-  sono visibili sulla scala utilizzata rappresentarle sul grafico come barre di
-  errore. Porre particolare attenzione alla leggibilità, utilizzando caratteri
-  sufficientemente grandi. Descrivere come sono stati elaborati i dati e
-  riportare i risultati numerici (miglior stima ed incertezza), in forma
-  tabellare se necessario. Commentare i valori ottenuti. Non è necessario
-  riportare il calcolo esplicito delle incertezze (eventualmente usare una
-  appendice), ma è importante segnalare se si tratta di risoluzione strumentale,
-  di errore casuale oppure di errore sistematico. }
+	foto delle osservazioni sull'oscilloscopio analogico (se utilizzato). Non è
+	necessario riportare tutti i dati. Commentare qualitativamente gli andamenti
+	delle grandezze fisiche riportati in forma grafica e/o le forme di riga
+	osservate. In tutti i grafici gli assi devono essere chiaramente etichettati e
+	le unità di misura devono essere incluse. Quando le incertezze sono note e
+	sono visibili sulla scala utilizzata rappresentarle sul grafico come barre di
+	errore. Porre particolare attenzione alla leggibilità, utilizzando caratteri
+	sufficientemente grandi. Descrivere come sono stati elaborati i dati e
+	riportare i risultati numerici (miglior stima ed incertezza), in forma
+	tabellare se necessario. Commentare i valori ottenuti. Non è necessario
+	riportare il calcolo esplicito delle incertezze (eventualmente usare una
+	appendice), ma è importante segnalare se si tratta di risoluzione strumentale,
+	di errore casuale oppure di errore sistematico. }
 
 \section*{Conclusioni}
 \prof{Conclusioni finali, particolarmente importanti nel caso di risultati
-  anomali.}
+	anomali.}
 
 \appendix
 \section{Appendici}
 \subsection{Tensioni ai capi delle resistenze}
 \label{sec:tensioni}
 \begin{equation}
-  \left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{\mathbb{Z}_{load}(\omega)}
-  {R_{g}+\mathbb{Z}_{load}(\omega)}\right| \mathbf{V}
+	\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{\mathbb{Z}_{load}(\omega)}
+	{R_{g}+\mathbb{Z}_{load}(\omega)}\right| \mathbf{V}
 \end{equation}
 
 \begin{equation}
-  \left| \mathbf{V_{w}}(\omega) \right| = \left| \frac{R_{w}}
-  {\mathbb{Z}_{w}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{w}}
-  {R_{w}+R_{Lw} + j \omega L_w}\right|\left| \mathbf{V_{g}}(\omega) \right|
+	\left| \mathbf{V_{w}}(\omega) \right| = \left| \frac{R_{w}}
+	{\mathbb{Z}_{w}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{w}}
+	{R_{w}+R_{Lw} + j \omega L_w}\right|\left| \mathbf{V_{g}}(\omega) \right|
 \end{equation}
 
 \begin{equation}
-  \left| \mathbf{V_{m}}(\omega) \right| = \left| \frac{R_{m}}
-  {\mathbb{Z}_{m}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{m}}{R_{m}+R_{Lm} + j (\omega L_m - \frac{1}{\omega C_{m}})} \right| \left| \mathbf{V_{g}}(\omega) \right|
+	\left| \mathbf{V_{m}}(\omega) \right| = \left| \frac{R_{m}}
+	{\mathbb{Z}_{m}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{m}}{R_{m}+R_{Lm} + j (\omega L_m - \frac{1}{\omega C_{m}})} \right| \left| \mathbf{V_{g}}(\omega) \right|
 \end{equation}
 
 \begin{equation}
-  \left| \mathbf{V_{t}}(\omega) \right| = \left| \frac{R_{t}}
-  {\mathbb{Z}_{t}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{t}}{R_{t} + j (-\frac{1}{\omega C_{t}})}\right|\left| \mathbf{V_{g}}(\omega) \right|
+	\left| \mathbf{V_{t}}(\omega) \right| = \left| \frac{R_{t}}
+	{\mathbb{Z}_{t}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right| = \left| \frac{R_{t}}{R_{t} + j (-\frac{1}{\omega C_{t}})}\right|\left| \mathbf{V_{g}}(\omega) \right|
 \end{equation}
 
 \subsection{Fasi delle tensioni}
 \label{sec:fasi}
 
 \begin{equation}
-  \phi_{w}(\omega) = - \arctan\left(\frac{\omega L_{w}}{R_{w}+R_{Lws}}\right)
+	\phi_{w}(\omega) = - \arctan\left(\frac{\omega L_{w}}{R_{w}+R_{Lws}}\right)
 \end{equation}
 
 \begin{equation}
-  \phi_{m}(\omega) = - \arctan\left(\frac{\omega L_{m} - \frac{1}{\omega C_{m}}}{R_{m}+R_{Lm}}\right)
+	\phi_{m}(\omega) = - \arctan\left(\frac{\omega L_{m} - \frac{1}{\omega C_{m}}}{R_{m}+R_{Lm}}\right)
 \end{equation}
 
 \begin{equation}
-  \phi_{t}(\omega) = \arctan\left(\frac{1}{\omega R_{t} C_{t}}\right)
+	\phi_{t}(\omega) = \arctan\left(\frac{1}{\omega R_{t} C_{t}}\right)
 \end{equation}
 
 \subsection{Frequenza di crossover}
