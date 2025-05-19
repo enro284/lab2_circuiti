@@ -41,8 +41,7 @@ Il valore teorico della frequenza di crossover tra woofer e tweeter, calcolato
 dalla relazione analitica, è risultato
 
 \begin{equation*}
-	f_{c} = (10.4016 \pm \cdots)
-	\ kHz
+	f_{c} = (10.40 \pm 0.12) \ kHz
 \end{equation*},
 
 \noindent
@@ -191,7 +190,8 @@ sample per ciascuna acquisizione, abbastanza per includere \err{diversi
 	periodi} anche per le frequenze inferiori.
 
 I componenti del circuito sono stati misurati tramite il multimetro di ELVIS
-II, i loro valori si trovano in \cref{tab:componenti}.
+II, i loro valori si trovano in \cref{tab:componenti} (\err{mettere la tabella
+	nei risultati?}).
 
 \noindent
 \begin{minipage}[b]{0.6\textwidth}
@@ -236,7 +236,7 @@ II, i loro valori si trovano in \cref{tab:componenti}.
 		[short, -o] (8.5, 2) node[right]{$v_t$};
 	\end{circuitikz}
 	\label{fig:schema_elettrico}
-	\captionof{figure}{Schema elettrico del circuito, in blu i componenti non ideali. I punti $v_g, v_w, v_m, v_t$ sono stati collegati agli analog input di ELVIS II per le relative misure di tensione.}
+	\captionof{figure}{Schema elettrico del circuito. I punti $v_g, v_w, v_m, v_t$ sono stati collegati agli analog input di ELVIS II per le relative misure di tensione. I pedici g,w,m,t sono relativi ai rami del generatore, woofer, midrange e tweeter, i componenti non ideali sono disegnati in blu.}
 \end{minipage}
 \begin{minipage}[b]{0.4\textwidth}
 	\vspace{0pt}
@@ -279,6 +279,23 @@ II, i loro valori si trovano in \cref{tab:componenti}.
 	riportare il calcolo esplicito delle incertezze (eventualmente usare una
 	appendice), ma è importante segnalare se si tratta di risoluzione strumentale,
 	di errore casuale oppure di errore sistematico. }
+
+Dalle misure delle componenti riportate in \cref{tab:componenti} e
+dall'equazione \eqref{eq:fc} abbiamo ricavato la miglior
+stima del valore atteso della frequenza di crossover, mentre per la miglior
+stima sulla sua incertezza abbiamo propagato linearmente le incertezze
+(\err{sistema cifre dec e allinea })
+
+\begin{equation}
+	\begin{aligned}
+		\Delta f_{c} = & \left|\frac{\partial f_{c}}{\partial R_{w}}\right| \Delta R_{w} + \left|\frac{\partial f_{c}}{\partial R_{Lw}}\right| \Delta R_{Lw} + \left|\frac{\partial f_{c}}{\partial L_{w}}\right| \Delta L_{w} + \left|\frac{\partial f_{c}}{\partial R_{t}}\right| \Delta R_{t} + \left|\frac{\partial f_{c}}{\partial C_{t}}\right| \Delta C_{t} \\
+		=              & \left( 3.16 + 0.269 + \colorbox{yellow}{52.9} + 3.28 + \colorbox{yellow}{56.9} \right) Hz                                                                                                                                                                                                                                                 \\
+		=              & 117 \ Hz
+	\end{aligned}
+\end{equation}
+
+\noindent
+dove sono state evidenziate le incertezze più significative.
 
 \section*{Conclusioni}
 \prof{Conclusioni finali, particolarmente importanti nel caso di risultati
