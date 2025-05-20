@@ -1,6 +1,8 @@
 \documentclass[12pt,italian]{article}
 \usepackage[italian]{babel}
 \usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
 \usepackage{amsmath}
 \usepackage{circuitikz}
 \usepackage{caption}
@@ -41,26 +43,26 @@ Il valore teorico della frequenza di crossover tra woofer e tweeter, calcolato
 dalla relazione analitica, è risultato
 
 \begin{equation*}
-	f_{c} = (10.40 \pm 0.12)  \ kHz
+	f_{c} = (10.40 \pm 0.12)  \text{ kHz}
 \end{equation*},
 
 \noindent
 mentre la misura sperimentale ha fornito
 
 \begin{equation*}
-	f_{c} = (\cdots \pm \cdots) \ kHz
+	f_{c} = (\cdots \pm \cdots) \text{ kHz}
 \end{equation*}.
 
 \noindent
 La frequenza di risonanza del midrange attesa è \err{(il valore è quello non approssimato, l'incertezza è ricavata dalla formula approssimata )}
 \begin{equation*}
-	f_{r} = (10.65 \pm 0.11)  \ kHz
+	f_{r} = (10.65 \pm 0.11)  \text{ kHz}
 \end{equation*},
 
 \noindent
 e quella misurata
 \begin{equation*}
-	f_{r} = (\cdots \pm \cdots)  \ kHz
+	f_{r} = (\cdots \pm \cdots)  \text{ kHz}
 \end{equation*}.
 \err{sistemare formattazione eq. con virgole e punti, aggiungere anche differenza di fase al crossover?}
 
@@ -261,7 +263,7 @@ II, i loro valori si trovano in \cref{tab:componenti} (\err{mettere la tabella
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{Images/Elvis.jpg}
+	\includegraphics[width=0.5\textwidth]{Elvis.jpg}
 	\caption{Foto della scheda NI ELVIS II (\err{sistema foto (c'è anche foto circuito)})}
 	\label{fig:Elvis}
 \end{figure}
@@ -287,32 +289,32 @@ dall'equazione \eqref{eq:fc} abbiamo ricavato la miglior stima del valore
 atteso della frequenza di crossover
 
 \begin{equation*}
-	f_{c} = 10402 \ Hz
+	f_{c} = 10402 \text{ Hz}
 \end{equation*}
 
 \noindent
 mentre per la miglior stima sulla sua incertezza abbiamo propagato linearmente
-le incertezze (\err{sistema cifre dec e allinea })
+le incertezze strumentali dovute alla misura dei componenti (\err{sistema cifre dec})
 
 \begin{equation*}
-	\begin{aligned}
-		\Delta f_{c} = & \left|\frac{\partial f_{c}}{\partial R_{w}}\right| \Delta R_{w} + \left|\frac{\partial f_{c}}{\partial R_{Lw}}\right| \Delta R_{Lw} + \left|\frac{\partial f_{c}}{\partial L_{w}}\right| \Delta L_{w} + \left|\frac{\partial f_{c}}{\partial R_{t}}\right| \Delta R_{t} + \left|\frac{\partial f_{c}}{\partial C_{t}}\right| \Delta C_{t} \\
-		=              & \left( 3.16 + 0.269 + \colorbox{yellow}{52.9} + 3.28 + \colorbox{yellow}{56.9} \right) Hz                                                                                                                                                                                                                                                 \\
-		=              & 117 \ Hz
-	\end{aligned}
+	\begin{alignedat}{5}
+		\Delta f_{c} = & \left|\frac{\partial f_{c}}{\partial R_{w}}\right| \Delta R_{w} &  & +  \left|\frac{\partial f_{c}}{\partial R_{Lw}}\right| \Delta R_{Lw} &  & + \left|\frac{\partial f_{c}}{\partial L_{w}}\right| \Delta L_{w} &  & + \left|\frac{\partial f_{c}}{\partial R_{t}}\right| \Delta R_{t} &  & + \left|\frac{\partial f_{c}}{\partial C_{t}}\right| \Delta C_{t} \\
+		=              & ( 3.16                                                          &  & +  0.269                                                             &  & + \colorbox{yellow}{52.9}                                         &  & + 3.28                                                            &  & + \colorbox{yellow}{56.9} ) \text{ Hz}                             \\
+		=              & 117 \text{ Hz}
+	\end{alignedat}
 \end{equation*}
 
 \noindent
-dove sono state evidenziate le incertezze più significative.
+dove sono stati evidenziati i termini più significativi.
 
 Invece, per la frequenza di risonanza del midrange, abbiamo ottenuto due
 migliori stime: la prima utilizzando la relazione approssimata al caso ideale
-\eqref{eq:fr} (vedi (\cref{sec:resFreq})), e la seconda calcolando
-numericamente la frequenza corrispondente al massimo di $ \left|
-	\mathbf{V_{m}}(\omega) \right| $, ottenendo
+\eqref{eq:fr} (vedi (\cref{sec:resFreq})), e la seconda stimando numericamente
+la frequenza corrispondente al massimo di $ \left| \mathbf{V_{m}}(\omega)
+	\right| $, ottenendo
 
 \begin{equation*}
-	f_{r}^{\text{(ideale)}} = 10652 \ Hz \hspace{2cm} f_{r}^{\text{(\err{num})}} = 10651 \ Hz
+	f_{r}^{\text{(ideale)}} = 10652 \text{ Hz} \hspace{2cm} f_{r}^{\text{(\err{num})}} = 10651 \text{ Hz}
 \end{equation*}
 
 \noindent
@@ -321,24 +323,24 @@ stima è solamente  $\varepsilon_{f_r} \approx 0.01\%$, si è scelto di utilizza
 con semplicità l'incertezza, che risulta essere
 
 \begin{equation*}
-	\begin{aligned}
-		\frac{\Delta f_{r}}{f_{r}} = & \frac{1}{2} \frac{\Delta L_{m}}{L_{m}} + \frac{1}{2} \frac{\Delta C_{m}}{C_{m}} \\
-		=                            & 0.0053 + 0.0053                                                                 \\
-		=                            & 0.0106
-	\end{aligned}
+	\begin{alignedat}{2}
+		\frac{\Delta f_{r}}{f_{r}} = & \frac{1}{2} \frac{\Delta L_{m}}{L_{m}} &  & + \frac{1}{2} \frac{\Delta C_{m}}{C_{m}} \\
+		=                            & (0.0053                                &  & + 0.0053) \text{ Hz}                     \\
+		=                            & 0.0106 \text{ Hz}
+	\end{alignedat}
 \end{equation*}
 
 Riassumendo, abbiamo quindi
 
 \begin{equation*}
-	f_{c} = (10.40 \pm 0.12)\  \ kHz \hspace{2cm} \frac{\Delta f_{c}}{f_{c}} \approx 1.2 \ \%
+	f_{c} = (10.40 \pm 0.12)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{c}}{f_{c}} \approx 1.2 \ \%
 \end{equation*}
 
 \noindent
 e
 
 \begin{equation*}
-	f_{r} = (10.65 \pm 0.11)\  \ kHz \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} \approx 1.1 \ \%
+	f_{r} = (10.65 \pm 0.11)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} \approx 1.1 \ \%
 \end{equation*}
 
 \section*{Conclusioni}
