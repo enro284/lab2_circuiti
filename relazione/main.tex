@@ -286,62 +286,20 @@ II, i loro valori si trovano in \cref{tab:componenti} (\err{mettere la tabella
 
 Dalle misure delle componenti riportate in \cref{tab:componenti} e
 dall'equazione \eqref{eq:fc} abbiamo ricavato la miglior stima del valore
-atteso della frequenza di crossover
-
-\begin{equation*}
-	f_{c} = 10402 \text{ Hz}
-\end{equation*}
-
-\noindent
-mentre per la miglior stima sulla sua incertezza abbiamo propagato linearmente
-le incertezze strumentali dovute alla misura dei componenti (\err{sistema cifre dec})
-
-\begin{equation*}
-	\begin{alignedat}{5}
-		\Delta f_{c} = & \left|\frac{\partial f_{c}}{\partial R_{w}}\right| \Delta R_{w} &  & +  \left|\frac{\partial f_{c}}{\partial R_{Lw}}\right| \Delta R_{Lw} &  & + \left|\frac{\partial f_{c}}{\partial L_{w}}\right| \Delta L_{w} &  & + \left|\frac{\partial f_{c}}{\partial R_{t}}\right| \Delta R_{t} &  & + \left|\frac{\partial f_{c}}{\partial C_{t}}\right| \Delta C_{t} \\
-		=              & ( 3.16                                                          &  & +  0.269                                                             &  & + \colorbox{yellow}{52.9}                                         &  & + 3.28                                                            &  & + \colorbox{yellow}{56.9} ) \text{ Hz}                             \\
-		=              & 117 \text{ Hz}
-	\end{alignedat}
-\end{equation*}
-
-\noindent
-dove sono stati evidenziati i termini più significativi.
-
-Invece, per la frequenza di risonanza del midrange, abbiamo ottenuto due
-migliori stime: la prima utilizzando la relazione approssimata al caso ideale
-\eqref{eq:fr} (vedi (\cref{sec:resFreq})), e la seconda stimando numericamente
-la frequenza corrispondente al massimo di $ \left| \mathbf{V_{m}}(\omega)
-	\right| $, ottenendo
-
-\begin{equation*}
-	f_{r}^{\text{(ideale)}} = 10652 \text{ Hz} \hspace{2cm} f_{r}^{\text{(\err{num})}} = 10651 \text{ Hz}
-\end{equation*}
-
-\noindent
-Poichè l'errore percentuale che si commette prendendo $f_{r}^{\text{(ideale)}}$ come miglior
-stima è solamente  $\varepsilon_{f_r} \approx 0.01\%$, si è scelto di utilizzare questa stima per poter propagare
-con semplicità l'incertezza, che risulta essere
-
-\begin{equation*}
-	\begin{alignedat}{2}
-		\frac{\Delta f_{r}}{f_{r}} = & \frac{1}{2} \frac{\Delta L_{m}}{L_{m}} &  & + \frac{1}{2} \frac{\Delta C_{m}}{C_{m}} \\
-		=                            & (0.0053                                &  & + 0.0053) \text{ Hz}                     \\
-		=                            & 0.0106 \text{ Hz}
-	\end{alignedat}
-\end{equation*}
-
-Riassumendo, abbiamo quindi
+atteso della frequenza di crossover:
 
 \begin{equation*}
 	f_{c} = (10.40 \pm 0.12)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{c}}{f_{c}} \approx 1.2 \ \%
 \end{equation*}
 
-\noindent
-e
+La frequenza di risonanza del midrange è stata stimata secondo il modello
+teorico, a partire dai parametri del circuito:
 
 \begin{equation*}
 	f_{r} = (10.65 \pm 0.11)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} \approx 1.1 \ \%
 \end{equation*}
+Questo valore fa fede alla relazione ideale Eq. \eqref{eq:fr} perché gli effetti del circuito reale sono risultati inferiori
+all'errore strumentale, più dettagli in \cref{sec:resFreq}.
 
 \section*{Conclusioni}
 \prof{Conclusioni finali, particolarmente importanti nel caso di risultati
@@ -413,9 +371,45 @@ da cui si ricava che \err{ha senso ricavarle o possiamo evitare questa appendice
 \subsection{Frequenza di crossover}
 \label{sec:crossFreq}
 
-\subsection{Frequenza di risonanza}
-\label{sec:resFreq}
+\subsection{Frequenza di risonanza}\label{sec:resFreq}
+La prima misura è data dalla relazione ideale Eq. \eqref{eq:fr}; la seconda
+tiene conto anche degli effetti non ideali ed è stata ricavata numericamente
+come frequenza corrispondente al massimo di Eq. \eqref{eq:Vm}.
+
+\begin{equation*}
+	f_{r}^{\text{(ideale)}} = 10652 \text{ Hz} \hspace{2cm} f_{r}^{\text{(reale)}} = 10651 \text{ Hz}
+\end{equation*}
+% f_r
+Poichè l'errore percentuale che si commette prendendo $f_{r}^{\text{(ideale)}}$
+come miglior stima è solamente $\varepsilon_{f_r} \approx 0.01\%$, si è scelto
+di utilizzare questa stima per poter propagare con semplicità l'incertezza, che
+risulta essere
+
+\begin{equation*}
+	\begin{alignedat}{2}
+		\frac{\Delta f_{r}}{f_{r}} = & \frac{1}{2} \frac{\Delta L_{m}}{L_{m}} &  & + \frac{1}{2} \frac{\Delta C_{m}}{C_{m}} \\
+		=                            & 0.0053                                 &  & + 0.0053
+		= 0.0106 \approx 1 \ \%
+	\end{alignedat}
+\end{equation*}
+ossia due ordini di grandezza più grande di $\varepsilon_{f_r}$
 
 \subsection{Incertezze}
+
+%f_c
+\noindent
+mentre per la miglior stima sulla sua incertezza abbiamo propagato linearmente
+le incertezze strumentali dovute alla misura dei componenti (\err{sistema cifre dec})
+
+\begin{equation*}
+	\begin{alignedat}{5}
+		\Delta f_{c} = & \left|\frac{\partial f_{c}}{\partial R_{w}}\right| \Delta R_{w} &  & +  \left|\frac{\partial f_{c}}{\partial R_{Lw}}\right| \Delta R_{Lw} &  & + \left|\frac{\partial f_{c}}{\partial L_{w}}\right| \Delta L_{w} &  & + \left|\frac{\partial f_{c}}{\partial R_{t}}\right| \Delta R_{t} &  & + \left|\frac{\partial f_{c}}{\partial C_{t}}\right| \Delta C_{t} \\
+		=              & ( 3.16                                                          &  & +  0.269                                                             &  & + \colorbox{yellow}{52.9}                                         &  & + 3.28                                                            &  & + \colorbox{yellow}{56.9} ) \text{ Hz}                            \\
+		=              & 117 \text{ Hz}
+	\end{alignedat}
+\end{equation*}
+
+\noindent
+dove sono stati evidenziati i termini più significativi.
 
 \end{document}
