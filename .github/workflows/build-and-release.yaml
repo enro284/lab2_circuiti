@@ -1,8 +1,9 @@
 name: Build and release Relazione
-on: 
+on:
   push:
     paths: 
       - 'relazione/**'
+  workflow_dispatch:
   
 jobs:
   presentation:
