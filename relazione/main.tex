@@ -9,6 +9,7 @@
 \usepackage{cleveref}
 \usepackage{amsfonts}
 
+\hyphenation{ELVIS}
 \newcommand{\prof}[1]{\textcolor{blue}{#1}}
 \newcommand{\err}[1]{\textcolor{red}{#1}}
 
@@ -44,27 +45,27 @@ dalla relazione analitica, è risultato
 
 \begin{equation*}
 	f_{c} = (10.40 \pm 0.12)  \text{ kHz}
-\end{equation*},
+\end{equation*}
 
 \noindent
 mentre la misura sperimentale ha fornito
 
 \begin{equation*}
 	f_{c} = (\cdots \pm \cdots) \text{ kHz}
-\end{equation*}.
+\end{equation*}
 
 \noindent
 La frequenza di risonanza del midrange attesa è \err{(il valore è quello non approssimato, l'incertezza è ricavata dalla formula approssimata )}
 \begin{equation*}
-	f_{r} = (10.65 \pm 0.11)  \text{ kHz}
-\end{equation*},
+	f_{r} = (10.65 \pm 0.10)  \text{ kHz}
+\end{equation*}
 
 \noindent
 e quella misurata
 \begin{equation*}
 	f_{r} = (\cdots \pm \cdots)  \text{ kHz}
-\end{equation*}.
-\err{sistemare formattazione eq. con virgole e punti, aggiungere anche differenza di fase al crossover?}
+\end{equation*}
+\err{aggiungere anche differenza di fase al crossover?}
 
 \section*{Introduzione}
 \prof{ Descrivere i concetti fisici principali e gli obiettivi dell'esperienza.
@@ -239,7 +240,7 @@ II, i loro valori si trovano in \cref{tab:componenti} (\err{mettere la tabella
 	\end{circuitikz}
 	\captionof{figure}{Schema elettrico del circuito. I punti $v_g, v_w, v_m,
 			v_t$ sono stati collegati agli analog input di ELVIS II per le relative
-		misure di tensione. I pedici g,w,m,t indicano i rami del generatore, woofer,
+		misure di tensione. I pedici $g$, $w$, $m$, $t$ indicano i rami del generatore, woofer,
 		midrange e tweeter. I componenti non ideali sono disegnati in blu.}\label{fig:schema_elettrico}
 \end{minipage}
 \begin{minipage}[b]{0.4\textwidth}
@@ -255,7 +256,7 @@ II, i loro valori si trovano in \cref{tab:componenti} (\err{mettere la tabella
 		 & C_m    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
 		 & R_t    &  & =(3295 \pm 2) \text{ \Omega}      \\
 		 & C_t    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
-		 & R_g    &  & =(\err{50}) \text{ \Omega}
+		 & R_g    &  & =50 \text{ \Omega}
 	\end{alignat*}
 	\captionof{table}{Valori componenti.}
 	\label{tab:componenti}
@@ -296,7 +297,7 @@ La frequenza di risonanza del midrange è stata stimata secondo il modello
 teorico, a partire dai parametri del circuito:
 
 \begin{equation*}
-	f_{r} = (10.65 \pm 0.11)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} \approx 1.1 \ \%
+	f_{r} = (10.65 \pm 0.10)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} = 1 \ \%
 \end{equation*}
 Questo valore fa fede alla relazione ideale Eq. \eqref{eq:fr} perché gli effetti del circuito reale sono risultati inferiori
 all'errore strumentale, più dettagli in \cref{sec:resFreq}.
@@ -388,8 +389,8 @@ risulta essere
 \begin{equation*}
 	\begin{alignedat}{2}
 		\frac{\Delta f_{r}}{f_{r}} = & \frac{1}{2} \frac{\Delta L_{m}}{L_{m}} &  & + \frac{1}{2} \frac{\Delta C_{m}}{C_{m}} \\
-		=                            & 0.0053                                 &  & + 0.0053
-		= 0.0106 \approx 1 \ \%
+		=                            & 0.005                                  &  & + 0.005
+		= 0.01 = 1 \ \%
 	\end{alignedat}
 \end{equation*}
 ossia due ordini di grandezza più grande di $\varepsilon_{f_r}$
