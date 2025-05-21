@@ -10,6 +10,8 @@
 
 const double f_min = 5E3;
 const double f_max = 20E3;
+const double fit_min = 8E3;
+const double fit_max = 13E3;
 
 double V_g(double *f, double *par);
 double V_w(double *f, double *par);
@@ -115,16 +117,16 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     func_t->SetParLimits(5, 4.3E-9, 5.2E-9);
     func_t->SetLineColor(kMagenta);
 
-    graph_w->Fit(func_w);
-    graph_m->Fit(func_m);
-    graph_t->Fit(func_t);
+    graph_w->Fit(func_w, "", "", fit_min, fit_max);
+    graph_m->Fit(func_m, "", "", fit_min, fit_max);
+    graph_t->Fit(func_t, "", "", fit_min, fit_max);
 
     auto diff_func = new TF1("diff_func", [&](double *x, double *)
-                             { return func_w->Eval(x[0]) - func_t->Eval(x[0]); }, f_min, f_max, 0);
-    double cross_freq = diff_func->GetX(0, f_min, f_max);
+                             { return func_w->Eval(x[0]) - func_t->Eval(x[0]); }, fit_min, fit_max, 0);
+    double cross_freq = diff_func->GetX(0, fit_min, fit_max);
     std::cout << "Crossover frequency = " << cross_freq << std::endl;
 
-    double res_freq = func_m->GetMaximumX(f_min, f_max);
+    double res_freq = func_m->GetMaximumX(fit_min, fit_max);
     std::cout << "Resonance frequency = " << res_freq << std::endl;
 }
 
