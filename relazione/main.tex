@@ -3,6 +3,7 @@
 \usepackage[a4paper, margin=2cm]{geometry}
 \usepackage{graphicx}
 \graphicspath{{./images/}}
+\usepackage{subfig}
 \usepackage{amsmath}
 \usepackage{circuitikz}
 \usepackage{caption}
@@ -10,7 +11,6 @@
 \usepackage{amsfonts}
 
 \hyphenation{ELVIS}
-\newcommand{\prof}[1]{\textcolor{blue}{#1}}
 \newcommand{\err}[1]{\textcolor{red}{#1}}
 
 %\usepackage{fontspec} \setmainfont{calibri}
@@ -20,18 +20,13 @@
 %\titlespacing{\section}{0pt}{1em}{0pt}
 
 
-\title{TITOLO}
+\title{Misure di grandezze caratteristiche su un circuito crossover.}
 \author{Enrico Barbuio \\ 0001117553 \and Giacomo Cicala \\ 0001122965} 
-\date{data}
+\date{\err{data}}
 
 \begin{document}
 \maketitle
 \section*{Abstract}
-\prof{ Lunghezza massima 10 righe, riassumere lo scopo dell'esperimento e i
-	risultati principali (osservazioni qualitative e risultati numerici).
-	L'abstract non deve contenere riferimenti a quanto riportato nel testo
-	(figure, equazioni o tabelle) e deve essere auto - esplicativo. }
-
 L'esperimento ha avuto come obiettivo la progettazione e la realizzazione, su
 breadboard ELVIS II, di un crossover RLC a tre vie (woofer, midrange, tweeter),
 corredato dallo studio analitico del comportamento in regime sinusoidale e dal
@@ -68,27 +63,18 @@ e quella misurata
 \err{aggiungere anche differenza di fase al crossover?}
 
 \section*{Introduzione}
-\prof{ Descrivere i concetti fisici principali e gli obiettivi dell'esperienza.
-	Per l'esperienza sui circuiti descrivere il circuito progettato, le
-	espressioni algebriche per le grandezze fisiche misurate, il comportamento
-	atteso; analogamente per ottica. L'introduzione non è un riassunto, non
-	riportare i risultati.}
 
-L'esperimento svolto in laboratorio è incentrato sulla progettazione di un
-circuito RLC sulla breadboard di ELVIS II, sullo studio analitico del
-comportamento atteso e sul confroto di questo con le misure effettuate. Il
-circuito scelto è un crossover a tre vie, un circuito filtrante a regime
-sinusoidale dato dalla combinazione di un filtro passa-basso (woofer), un
-filtro passa-alto (tweeter) e un filtro passa-banda (midrange) che suddivide il
-segnale audio in tre bande di frequenza distinte (bassi, alti, medi), al fine
-di ottimizzare la riproduzione sonora per tutta la gamma di frequenze.
-
+L'esperimento svolto in laboratorio è incentrato sulla realizzazione di un
+circuito RLC, sullo studio analitico del comportamento atteso e sul confroto di
+questo con le misure effettuate. Il circuito scelto è un crossover a tre vie:
+un circuito filtrante che divide un segnale su tre canali, al fine di
+ottimizzare la riproduzione sonora per tutta la gamma di frequenze. Nel canale
+del woofer si trova un filtro passa-basso (RL serie), nel midrange un filtro
+passa-banda (RLC serie) e infine nel tweeter un filtro passa-alto (RC serie).
 Dalla legge di Ohm e dalle leggi di Kirchhoff simboliche per tensioni e
-correnti (\err{inserire eq. fondamentali inline oppure fare appendice dove si
-	ricava tutto?}), utilizzando il metodo dei fasori, è stata ricavata la
-soluzione stazionaria dell'ampiezza della differenza di potenziale ai capi del
-generatore e ai capi delle resistenze di woofer, medi e tweeter
-(\ref{sec:tensioni}) (\err{farlo o no?})
+correnti, utilizzando il metodo dei fasori, è stata ricavata la soluzione
+stazionaria dell'ampiezza della differenza di potenziale ai capi del generatore
+e ai capi delle resistenze di woofer, medi e tweeter:
 
 \begin{equation}
 	\left| \mathbf{V_{g}}(\omega) \right| = \left| 1 - \frac{R_g}
@@ -130,14 +116,14 @@ e delle rispettive fasi (\err{decidere dove esplicitare e definire simboli, togl
 \\
 tutto in funzione della pulsazione.
 
-Per quanto riguarda le ampiezze delle tensioni in funzione della frequenza, per
-il woofer ci aspettiamo un andamento decrescente asintoticamente a zero, per il
-tweeter ci aspettiamo un andamento crescente asintoticamente al generatore,
-mentre per il midrange ci aspettiamo un picco alla frequenza di risonanza.
-Invece, per quanto riguarda le fasi, ci aspettiamo che il woofer e il tweeter
-siano in fase con il generatore rispettivamente a basse e alte frequenze, e che
-siano in ritardo e in anticipo di fase di $90^\circ$ nel caso contrario; il
-midrange, invece, ci aspettiamo che sia in fase con il generatore alla
+Per quanto riguarda le ampiezze delle tensioni in funzione della frequenza ci
+aspettiamo che: il woofer abbia un massimo a basse frequenze e un andamento
+decrescente asintoticamente a zero per le alte, il tweeter tenda
+asintoticamente al generatore, mentre il midrange dovrà avere un picco alla
+frequenza di risonanza. Invece, per quanto riguarda le fasi, woofer e tweeter
+dovrebbero essere in fase con il generatore rispettivamente a basse e alte
+frequenze, mentre saranno in ritardo e in anticipo di fase di $90^\circ$ nel
+caso contrario. Il midrange dovrà essere in fase con il generatore alla
 frequenza di risonanza.
 
 Da \eqref{eq:Vw} e \eqref{eq:Vt} è possibile ricavare il valore atteso della
@@ -161,36 +147,29 @@ Inoltre, da \eqref{eq:Vm} è possibile calcolare la frequenza di risonanza attes
 \end{equation}
 
 \noindent
-Infine, si può ottenere \err{la differenza d fase tra tweeter e woofer alla frequenza di crossover}.
+Infine, si può ottenere \err{la differenza di fase tra tweeter e woofer alla frequenza di crossover}.
 
 \begin{equation}
 	booh non so se farlo
 \end{equation}
 
 \section*{Apparato sperimentale e svolgimento}
-\prof{ Descrivere l'apparato utilizzato. Allegare una foto o lo schema
-	dell'apparato sperimentale (sarà la Fig. 1); la foto deve permettere di
-	identificare chiaramente i componenti principali (eventualmente usare delle
-	frecce e delle etichette per evidenziarli). Riassumere lo svolgimento delle
-	misure e motivare la scelta dei parametri di acquisizione (per esempio:
-	l'intervallo di frequenze e la frequenza di acquisizione). }
 
-L'apparato sperimentale è costituito da un circuito crossover a tre vie (fig.
-\ref{fig:schema_elettrico}) realizzato sulla breadboard della scheda NI ELVIS
-II (\cref{fig:Elvis}), utilizzata anche come dispositivo DAQ unitamente ad un
-computer dotato di software apposito all'acquisizione e all'elaborazione delle
-misure. Per l'analisi in frequenza di ampiezza e fase è stato acquisito ciascun
-canale separatamente, con sweep ripetuti. In ogni prova l'analog input
-\texttt{A1} è stato collegato al canale di interesse mentre il canale
-\texttt{A0} è rimasto collegato al generatore di tensione, utilizzandolo come
-trigger e riferimento per la fase. Come range di frequenze è stato scelto:
-\err{range?}; questo per evidenziare il punto di crossover ma anche per vedere
-l'andamento a basse e alte frequenze. Al fine di massimizzare la frequenza di
-campionamento, le tensioni sono state misurate in modalità referenced single
-ended collegando a massa il ramo in comune alle resistenze. Ciò ha permesso un
-campionamento a $500$ kHz per canale, con $2000$ sample per ciascuna
-acquisizione, abbastanza per includere \err{diversi periodi} anche per le
-frequenze inferiori.
+Il circuito (fig. \ref{fig:schema_elettrico}) è stato realizzato su una
+breadboard. La scheda NI ELVIS II (\cref{fig:Elvis}) è stata utilizzata come
+dispositivo DAQ unitamente ad un computer dotato di software apposito
+all'acquisizione e all'elaborazione delle misure. Per l'analisi in frequenza di
+ampiezza e fase è stato acquisito ciascun canale separatamente, con sweep
+ripetuti. In ogni prova l'analog input \texttt{A1} è stato collegato al canale
+di interesse mentre il canale \texttt{A0} è rimasto collegato al generatore di
+tensione, utilizzandolo come trigger e riferimento per la fase. Come range di
+frequenze è stato scelto: $1$ kHz - $30$ kHz; questo per evidenziare il punto
+di crossover ma anche per vedere l'andamento a basse e alte frequenze. Al fine
+di massimizzare la frequenza di campionamento, le tensioni sono state misurate
+in modalità referenced single ended collegando a massa il ramo in comune alle
+resistenze. Ciò ha permesso un campionamento a $500$ kHz per canale, con $2000$
+sample per ciascuna acquisizione, abbastanza per includere $4$ o più periodi a
+qualsiasi frequenza del range.
 
 I componenti del circuito sono stati misurati tramite il multimetro di ELVIS
 II, i loro valori si trovano in \cref{tab:componenti} (\err{mettere la tabella
@@ -256,7 +235,7 @@ II, i loro valori si trovano in \cref{tab:componenti} (\err{mettere la tabella
 		 & C_m    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
 		 & R_t    &  & =(3295 \pm 2) \text{ \Omega}      \\
 		 & C_t    &  & =(4.76 \pm 0.05) \text{ nF}       \\[1em]
-		 & R_g    &  & =50 \text{ \Omega}
+		 & R_g    &  & =50 \text{ \Omega \ (dichiarata)}
 	\end{alignat*}
 	\captionof{table}{Valori componenti.}
 	\label{tab:componenti}
@@ -270,21 +249,6 @@ II, i loro valori si trovano in \cref{tab:componenti} (\err{mettere la tabella
 \end{figure}
 
 \section*{Risultati e discussione}
-\prof{ Riportare i risultati più rappresentativi in forma grafica oppure come
-	foto delle osservazioni sull'oscilloscopio analogico (se utilizzato). Non è
-	necessario riportare tutti i dati. Commentare qualitativamente gli andamenti
-	delle grandezze fisiche riportati in forma grafica e/o le forme di riga
-	osservate. In tutti i grafici gli assi devono essere chiaramente etichettati e
-	le unità di misura devono essere incluse. Quando le incertezze sono note e
-	sono visibili sulla scala utilizzata rappresentarle sul grafico come barre di
-	errore. Porre particolare attenzione alla leggibilità, utilizzando caratteri
-	sufficientemente grandi. Descrivere come sono stati elaborati i dati e
-	riportare i risultati numerici (miglior stima ed incertezza), in forma
-	tabellare se necessario. Commentare i valori ottenuti. Non è necessario
-	riportare il calcolo esplicito delle incertezze (eventualmente usare una
-	appendice), ma è importante segnalare se si tratta di risoluzione strumentale,
-	di errore casuale oppure di errore sistematico. }
-
 Dalle misure delle componenti riportate in \cref{tab:componenti} e
 dall'equazione \eqref{eq:fc} abbiamo ricavato la miglior stima del valore
 atteso della frequenza di crossover:
@@ -299,16 +263,15 @@ teorico, a partire dai parametri del circuito:
 \begin{equation*}
 	f_{r} = (10.65 \pm 0.10)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} = 1 \ \%
 \end{equation*}
-Questo valore fa fede alla relazione ideale Eq. \eqref{eq:fr} perché gli effetti del circuito reale sono risultati inferiori
+Questo valore fa fede alla relazione ideale Eq.~\eqref{eq:fr} perché gli effetti del circuito reale sono risultati inferiori
 all'errore strumentale, più dettagli in \cref{sec:resFreq}.
 
-Per ricavare $f_{c}$ dalle misure di ampiezza del woofer e tweeter, e $f_{r}$
-da quelle del midrange, si sono eseguiti dei fit in un intorno ristretto delle
-due frequenze interessate ($ 7 $ kHz - $ 14 $ kHz) con le funzioni
-(\ref{eq:Vw}), (\ref{eq:Vm}) e (\ref{eq:Vt}) (\cref{fig:fc_fr}). Le incertezze
-associate ai punti sperimentali risultano $ \Delta V = 1.9 \text{ mV}$ e $
-	\Delta f = 0.186 \text{ Hz} $, e sono entrambi errori di risoluzione
-strumentale presi dal datasheet di ELVIS II.
+Per ricavare $f_{c}$ e $f_{r}$ dalle misure di ampiezza, si sono eseguiti dei
+fit in un intorno ristretto delle due frequenze interessate ($ 7 $ kHz - $ 14 $
+kHz) con le funzioni (\ref{eq:Vw}), (\ref{eq:Vm}) e (\ref{eq:Vt})
+(\cref{fig:fc_fr}). Le incertezze associate ai punti sperimentali risultano $
+	\Delta V = 1.9 \text{ mV}$ e $ \Delta f = 0.186 \text{ Hz} $, e sono entrambi
+errori di risoluzione strumentale presi dal datasheet di ELVIS II.
 
 \begin{figure}[h]
 	\centering
@@ -334,8 +297,8 @@ loro incertezze:
 \end{equation*}
 
 Possiamo vedere come entrambe le stime sperimentali siano compatibili
-(\err{FALSO}) con quelle teoriche in quanto i rispettivi intervalli di incertezza
-si sovrappongono.
+(\err{FALSO}) con quelle teoriche in quanto i rispettivi intervalli di
+incertezza si sovrappongono.
 
 Per verificare le proprietà filtranti del circuito è possibile svolgere
 un'analisi qualitativa delle ampiezze per un range di frequenze più alto ($
@@ -350,13 +313,39 @@ un'analisi qualitativa delle ampiezze per un range di frequenze più alto ($
 \end{figure}
 
 \noindent
-Si può notare, come ci aspettavamo, che woofer, midrange e tweeter si comportano rispettivamente come
-un filtro passa-basso, un passa-banda e un passa-alto; tuttavia si osserva che il modello da noi utilizzato non si adatta ai dati
-sperimentali per range di frequenze così ampi, specialmente per le basse frequenze. (\err{fornire dati su chi quadro? })
+
+Si può notare, come ci aspettavamo, che woofer, midrange e tweeter si
+comportano rispettivamente come un filtro passa-basso, un passa-banda e un
+passa-alto; tuttavia si osserva che il modello da noi utilizzato non si adatta
+ai dati sperimentali per range di frequenze così ampi, specialmente per le
+basse frequenze. (\err{fornire dati su chi quadro? })
+
+Il grafico nelle fasi si è discostato parecchio dalla funzione attesa. Data la
+complessità del modello non siamo riusciti a ottenere un fit convergente
+neanche su regioni ristrette, di conseguenza non abbiamo potuto associare un
+incertezza significativa alle misure ricavate in questo modo.
+
+\begin{equation*}
+	f_{c} = 10.601 \text{ kHz} \hspace{2cm} f_{r} = 10.791 \text{ kHz}
+\end{equation*}
+
+Si è deciso allora di approssimare localmente (nell'intervallo $10$ kHz - $11.2$ kHz) il grafico delle fasi con una
+retta (fig.). In questo modo abbiamo misurato:
+
+\begin{equation*}
+	f_{c} = (10.60 \pm 0.03)\  \text{ kHz} \hspace{2cm}	f_{r} = (10.797 \pm 0.008)\  \text{ kHz}
+\end{equation*}
+
+\begin{figure}[h]
+	\centering
+	\subfloat{\includegraphics[width=0.7\textwidth]{example-image}}
+	\subfloat{\includegraphics[width=0.3\textwidth]{example-image}}
+	\caption{A sinistra: grafico delle fasi in funzione della frequenza per il woofer
+		(blu), il midrange (verde), il tweeter (arancione) e per il generatore (rosso);
+		fit ristretto al range $8$ kHz - $16$ kHz. A destra: fit lineare degli stessi dati da $10$ kHz a $11.2$ kHz.}\label{fig:phase_sweep}
+\end{figure}
 
 \section*{Conclusioni}
-\prof{Conclusioni finali, particolarmente importanti nel caso di risultati
-	anomali.}
 
 \appendix
 \section{Appendici}
