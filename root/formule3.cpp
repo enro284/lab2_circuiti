@@ -1,3 +1,6 @@
+// Par indipendenti per ciascun canale (ridotti)
+// ossia R_w=R_m=R_t, ...
+
 #include "TF1.h"
 #include "TComplex.h"
 
@@ -153,7 +156,7 @@ double p_m(double *f, double *par)
     TComplex Hgen = Z_load / (Z_gen + Z_load);
     TComplex HM = (Z_R) / (Z_M);
 
-    return deg((Hgen * HM).Theta());
+    return deg((Hgen * HM).Theta() + par[5]);
 }
 
 double p_t(double *f, double *par)
@@ -174,5 +177,5 @@ double p_t(double *f, double *par)
     TComplex Hgen = Z_load / (Z_gen + Z_load);
     TComplex HT = (Z_R) / (Z_T);
 
-    return deg((Hgen * HT).Theta());
+    return deg((Hgen * HT).Theta() + par[5]);
 }

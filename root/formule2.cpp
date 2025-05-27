@@ -1,4 +1,7 @@
+// Par indipendenti per ciascun canale (tutti)
+
 #include "TF1.h"
+#include "TComplex.h"
 
 double V_g(double *f, double *par)
 {

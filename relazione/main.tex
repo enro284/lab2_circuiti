@@ -290,7 +290,7 @@ II.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.5\textwidth]{example-image}
+	\includegraphics[width=\textwidth]{fig_amp.png}
 	\caption{Grafico delle ampiezze delle tensioni in funzione della frequenza per il woofer, midrange, tweeter e generatore. I fit sono eseguiti nel range $7$ kHz - $14$ kHz e le funzioni risultanti disegnate su tutto il range di acquisizione.}\label{fig:fc_fr}
 	\label{fig:amp_sweep}
 \end{figure}
@@ -302,10 +302,10 @@ sono state propagate in quadratura e vanno considerate come statistiche.
 Riportiamo di seguito le stime ottenute e le loro incertezze:
 
 \begin{equation*}
-	f_{c} = (10.64 \pm 0.02) \text{ kHz}
+	f_{c}^{amp} = 10.64 \text{ kHz} \hspace{2cm} \sigma_c^{amp} = 0.02 \text{ kHz}
 \end{equation*}
 \begin{equation*}
-	f_{r} = (10.89 \pm 0.16)\  \text{ kHz}
+	f_{r}^{amp} = 10.89 \text{ kHz} \hspace{2cm} \sigma_r^{amp} = 0.16 \text{ kHz}
 \end{equation*}
 
 Per verificare le proprietà filtranti del circuito è possibile svolgere
@@ -330,7 +330,10 @@ $11.2$ kHz) il grafico delle fasi con una retta (fig.). In questo modo abbiamo
 misurato:
 
 \begin{equation*}
-	f_{c} = (10.60 \pm 0.03)\  \text{ kHz} \hspace{2cm}	f_{r} = (10.797 \pm 0.008)\  \text{ kHz}
+	f_{c}^{fasi} = 10.6001 \text{ kHz}  \hspace{2cm}  \sigma_c^{fasi} = 0.0102 \text{ kHz}
+\end{equation*}
+\begin{equation*}
+	f_{r}^{fasi} = 10.7971 \text{ kHz}  \hspace{2cm}  \sigma_r^{fasi} = 0.0274 \text{ kHz}
 \end{equation*}
 
 \begin{figure}[h]
@@ -340,6 +343,15 @@ misurato:
 		(blu), il midrange (verde), il tweeter (arancione) e per il generatore (rosso);
 		fit ristretto al range $8$ kHz - $16$ kHz. A destra: fit lineare degli stessi dati da $10$ kHz a $11.2$ kHz.}\label{fig:phase_sweep}
 \end{figure}
+
+La media pesata delle due misure sperimentali è:
+
+\begin{equation*}
+	f_{c}^{sperimentale} = 10.6086 \text{ kHz}  \hspace{2cm}  \sigma_c^{sperimentale} = 0.0091 \text{ kHz}
+\end{equation*}
+\begin{equation*}
+	f_{r}^{sperimentale} = 10.7971 \text{ kHz}  \hspace{2cm}  \sigma_r^{sperimentale} = 0.00274  \text{ kHz}
+\end{equation*}
 
 \section*{Conclusioni}
 
