@@ -272,56 +272,44 @@ all'errore strumentale, più dettagli in \cref{sec:resFreq}.
 Per ricavare $f_{c}$ e $f_{r}$ dalle misure di ampiezza, si sono eseguiti dei
 fit in un intorno ristretto delle due frequenze interessate ($ 7 $ kHz - $ 14 $
 kHz) con le funzioni (\ref{eq:Vw}), (\ref{eq:Vm}) e (\ref{eq:Vt})
-(\cref{fig:fc_fr}). Le incertezze associate ai punti sperimentali risultano $
-	\Delta V = 1.9 \text{ mV}$ e $ \Delta f = 0.186 \text{ Hz} $, e sono entrambi
+(\cref{fig:amp_sweep}). Le incertezze associate ai punti sperimentali risultano
+$ \Delta V = 1.9 \text{ mV}$ e $ \Delta f = 0.186 \text{ Hz} $, e sono entrambi
 errori di risoluzione strumentale presi dal datasheet di ELVIS II.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{example-image}
-	\caption{Grafico delle ampiezze delle tensioni in funzione della frequenza per il woofer
-		(blu), il midrange (verde) e il tweeter (arancione) in vicinanza della frequenza di crossover e di risonanza.}
-	\label{fig:fc_fr}
+	\caption{Grafico delle ampiezze delle tensioni in funzione della frequenza per il woofer, midrange, tweeter e generatore. I fit sono eseguiti nel range $7$ kHz - $14$ kHz, e le funzioni risultanti disegnate su tutto il range di acquisizione.}\label{fig:fc_fr}
+	\label{fig:amp_sweep}
 \end{figure}
 
 Uguagliando le funzioni risultanti del woofer e del tweeter, si è calcolata
 numericamente $f_{c}$, allo stesso modo $f_{r}$ è stata calcolata numericamente
-come frequenza corrispondente al massimo della funzione di fit. Come per i
-valori attesi, le incertezze sono state propagate linearmente ( vedi
-\cref{sec:inc_sper}), dove le incertezze sui singoli parametri sono quelle
-fornite dai fit corrispettivi. Riportiamo di seguito le stime ottenute e le
-loro incertezze:
+come frequenza corrispondente al massimo della funzione di fit. Le incertezze
+sono state propagate in quadratura e vanno considerate come
+(\err{statistiche/casuali?}) Riportiamo di seguito le stime ottenute e le loro
+incertezze:
 
 \begin{equation*}
-	f_{c} = (10.64 \pm 0.04)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{c}}{f_{c}} = 0.4 \ \%
+	f_{c} = (10.64 \pm 0.02) \text{ kHz}
 \end{equation*}
 \begin{equation*}
-	f_{r} = (10.9 \pm 0.2)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} = 2 \ \%
+	f_{r} = (10.89 \pm 0.16)\  \text{ kHz}
 \end{equation*}
 
+\noindent
 Possiamo vedere come entrambe le stime sperimentali siano compatibili
 (\err{FALSO}) con quelle teoriche in quanto i rispettivi intervalli di
 incertezza si sovrappongono.
 
 Per verificare le proprietà filtranti del circuito è possibile svolgere
-un'analisi qualitativa delle ampiezze per un range di frequenze più alto ($
-	\cdots$ kHz - $\cdots $ kHz) (\cref{fig:amp_sweep}).
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.5\textwidth]{example-image}
-	\caption{Grafico delle ampiezze delle tensioni in funzione della frequenza per il woofer
-		(blu), il midrange (verde), il tweeter (arancione) e per il generatore (rosso)  in un range di frequenze più ampio (\err{range}).}
-	\label{fig:amp_sweep}
-\end{figure}
-
-\noindent
-
-Si può notare, come ci aspettavamo, che woofer, midrange e tweeter si
-comportano rispettivamente come un filtro passa-basso, un passa-banda e un
-passa-alto; tuttavia si osserva che il modello da noi utilizzato non si adatta
-ai dati sperimentali per range di frequenze così ampi, specialmente per le
-basse frequenze. (\err{fornire dati su chi quadro? })
+un'analisi qualitativa delle ampiezze per il range di frequenze complessivo
+acquisito: dalla (\cref{fig:fc_fr}) si può notare, come ci aspettavamo, che
+woofer, midrange e tweeter si comportano rispettivamente come un filtro
+passa-basso, un passa-banda e un passa-alto; tuttavia si osserva che il modello
+da noi utilizzato non si adatta ai dati sperimentali per range di frequenze
+così ampi, specialmente per le basse frequenze. (\err{fornire dati su chi
+	quadro? })
 
 Il grafico nelle fasi si è discostato parecchio dalla funzione attesa. Data la
 complessità del modello non siamo riusciti a ottenere un fit convergente
@@ -332,8 +320,9 @@ incertezza significativa alle misure ricavate in questo modo.
 	f_{c} = 10.601 \text{ kHz} \hspace{2cm} f_{r} = 10.791 \text{ kHz}
 \end{equation*}
 
-Si è deciso allora di approssimare localmente (nell'intervallo $10$ kHz - $11.2$ kHz) il grafico delle fasi con una
-retta (fig.). In questo modo abbiamo misurato:
+Si è deciso allora di approssimare localmente (nell'intervallo $10$ kHz -
+$11.2$ kHz) il grafico delle fasi con una retta (fig.). In questo modo abbiamo
+misurato:
 
 \begin{equation*}
 	f_{c} = (10.60 \pm 0.03)\  \text{ kHz} \hspace{2cm}	f_{r} = (10.797 \pm 0.008)\  \text{ kHz}

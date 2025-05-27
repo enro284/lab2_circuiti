@@ -7,9 +7,11 @@
 #include "TStyle.h"
 
 #include "formule2.cpp" //si lo so, non si fa
-
-const double f_min = 5E3;
-const double f_max = 20E3;
+// DEFINITiVO NON TOCCARE RANGE O PARAMETRI, FAI SOLO ESTETICA
+const double f_min = 1E3;
+const double f_max = 50E3;
+const double fit_min = 7E3;
+const double fit_max = 14E3;
 
 double V_g(double *f, double *par);
 double V_w(double *f, double *par);
@@ -22,8 +24,8 @@ double p_t(double *f, double *par);
 
 void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data/amp_w.txt", const char *data_m = "data/amp_m.txt", const char *data_t = "data/amp_t.txt")
 {
-    gStyle->SetOptFit(1111);
-    auto canvas = new TCanvas();
+
+    auto canvas = new TCanvas("canvas", "Amplitude", 2000, 1000);
 
     auto graph_w = new TGraphErrors(data_w, "%lg %lg");
     auto graph_m = new TGraphErrors(data_m, "%lg %lg");
@@ -62,24 +64,27 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     mg->Add(graph_g);
 
     graph_g->SetMarkerStyle(20);
-    graph_g->SetMarkerSize(0.5);
+    graph_g->SetMarkerSize(0.6);
     graph_w->SetMarkerStyle(20);
-    graph_w->SetMarkerSize(0.5);
+    graph_w->SetMarkerSize(0.6);
     graph_m->SetMarkerStyle(20);
-    graph_m->SetMarkerSize(0.5);
+    graph_m->SetMarkerSize(0.6);
     graph_t->SetMarkerStyle(20);
-    graph_t->SetMarkerSize(0.5);
+    graph_t->SetMarkerSize(0.6);
 
     mg->GetXaxis()->SetLimits(f_min, f_max);
-
+    mg->SetMinimum(0.);
+    mg->SetTitle("Ampiezze - sweep completo;Frequenza (Hz);Ampiezza (V)");
     mg->Draw("AP");
+
+    gPad->SetGrid(1, 1);
 
     auto func_g = new TF1("Tensione Generatore", V_g, f_min, f_max, 11);
     func_g->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
     func_g->SetParLimits(0, 4.5, 5.5);
-    func_g->SetParLimits(1, 3E3, 3.4E3);
-    func_g->SetParLimits(2, 3E3, 3.4E3);
-    func_g->SetParLimits(3, 3E3, 3.4E3);
+    func_g->SetParLimits(1, 3.2E3, 3.4E3);
+    func_g->SetParLimits(2, 3.2E3, 3.4E3);
+    func_g->SetParLimits(3, 3.2E3, 3.4E3);
     func_g->SetParLimits(4, 110, 130);
     func_g->SetParLimits(5, 110, 130);
     func_g->SetParLimits(6, 45, 55);
@@ -87,14 +92,14 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     func_g->SetParLimits(8, 0.043, 0.05);
     func_g->SetParLimits(9, 4.3E-9, 5.2E-9);
     func_g->SetParLimits(10, 4.3E-9, 5.2E-9);
-    func_g->SetLineColor(kRed);
+    func_g->SetLineColor(kOrange);
 
     auto func_w = new TF1("Tensione Woofer", V_w, f_min, f_max, 11);
     func_w->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
     func_w->SetParLimits(0, 4.5, 5.5);
-    func_w->SetParLimits(1, 3E3, 3.4E3);
-    func_w->SetParLimits(2, 3E3, 3.4E3);
-    func_w->SetParLimits(3, 3E3, 3.4E3);
+    func_w->SetParLimits(1, 3.2E3, 3.4E3);
+    func_w->SetParLimits(2, 3.2E3, 3.4E3);
+    func_w->SetParLimits(3, 3.2E3, 3.4E3);
     func_w->SetParLimits(4, 110, 130);
     func_w->SetParLimits(5, 110, 130);
     func_w->SetParLimits(6, 45, 55);
@@ -107,9 +112,9 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     auto func_m = new TF1("Tensione Mid", V_m, f_min, f_max, 11);
     func_m->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
     func_m->SetParLimits(0, 4.5, 5.5);
-    func_m->SetParLimits(1, 3E3, 3.4E3);
-    func_m->SetParLimits(2, 3E3, 3.4E3);
-    func_m->SetParLimits(3, 3E3, 3.4E3);
+    func_m->SetParLimits(1, 3.2E3, 3.4E3);
+    func_m->SetParLimits(2, 3.2E3, 3.4E3);
+    func_m->SetParLimits(3, 3.2E3, 3.4E3);
     func_m->SetParLimits(4, 110, 130);
     func_m->SetParLimits(5, 110, 130);
     func_m->SetParLimits(6, 45, 55);
@@ -122,9 +127,9 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     auto func_t = new TF1("Tensione Tweeter", V_t, f_min, f_max, 11);
     func_t->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);
     func_t->SetParLimits(0, 4.5, 5.5);
-    func_t->SetParLimits(1, 3E3, 3.4E3);
-    func_t->SetParLimits(2, 3E3, 3.4E3);
-    func_t->SetParLimits(3, 3E3, 3.4E3);
+    func_t->SetParLimits(1, 3.2E3, 3.4E3);
+    func_t->SetParLimits(2, 3.2E3, 3.4E3);
+    func_t->SetParLimits(3, 3.2E3, 3.4E3);
     func_t->SetParLimits(4, 110, 130);
     func_t->SetParLimits(5, 110, 130);
     func_t->SetParLimits(6, 45, 55);
@@ -134,10 +139,22 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     func_t->SetParLimits(10, 4.3E-9, 5.2E-9);
     func_t->SetLineColor(kRed);
 
-    graph_g->Fit(func_g);
-    graph_w->Fit(func_w);
-    graph_m->Fit(func_m);
-    graph_t->Fit(func_t);
+    graph_g->Fit(func_g, "N", "", fit_min, fit_max);
+    graph_w->Fit(func_w, "N", "", fit_min, fit_max);
+    graph_m->Fit(func_m, "N", "", fit_min, fit_max);
+    graph_t->Fit(func_t, "N", "", fit_min, fit_max);
+
+    func_g->Draw("SAME");
+    func_w->Draw("SAME");
+    func_m->Draw("SAME");
+    func_t->Draw("SAME");
+
+    auto leg = new TLegend(0.6, 0.7, .89, .89);
+    leg->AddEntry(func_g, "Fit Generatore", "l");
+    leg->AddEntry(func_w, "Fit Woofer", "l");
+    leg->AddEntry(func_m, "Fit Midrange", "l");
+    leg->AddEntry(func_t, "Fit Tweeter", "l");
+    leg->Draw();
 
     auto diff_func = new TF1("diff_func", [&](double *x, double *)
                              { return func_w->Eval(x[0]) - func_t->Eval(x[0]); }, f_min, f_max, 0);
@@ -237,7 +254,13 @@ void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/p
     graph_t->SetMarkerStyle(20);
     graph_t->SetMarkerSize(0.5);
 
+    mg->GetXaxis()->SetTitle("Frequenza (Hz)");
+    mg->GetYaxis()->SetTitle("Ampiezza (V)");
+    mg->SetTitle("Porcodio");
     mg->Draw("AP");
+    gPad->SetGrid(1, 1);
+    gPad->SetGridx(20);
+    gPad->SetGridy(20);
 
     auto func_w = new TF1("Fase Woofer", p_w, f_min, f_max, 11);
     func_w->SetParameters(5., 3.3E3, 3.3E3, 3.3E3, 120, 120, 50, 47E-3, 47E-3, 4.7E-9, 4.7E-9);

@@ -82,16 +82,16 @@ void voltage_sigma()
 void amplitude_sigma()
 {
 
-    const int nBins = 30;
+    const int nBins = 32;
     const double xMin = 4.989;
-    const double xMax = 4.992;
+    const double xMax = 4.994;
 
     // Istogrammi
     auto h1 = new TH1F("h1", "20kHz; V; Conteggi", nBins, xMin, xMax);
     auto h2 = new TH1F("h2", "50kHz; V; Conteggi", nBins, xMin, xMax);
 
     // Leggi primo file
-    std::ifstream file1("amplitude_20kHz.txt");
+    std::ifstream file1("data/amp_20k.txt");
 
     double x;
     while (file1 >> x)
@@ -101,7 +101,7 @@ void amplitude_sigma()
     file1.close();
 
     // Leggi secondo file
-    std::ifstream file2("amplitude_50kHz.txt");
+    std::ifstream file2("data/amp_50k.txt");
     while (file2 >> x)
     {
         h2->Fill(x);
