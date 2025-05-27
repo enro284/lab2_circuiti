@@ -23,7 +23,7 @@
 %\titlespacing{\section}{0pt}{1em}{0pt}
 
 
-\title{Misure di grandezze caratteristiche su un circuito crossover.}
+\title{Misure di grandezze caratteristiche su un circuito crossover}
 \author{Enrico Barbuio \\ 0001117553 \and Giacomo Cicala \\ 0001122965} 
 \date{\err{data}}
 
@@ -35,7 +35,7 @@ breadboard ELVIS II, di un crossover RLC a tre vie (woofer, midrange, tweeter),
 corredato dallo studio analitico del comportamento in regime sinusoidale e dal
 confronto con le misure sperimentali. Dal punto di vista qualitativo si è
 osservato che la risposta in ampiezza del woofer decresce verso zero alle alte
-frequenze, quella del tweeter cresce \err{fino al valore del generatore} e il
+frequenze, quella del tweeter cresce asintoticamente al valore del generatore e il
 midrange presenta un picco alla risonanza; le misure di fase confermano
 l'inversione di $ \pm 90^\circ $ (\err{FALSO}) fuori banda e la coerenza in
 banda di taglio. Il valore teorico della frequenza di crossover tra woofer e
@@ -49,11 +49,11 @@ tweeter, calcolato dalla relazione analitica, è risultato
 mentre la misura sperimentale ha fornito
 
 \begin{equation*}
-	f_{c} = (10.64 \pm 0.04) \text{ kHz}
+	f_{c} = (\cdots \pm \cdots) \text{ kHz}
 \end{equation*}
 
 \noindent
-La frequenza di risonanza del midrange attesa è \err{(il valore è quello non approssimato, l'incertezza è ricavata dalla formula approssimata )}
+La frequenza di risonanza del midrange attesa è
 \begin{equation*}
 	f_{r} = (10.65 \pm 0.10)  \text{ kHz}
 \end{equation*}
@@ -61,7 +61,7 @@ La frequenza di risonanza del midrange attesa è \err{(il valore è quello non a
 \noindent
 e quella misurata
 \begin{equation*}
-	f_{r} = (10.9 \pm 0.2)  \text{ kHz}
+	f_{r} = (\cdots \pm \cdots)  \text{ kHz}
 \end{equation*}
 \err{aggiungere anche differenza di fase al crossover?}
 
@@ -70,14 +70,14 @@ e quella misurata
 L'esperimento svolto in laboratorio è incentrato sulla realizzazione di un
 circuito RLC, sullo studio analitico del comportamento atteso e sul confroto di
 questo con le misure effettuate. Il circuito scelto è un crossover a tre vie:
-un circuito filtrante che divide un segnale su tre canali, al fine di
+un circuito filtrante che divide un segnale su tre canali al fine di
 ottimizzare la riproduzione sonora per tutta la gamma di frequenze. Nel canale
 del woofer si trova un filtro passa-basso (RL serie), nel midrange un filtro
 passa-banda (RLC serie) e infine nel tweeter un filtro passa-alto (RC serie).
 Dalla legge di Ohm e dalle leggi di Kirchhoff simboliche per tensioni e
 correnti, utilizzando il metodo dei fasori, è stata ricavata la soluzione
-stazionaria dell'ampiezza della differenza di potenziale ai capi del generatore
-e ai capi delle resistenze di woofer, medi e tweeter:
+stazionaria della differenza di potenziale ai capi del generatore e ai capi
+delle resistenze di woofer, medi e tweeter. Riportiamo qui le loro ampiezze
 
 \begin{equation}
 	\left| \mathbf{V_{g}}(\omega) \right| = \left| 1 - \frac{R_g}
@@ -102,8 +102,13 @@ e ai capi delle resistenze di woofer, medi e tweeter:
 	{\mathbb{Z}_{t}(\omega)}\right|\left| \mathbf{V_{g}}(\omega) \right|
 	\label{eq:Vt}
 \end{equation}
-\\
-e delle rispettive fasi (\err{decidere dove esplicitare e definire simboli, togli fase del generatore giustificando in appendice}) (\ref{sec:fasi})
+
+\noindent
+e le rispettive fasi (\err{decidere dove esplicitare e definire simboli, togli fase del generatore giustificando in appendice}) (\ref{sec:fasi})
+
+\begin{equation}
+	\phi_{g}(\omega) = Arg(\mathbf{V_{g}}(\omega))
+\end{equation}
 
 \begin{equation}
 	\phi_{w}(\omega) = Arg(\mathbf{V_{g}}(\omega)) - Arg(\mathbb{Z}_{w}(\omega))
@@ -129,9 +134,10 @@ frequenze, mentre saranno in ritardo e in anticipo di fase di $90^\circ$ nel
 caso contrario. Il midrange dovrà essere in fase con il generatore alla
 frequenza di risonanza.
 
-Da \eqref{eq:Vw} e \eqref{eq:Vt} è possibile ricavare il valore atteso della
-frequenza di crossover [\ref{sec:crossFreq}], cioè la frequenza alla quale il
-woofer e il tweeter hanno la tensione di ampiezza uguale.
+Imponendo l'uguaglianza tra le relazioni \eqref{eq:Vw} e \eqref{eq:Vt} è
+possibile ricavare il valore atteso della frequenza di crossover \eqref{eq:fc},
+cioè la frequenza alla quale il woofer e il tweeter hanno la tensione di
+ampiezza uguale.
 
 \begin{equation}
 	f_{c} = \frac{1}{2\pi}\sqrt{\frac{\sqrt{4 (R_{w} R_{t} L_{w})^2 + C_{t}^2(2
@@ -141,8 +147,7 @@ woofer e il tweeter hanno la tensione di ampiezza uguale.
 \end{equation}
 
 \noindent
-Inoltre, da \eqref{eq:Vm} è possibile calcolare la frequenza di risonanza attesa del midrange [\ref{sec:resFreq}].
-\err{è approssimata}
+Inoltre, da \eqref{eq:Vm} è possibile calcolare la frequenza di risonanza attesa del midrange \eqref{eq:fr} (vedi \cref{sec:resFreq}).
 
 \begin{equation}
 	f_{r} = \frac{1}{2\pi}\sqrt{\frac{1}{L_{m} C_{m}}}  %equazione approssimata
@@ -166,7 +171,7 @@ ampiezza e fase è stato acquisito ciascun canale separatamente, con sweep
 ripetuti. In ogni prova l'analog input \texttt{A1} è stato collegato al canale
 di interesse mentre il canale \texttt{A0} è rimasto collegato al generatore di
 tensione, utilizzandolo come trigger e riferimento per la fase. Come range di
-frequenze è stato scelto: $1$ kHz - $30$ kHz; questo per evidenziare il punto
+frequenze è stato scelto: $1$ kHz - $50$ kHz; questo per evidenziare il punto
 di crossover ma anche per vedere l'andamento a basse e alte frequenze. Al fine
 di massimizzare la frequenza di campionamento, le tensioni sono state misurate
 in modalità referenced single ended collegando a massa il ramo in comune alle
@@ -175,8 +180,8 @@ sample per ciascuna acquisizione, abbastanza per includere $4$ o più periodi a
 qualsiasi frequenza del range.
 
 I componenti del circuito sono stati misurati tramite il multimetro di ELVIS
-II, i loro valori si trovano in \cref{tab:componenti} (\err{mettere la tabella
-	nei risultati?}).
+II, i loro valori e le rispettive incertezze (strumentali) si trovano in
+\cref{tab:componenti} (\err{mettere la tabella nei risultati?}).
 
 \noindent
 \begin{minipage}[b]{0.6\textwidth}
@@ -260,35 +265,41 @@ atteso della frequenza di crossover:
 	f_{c} = (10.40 \pm 0.12)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{c}}{f_{c}} = 1.2 \ \%
 \end{equation*}
 
-La frequenza di risonanza del midrange è stata stimata secondo il modello
-teorico, a partire dai parametri del circuito:
+\noindent
+Analogamente, la frequenza di risonanza del midrange attesa è risultata:
 
 \begin{equation*}
 	f_{r} = (10.65 \pm 0.10)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} = 1 \ \%
 \end{equation*}
 Questo valore fa fede alla relazione ideale Eq.~\eqref{eq:fr} perché gli effetti del circuito reale sono risultati inferiori
-all'errore strumentale, più dettagli in \cref{sec:resFreq}.
+all'errore strumentale, più dettagli in \cref{sec:resFreq}. Entrambe le incertezze sono state propagate linearmente e sono da considerarsi assolute.
 
 Per ricavare $f_{c}$ e $f_{r}$ dalle misure di ampiezza, si sono eseguiti dei
 fit in un intorno ristretto delle due frequenze interessate ($ 7 $ kHz - $ 14 $
-kHz) con le funzioni (\ref{eq:Vw}), (\ref{eq:Vm}) e (\ref{eq:Vt})
-(\cref{fig:amp_sweep}). Le incertezze associate ai punti sperimentali risultano
-$ \Delta V = 1.9 \text{ mV}$ e $ \Delta f = 0.186 \text{ Hz} $, e sono entrambi
-errori di risoluzione strumentale presi dal datasheet di ELVIS II.
+kHz) con le funzioni (\ref{eq:Vg}), (\ref{eq:Vw}), (\ref{eq:Vm}) e
+(\ref{eq:Vt}) (\cref{fig:amp_sweep}). Le incertezze associate ai punti
+sperimentali risultano
+
+\begin{equation*}
+	\Delta V = 1.9 \text{ mV} \hspace{2cm} \Delta f = 0.186 \text{ Hz}
+\end{equation*}
+
+\noindent
+e sono entrambi errori di risoluzione strumentale presi dal datasheet di ELVIS
+II.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{example-image}
-	\caption{Grafico delle ampiezze delle tensioni in funzione della frequenza per il woofer, midrange, tweeter e generatore. I fit sono eseguiti nel range $7$ kHz - $14$ kHz, e le funzioni risultanti disegnate su tutto il range di acquisizione.}\label{fig:fc_fr}
+	\caption{Grafico delle ampiezze delle tensioni in funzione della frequenza per il woofer, midrange, tweeter e generatore. I fit sono eseguiti nel range $7$ kHz - $14$ kHz e le funzioni risultanti disegnate su tutto il range di acquisizione.}\label{fig:fc_fr}
 	\label{fig:amp_sweep}
 \end{figure}
 
 Uguagliando le funzioni risultanti del woofer e del tweeter, si è calcolata
 numericamente $f_{c}$, allo stesso modo $f_{r}$ è stata calcolata numericamente
 come frequenza corrispondente al massimo della funzione di fit. Le incertezze
-sono state propagate in quadratura e vanno considerate come
-(\err{statistiche/casuali?}) Riportiamo di seguito le stime ottenute e le loro
-incertezze:
+sono state propagate in quadratura e vanno considerate come statistiche.
+Riportiamo di seguito le stime ottenute e le loro incertezze:
 
 \begin{equation*}
 	f_{c} = (10.64 \pm 0.02) \text{ kHz}
@@ -297,19 +308,13 @@ incertezze:
 	f_{r} = (10.89 \pm 0.16)\  \text{ kHz}
 \end{equation*}
 
-\noindent
-Possiamo vedere come entrambe le stime sperimentali siano compatibili
-(\err{FALSO}) con quelle teoriche in quanto i rispettivi intervalli di
-incertezza si sovrappongono.
-
 Per verificare le proprietà filtranti del circuito è possibile svolgere
 un'analisi qualitativa delle ampiezze per il range di frequenze complessivo
 acquisito: dalla (\cref{fig:fc_fr}) si può notare, come ci aspettavamo, che
 woofer, midrange e tweeter si comportano rispettivamente come un filtro
 passa-basso, un passa-banda e un passa-alto; tuttavia si osserva che il modello
 da noi utilizzato non si adatta ai dati sperimentali per range di frequenze
-così ampi, specialmente per le basse frequenze. (\err{fornire dati su chi
-	quadro? })
+così ampi.
 
 Il grafico nelle fasi si è discostato parecchio dalla funzione attesa. Data la
 complessità del modello non siamo riusciti a ottenere un fit convergente
@@ -342,24 +347,6 @@ misurato:
 \section{Appendici}
 \subsection{Tensioni ai capi delle resistenze}
 \label{sec:tensioni}
-
-Ricaviamo per esempio \eqref{eq:Vw}: dalla legge di Kirchhoff simbolica per le
-tensioni e correnti abbiamo che
-
-\begin{equation}
-	\begin{cases}
-		\mathbf{V_{w}} = \mathbf{I_{w}} \mathbb{Z}_{w}                                                                \\
-		\mathbf{I_{tot}} = \mathbf{I_{w}} + \mathbf{I_{m}} + \mathbf{I_{t}} = \frac{V_{0}}{R_{g} + \mathbb{Z}_{load}} \\
-		\mathbf{I_{w}} \mathbb{Z}_{w} = \mathbf{I_{m}} \mathbb{Z}_{m} = \mathbf{I_{t}} \mathbb{Z}_{t}                 \\
-	\end{cases}
-\end{equation}
-
-\noindent
-da cui si ricava che \err{ha senso ricavarle o possiamo evitare questa appendice?}
-
-\begin{equation}
-	\mathbf{V_{w}} = \left( \frac{R_{w}}{\mathbb{Z}_{w}} \right)
-\end{equation}
 
 \begin{equation*}
 	\mathbb{Z}_{load}(\omega) = \left(\frac{1}{\mathbb{Z}_{w}(\omega)} + \frac{1}{\mathbb{Z}_{m}(\omega)} + \frac{1}{\mathbb{Z}_{t}(\omega)}\right)^{-1}
@@ -401,9 +388,6 @@ da cui si ricava che \err{ha senso ricavarle o possiamo evitare questa appendice
 	\phi_{t}(\omega) = \arctan\left(\frac{1}{\omega R_{t} C_{t}}\right)
 \end{equation}
 
-\subsection{Frequenza di crossover}
-\label{sec:crossFreq}
-
 \subsection{Frequenza di risonanza}\label{sec:resFreq}
 La prima misura è data dalla relazione ideale Eq. \eqref{eq:fr}; la seconda
 tiene conto anche degli effetti non ideali ed è stata ricavata numericamente
@@ -429,8 +413,8 @@ ossia due ordini di grandezza più grande di $\varepsilon_{f_r}$
 
 \subsection{Incertezze}
 
-%f_c
 \noindent
+\err{TOGLIERE QUESTO PARAGRAFO?}
 mentre per la miglior stima sulla sua incertezza abbiamo propagato linearmente
 le incertezze strumentali dovute alla misura dei componenti (\err{sistema cifre dec})
 
@@ -444,28 +428,4 @@ le incertezze strumentali dovute alla misura dei componenti (\err{sistema cifre 
 
 \noindent
 dove sono stati evidenziati i termini più significativi.
-
-\subsection{Incertezze sperimentali}
-\label{sec:inc_sper}
-Per quanto riguarda $f_{c}$ si ha che
-
-\begin{equation*}
-	\begin{alignedat}{5}
-		\Delta f_{c} = & \left|\frac{\partial f_{c}}{\partial R_{w}}\right| \Delta R_{w} &  & +  \left|\frac{\partial f_{c}}{\partial R_{Lw}}\right| \Delta R_{Lw} &  & + \left|\frac{\partial f_{c}}{\partial L_{w}}\right| \Delta L_{w} &  & + \left|\frac{\partial f_{c}}{\partial R_{t}}\right| \Delta R_{t} &  & + \left|\frac{\partial f_{c}}{\partial C_{t}}\right| \Delta C_{t} \\
-		=              & ( 5.31                                                          &  & +  4.97                                                              &  & + 6.71                                                            &  & + 9.57                                                            &  & + 16.2 ) \text{ Hz}                                               \\
-		=              & 43 \text{ Hz}
-	\end{alignedat}
-\end{equation*}
-
-\noindent
-mentre per $f_{r}$ risulta
-
-\begin{equation*}
-	\begin{alignedat}{2}
-		\frac{\Delta f_{r}}{f_{r}} = & \frac{1}{2} \frac{\Delta L_{m}}{L_{m}} &  & + \frac{1}{2} \frac{\Delta C_{m}}{C_{m}} \\
-		=                            & 0.010                                  &  & + 0.010
-		= 0.020 = 2 \ \%
-	\end{alignedat}
-\end{equation*}
-
 \end{document}
