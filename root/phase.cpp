@@ -7,10 +7,38 @@
 #include "TStyle.h"
 #include "TVirtualFitter.h"
 #include "TMatrixD.h"
+#include "TLegend.h"
 
 #include "formule3.cpp" //si lo so, non si fa
+struct Plot
+{
+    TMultiGraph *mg;
+    std::array<TF1 *, 4> functions;
 
-void lin(const char *data_g = "data/phase_g.txt", const char *data_w = "data/phase_w.txt", const char *data_m = "data/phase_m.txt", const char *data_t = "data/phase_t.txt")
+    void draw(TPad* pad)
+    {
+        auto legend = new TLegend(0.6, 0.7, .89, .89);
+
+        pad->cd();
+        pad->SetGridx();
+        pad->SetGridy();
+
+        mg->Draw("AP");
+        mg->GetYaxis()->SetTitle("fase (#circ)");
+        mg->GetXaxis()->SetTitle("frequenza (Hz)");
+        mg->GetXaxis()->SetMaxDigits(3);
+        mg->GetXaxis()->SetNdivisions(520);
+        for (auto func : functions){
+            std::cout << "nome  " << func->GetName() << '\n';
+            func->Draw("same");
+            legend->AddEntry(func);
+        }
+        legend->SetTextSizePixels(40);
+        legend->Draw();
+    }
+};
+
+Plot lin(const char *data_g = "data/phase_g.txt", const char *data_w = "data/phase_w.txt", const char *data_m = "data/phase_m.txt", const char *data_t = "data/phase_t.txt")
 {
     const double fit_min = 9.99E3;
     const double fit_max = 11.25E3;
@@ -60,7 +88,7 @@ void lin(const char *data_g = "data/phase_g.txt", const char *data_w = "data/pha
         }
 
         graph->SetMarkerStyle(20);
-        graph->SetMarkerSize(0.5);
+        graph->SetMarkerSize(1);
         mg->Add(graph);
     }
     mg->SetTitle("Fasi - fit lineare");
@@ -75,16 +103,20 @@ void lin(const char *data_g = "data/phase_g.txt", const char *data_w = "data/pha
     // Fit
     //
     auto func_g = new TF1("Fase Generatore", "[0] + [1]*x ", fit_min, fit_max);
-    func_g->SetLineColor(kRed);
+    func_g->SetNameTitle("Fase Generatore", "Fase Generatore");
+    func_g->SetLineColor(kOrange);
 
     auto func_w = new TF1("Fase Woofer", "[0] + [1]*x ", fit_min, fit_max);
+    func_w->SetNameTitle("Fase Woofer", "Fase Woofer");
     func_w->SetLineColor(kBlue);
 
     auto func_m = new TF1("Fase Mid", "[0] + [1]*x", fit_min, fit_max);
+    func_m->SetNameTitle("Fase Mid", "Fase Mid");
     func_m->SetLineColor(kGreen);
 
     auto func_t = new TF1("Fase Tweeter", "[0] + [1]*x", fit_min, fit_max);
-    func_t->SetLineColor(kPink);
+    func_t->SetNameTitle("Fase Tweeter", "Fase Tweeter");
+    func_t->SetLineColor(kRed);
 
     graph_g->Fit(func_g, "R");
     graph_w->Fit(func_w, "R");
@@ -111,12 +143,14 @@ void lin(const char *data_g = "data/phase_g.txt", const char *data_w = "data/pha
 
     std::cout << "Crossover frequency from phase = " << cross_freq_phase << "    sigma = " << sqrt(var_w + var_t) << '\n';
     std::cout << "Resonance frequency from phase = " << res_freq << "    sigma = " << sqrt(var_m) << '\n';
+
+    return {mg, {func_g, func_w, func_m, func_t}};
 }
 
-void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/phase_w.txt", const char *data_m = "data/phase_m.txt", const char *data_t = "data/phase_t.txt")
+Plot phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/phase_w.txt", const char *data_m = "data/phase_m.txt", const char *data_t = "data/phase_t.txt")
 {
     double plot_min{1E3};
-    double plot_max{30E3};
+    double plot_max{50E3};
     double fit_min{8E3};
     double fit_max{16E3};
 
@@ -182,13 +216,8 @@ void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/p
     //
     // Fit
     //
-    auto func_g = new TF1("Fase Generatore", p_g, fit_min, fit_max, 5);
-    func_g->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9, 0);
-    func_g->SetParLimits(0, 2E3, 4E3);
-    func_g->SetParLimits(1, 50, 200);
-    func_g->SetParLimits(2, 30, 70);
-    func_g->SetParLimits(3, 0.02, 0.06);
-    func_g->SetParLimits(4, 3E-9, 7E-9);
+    auto func_g = new TF1("Fase Generatore", "[0]", fit_min, fit_max);
+    func_g->SetNameTitle("Fase Generatore", "Fase Generatore");
 
     auto func_w = new TF1("Fase Woofer", p_w, fit_min, fit_max, 6);
     func_w->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9, 0);
@@ -235,14 +264,33 @@ void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/p
     //
     // Drawing
     //
-    func_g->SetLineColor(kRed);
+    func_g->SetLineColor(kOrange);
     func_w->SetLineColor(kBlue);
     func_m->SetLineColor(kGreen);
-    func_t->SetLineColor(kPink);
+    func_t->SetLineColor(kRed);
     std::array<TF1 *, 4> functions = {func_g, func_w, func_m, func_t};
     for (auto function : functions)
     {
         function->SetRange(plot_min, plot_max);
         function->Draw("same");
     }
+
+    return {mg, {func_g, func_w, func_m, func_t}};
+}
+
+void figura_fase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/phase_w.txt", const char *data_m = "data/phase_m.txt", const char *data_t = "data/phase_t.txt")
+{
+    auto c = new TCanvas("Grafici fase", "Grafici fase", 2400, 1000);
+    c->Draw();
+
+    TPad *p1 = new TPad("p1", "p1", 0, 0, 0.6, 1);
+    p1->SetMargin(0.1, 0.05, 0.1, 0.1);
+    p1->Draw();
+    TPad *p2 = new TPad("p2", "p2", 0.6, 0, 1, 1);
+    p2->Draw();
+    
+    phase().draw(p1);
+    lin().draw(p2);
+
+    c->SaveAs("fig_fase.png");
 }

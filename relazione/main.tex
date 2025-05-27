@@ -10,6 +10,9 @@
 \usepackage{cleveref}
 \usepackage{amsfonts}
 
+\usepackage{tikz}
+\usetikzlibrary{patterns,plotmarks}
+
 \hyphenation{ELVIS}
 \newcommand{\err}[1]{\textcolor{red}{#1}}
 
@@ -338,8 +341,7 @@ retta (fig.). In questo modo abbiamo misurato:
 
 \begin{figure}[h]
 	\centering
-	\subfloat{\includegraphics[width=0.7\textwidth]{example-image}}
-	\subfloat{\includegraphics[width=0.3\textwidth]{example-image}}
+	\includegraphics[width=\textwidth]{fig_fase.png}
 	\caption{A sinistra: grafico delle fasi in funzione della frequenza per il woofer
 		(blu), il midrange (verde), il tweeter (arancione) e per il generatore (rosso);
 		fit ristretto al range $8$ kHz - $16$ kHz. A destra: fit lineare degli stessi dati da $10$ kHz a $11.2$ kHz.}\label{fig:phase_sweep}
