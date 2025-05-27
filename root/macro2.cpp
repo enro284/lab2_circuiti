@@ -58,6 +58,7 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     }
 
     auto mg = new TMultiGraph();
+    mg->SetTitle("Ampiezze - sweep completo;Frequenza (Hz);Ampiezza (V)");
     mg->Add(graph_w);
     mg->Add(graph_m);
     mg->Add(graph_t);
@@ -74,7 +75,7 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
 
     mg->GetXaxis()->SetLimits(f_min, f_max);
     mg->SetMinimum(0.);
-    mg->SetTitle("Ampiezze - sweep completo;Frequenza (Hz);Ampiezza (V)");
+
     mg->Draw("AP");
 
     gPad->SetGrid(1, 1);
