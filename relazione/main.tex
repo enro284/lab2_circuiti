@@ -42,28 +42,28 @@ banda di taglio. Il valore teorico della frequenza di crossover tra woofer e
 tweeter, calcolato dalla relazione analitica, è risultato
 
 \begin{equation*}
-	f_{c} = (10.50 \pm 0.12)  \text{ kHz}
+	f_{c}^{teo} = (10.50 \pm 0.12)  \text{ kHz}
 \end{equation*}
 
 \noindent
 mentre la misura sperimentale ha fornito
 
 \begin{equation*}
-	f_{c} = (\cdots \pm \cdots) \text{ kHz}
+	f_{c}^{sper} = (10.61 \pm 0.03) \text{ kHz}
 \end{equation*}
 
 \noindent
 La frequenza di risonanza del midrange attesa è
 \begin{equation*}
-	f_{r} = (10.65 \pm 0.10)  \text{ kHz}
+	f_{r}^{teo} = (10.65 \pm 0.10)  \text{ kHz}
 \end{equation*}
 
 \noindent
 e quella misurata
 \begin{equation*}
-	f_{r} = (\cdots \pm \cdots)  \text{ kHz}
+	f_{r}^{sper} = (10.80 \pm 0.09)  \text{ kHz}
 \end{equation*}
-\err{aggiungere anche differenza di fase al crossover?}
+\err{aggiungere anche differenza di fase al crossover? Fare abstract più corto}
 
 \section*{Introduzione}
 
@@ -262,16 +262,16 @@ dall'equazione \eqref{eq:fc} abbiamo ricavato la miglior stima del valore
 atteso della frequenza di crossover:
 
 \begin{equation*}
-	f_{c} = (10.50 \pm 0.12)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{c}}{f_{c}} = 1.1 \ \%
+	f_{c}^{teo} = (10.50 \pm 0.12)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{c}}{f_{c}} = 1.1 \ \%
 \end{equation*}
 
 \noindent
 Analogamente, la frequenza di risonanza del midrange attesa è risultata:
 
 \begin{equation*}
-	f_{r} = (10.65 \pm 0.10)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} = 1.0 \ \%
+	f_{r}^{teo} = (10.65 \pm 0.10)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} = 1.0 \ \%
 \end{equation*}
-Questo valore fa fede alla relazione ideale Eq.~\eqref{eq:fr} perché gli effetti del circuito reale sono risultati inferiori
+Questo valore fa fede alla relazione ideale \eqref{eq:fr} perché gli effetti del circuito reale sono risultati inferiori
 all'errore strumentale, più dettagli in \cref{sec:resFreq}. Entrambe le incertezze sono state propagate linearmente e sono da considerarsi assolute.
 
 Per ricavare $f_{c}$ e $f_{r}$ dalle misure di ampiezza, si sono eseguiti dei
@@ -326,8 +326,8 @@ incertezza significativa alle misure ricavate in questo modo.
 \end{equation*}
 
 Si è deciso allora di approssimare localmente (nell'intervallo $10$ kHz -
-$11.2$ kHz) il grafico delle fasi con una retta (fig.). In questo modo abbiamo
-misurato:
+$11.2$ kHz) il grafico delle fasi con una retta (\cref{fig:phase_sweep}). In
+questo modo abbiamo misurato:
 
 \begin{equation*}
 	f_{c}^{fasi} = 10.600 \text{ kHz}  \hspace{2cm}  \sigma_c^{fasi} = 0.010 \text{ kHz}
@@ -355,7 +355,8 @@ La media pesata delle due misure sperimentali è:
 
 Assumendo che le incertezze statistiche provengano da una popolazione
 gaussiana, utilizziamo un un fattore di copertura $k = 3$ per ottenere un
-$\text{C.L}\approx 99 \ \% $ e trattare le incertezze come assolute. Otteniamo dunque
+$\text{C.L}\approx 99 \ \% $ e trattare le incertezze come assolute. Otteniamo
+dunque
 
 \begin{equation*}
 	f_{c}^{sper} = (10.61 \pm 0.03) \text{ kHz} \hspace{2cm} \frac{\Delta f_{c}^{sper}}{f_{c}^{sper}} = 0.3 \ \%
@@ -364,6 +365,10 @@ $\text{C.L}\approx 99 \ \% $ e trattare le incertezze come assolute. Otteniamo d
 \begin{equation*}
 	f_{r}^{sper} = (10.80 \pm 0.09) \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}^{sper}}{f_{r}^{sper}} = 0.8 \ \%
 \end{equation*}
+
+Poichè gli intervalli di incertezza delle due stime sperimentali si
+sovrappongono a quelli delle rispettive stime teoriche, possiamo affermare che
+queste risultano compatibili.
 
 \section*{Conclusioni}
 
