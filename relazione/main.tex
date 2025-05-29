@@ -38,7 +38,7 @@ cresce asintoticamente al valore del generatore e il midrange presenta un picco
 alla risonanza; le misure di fase confermano la coerenza nella banda passante
 ma lo sfasamento fuori banda risulta inferiore a quello atteso. Presentiamo ora
 le misure sperimentali affiancate dal valore atteso ricavato dalle leggi di
-Kirchhoff e i valori dei componenti del circuito.\\ Frequenza di crossover:
+Kirchhoff e dai valori dei componenti del circuito.\\ Frequenza di crossover:
 \begin{equation*} f_{c}^{sper} = (10.61 \pm 0.03) \text{ kHz} \hspace{2cm}
 	f_{c}^{teo} = (10.50 \pm 0.12) \text{ kHz} \end{equation*} \noindent Frequenza
 di risonanza: \begin{equation*} f_{r}^{sper} = (10.80 \pm 0.09) \text{ kHz}
@@ -175,7 +175,6 @@ ampiezza uguale.
 	\label{eq:fc}
 \end{equation}
 
-\noindent
 Inoltre, da \eqref{eq:Vm} è possibile calcolare la frequenza di risonanza attesa del midrange \eqref{eq:fr} (vedi \cref{sec:resFreq}).
 
 \begin{equation}
@@ -183,7 +182,6 @@ Inoltre, da \eqref{eq:Vm} è possibile calcolare la frequenza di risonanza attes
 	\label{eq:fr}
 \end{equation}
 
-\noindent
 Infine, si può ottenere \err{la differenza di fase tra tweeter e woofer alla frequenza di crossover}.
 
 \begin{equation}
@@ -201,28 +199,25 @@ all'acquisizione e all'elaborazione delle misure. Per l'analisi in frequenza di
 ampiezza e fase è stato acquisito ciascun canale separatamente, con sweep
 ripetuti. In ogni prova l'analog input \texttt{A1} è stato collegato al canale
 di interesse mentre il canale \texttt{A0} è rimasto collegato al generatore di
-tensione, utilizzandolo come trigger e riferimento per la fase. Come range di
-frequenze è stato scelto: $1$ kHz - $50$ kHz; questo per evidenziare il punto
-di crossover ma anche per vedere l'andamento a basse e alte frequenze. Al fine
-di massimizzare la frequenza di campionamento, le tensioni sono state misurate
-in modalità referenced single ended collegando a massa il ramo in comune alle
-resistenze. Ciò ha permesso un campionamento a $500$ kHz per canale, con $2000$
-sample per ciascuna acquisizione, abbastanza per includere $4$ o più periodi a
-qualsiasi frequenza del range.
+tensione, utilizzandolo come trigger e riferimento per la fase. Per gli sweep è
+stato scelto un range di frequenze di $1$ kHz - $50$ kHz, questo per
+evidenziare il punto di crossover ma anche per vedere l'andamento a basse e
+alte frequenze. Al fine di massimizzare la frequenza di campionamento, le
+tensioni sono state misurate in modalità referenced single ended collegando a
+massa il ramo in comune alle resistenze. Ciò ha permesso un campionamento a
+$500$ kHz per canale, con $2000$ sample per ciascuna acquisizione, abbastanza
+per includere almeno $4$ periodi a qualsiasi frequenza del range.
 
 I componenti del circuito sono stati misurati tramite il multimetro di ELVIS
 II, i loro valori e le rispettive incertezze (strumentali) si trovano in
-\cref{tab:componenti} 
-\begin{table}[h]
-	\begin{alignat*}{6}
-		 & R_w    &  & =(3293 \pm 2) \text{ \Omega} \hspace{2cm} &  & R_m    &  & =(3287 \pm 2) \text{ \Omega} \hspace{2cm} &  & R_t &  & =(3295 \pm 2) \text{ \Omega}      \\
-		 & L_w    &  & =(47.1 \pm 0.5) \text{ mH}                &  & L_m    &  & =(46.8 \pm 0.5) \text{ mH}                &  & C_t &  & =(4.68 \pm 0.05) \text{ nF}       \\
-		 & R_{Lw} &  & =(120.00 \pm 0.15) \text{ \Omega}         &  & R_{Lm} &  & =(120.70 \pm 0.15) \text{ \Omega}         &  &     &  &                                   \\
-		 &        &  &                                           &  & C_m    &  & =(4.76 \pm 0.05) \text{ nF}               &  & R_g &  & =50 \text{ \Omega \ (dichiarata)}
-	\end{alignat*}
-	\caption{Valori dei componentidel circuito.}
-	\label{tab:componenti}
-\end{table}
+\cref{tab:componenti} \begin{table}[h] \begin{alignat*}{6}                            & R_w                               &     & =(3293 \pm
+                2) \text{ \Omega} \hspace{2cm} &                                   & R_m &            & =(3287 \pm 2) \text{ \Omega}
+                \hspace{2cm}                   &                                   & R_t &            & =(3295 \pm 2) \text{ \Omega}                                \\                 & L_w &     & =(47.1 \pm
+                0.5) \text{ mH}                &                                   & L_m &            & =(46.8 \pm 0.5) \text{ mH}        &   & C_t &  & =(4.68 \pm
+                0.05) \text{ nF}                                                                                                                                    \\  & R_{Lw}                            &  & =(120.00 \pm 0.15) \text{ \Omega} &  & R_{Lm}              &
+                                               & =(120.70 \pm 0.15) \text{ \Omega} &     &            &                                   &                         \\                  &  &     &  &                                   & C_m &  & =(4.76 \pm
+                0.05) \text{ nF}               &                                   & R_g &            & =50 \text{ \Omega \ (dichiarata)}\end{alignat*}
+	\caption{Valori dei componentidel circuito.} \label{tab:componenti} \end{table}
 
 \section*{Risultati e discussione}
 Dalle misure delle componenti riportate in \cref{tab:componenti} e
@@ -239,7 +234,7 @@ Analogamente, la frequenza di risonanza del midrange attesa è risultata:
 \begin{equation*}
 	f_{r}^{teo} = (10.65 \pm 0.11)\  \text{ kHz} \hspace{2cm} \frac{\Delta f_{r}}{f_{r}} = 1.0 \ \%
 \end{equation*}
-Questo valore fa fede alla relazione ideale \eqref{eq:fr} perché gli effetti del circuito reale sono risultati inferiori
+Quest'ultimo valore fa fede alla relazione ideale \eqref{eq:fr} perché gli effetti del circuito reale sono risultati inferiori
 all'errore strumentale, più dettagli in \cref{sec:resFreq}. Entrambe le incertezze sono state propagate linearmente e sono da considerarsi assolute.
 
 Per ricavare $f_{c}$ e $f_{r}$ dalle misure di ampiezza, si sono eseguiti dei
@@ -264,10 +259,11 @@ II.
 \end{figure}
 
 Uguagliando le funzioni risultanti del woofer e del tweeter si è calcolata
-numericamente $f_{c}$; $f_{r}$ è stata calcolata numericamente come frequenza
-corrispondente al massimo della funzione di fit. Le incertezze sono state
-propagate in quadratura a partire dai parametri del fit e vanno considerate
-come statistiche. Riportiamo di seguito le stime ottenute e le loro incertezze:
+numericamente $f_{c}$, mentre $f_{r}$ è stata calcolata numericamente come
+frequenza corrispondente al massimo della funzione di fit. Le incertezze sono
+state propagate in quadratura a partire dai parametri del fit e vanno
+considerate come statistiche. Riportiamo di seguito le stime ottenute e le loro
+incertezze:
 
 \begin{equation*}
 	f_{c}^{amp} = 10.64 \text{ kHz} \hspace{2cm} \sigma_c^{amp} = 0.02 \text{ kHz}
@@ -287,8 +283,8 @@ così ampi.
 Per quanto riguarda le fasi, il grafico (\cref{fig:phase_sweep}) si è
 discostato parecchio dalla funzione attesa. Data la complessità del modello non
 siamo riusciti a ottenere un fit convergente neanche su regioni ristrette, di
-conseguenza non abbiamo potuto associare un incertezza significativa allePer
-quanto misure ricavate in questo modo.
+conseguenza non abbiamo potuto associare un incertezza significativa alle
+misure ricavate in questo modo.
 
 \begin{equation*}
 	f_{c} = 10.601 \text{ kHz} \hspace{2cm} f_{r} = 10.791 \text{ kHz}
@@ -308,8 +304,7 @@ misurato:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{fig_fase.png}
-	\caption{A sinistra: grafico delle fasi in funzione della frequenza per il woofer
-		(blu), il midrange (verde), il tweeter (arancione) e per il generatore (rosso);
+	\caption{A sinistra: grafico delle fasi in funzione della frequenza per il woofer, midrange, tweeter e generatore;
 		fit ristretto al range $8$ kHz - $16$ kHz. A destra: fit lineare degli stessi dati da $10$ kHz a $11.2$ kHz.}\label{fig:phase_sweep}
 \end{figure}
 
@@ -325,7 +320,7 @@ La media pesata delle due misure sperimentali è:
 \end{equation*}
 
 Assumendo che le incertezze statistiche provengano da una popolazione
-gaussiana, utilizziamo un un fattore di copertura $k = 3$ per ottenere un
+gaussiana, utilizziamo un fattore di copertura $k = 3$ per ottenere un
 $\text{C.L}\approx 99 \ \% $ e trattare le incertezze come assolute. Otteniamo
 dunque
 
