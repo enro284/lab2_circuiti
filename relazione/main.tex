@@ -175,14 +175,16 @@ ampiezza uguale.
 	\label{eq:fc}
 \end{equation}
 
-Inoltre, da \eqref{eq:Vm} è possibile calcolare la frequenza di risonanza attesa del midrange \eqref{eq:fr} (vedi \cref{sec:resFreq}).
+Inoltre, da \eqref{eq:Vm} è possibile calcolare la frequenza di risonanza
+attesa del midrange \eqref{eq:fr} (vedi \cref{sec:resFreq}).
 
 \begin{equation}
 	f_{r} = \frac{1}{2\pi}\sqrt{\frac{1}{L_{m} C_{m}}}  %equazione approssimata
 	\label{eq:fr}
 \end{equation}
 
-Infine, si può ottenere \err{la differenza di fase tra tweeter e woofer alla frequenza di crossover}.
+Infine, si può ottenere \err{la differenza di fase tra tweeter e woofer alla
+	frequenza di crossover}.
 
 \begin{equation}
 	booh non so se farlo
@@ -337,6 +339,28 @@ sovrappongono a quelli delle rispettive stime teoriche, possiamo affermare che
 queste risultano compatibili.
 
 \section*{Conclusioni}
+
+Dunque, per la frequenza di crossover e per quella di risonanza abbiamo
+ottenuto due stime, una teorica e una sperimentale, risultanti compatibili tra
+loro.
+
+\begin{equation*}
+	f_{c}^{sper} = (10.61 \pm 0.03) \text{ kHz} \hspace{2cm}
+	f_{c}^{teo} = (10.50 \pm 0.12) \text{ kHz}
+\end{equation*}
+\begin{equation*}
+	f_{r}^{sper} = (10.80 \pm 0.09) \text{ kHz}
+	\hspace{2cm} f_{r}^{teo} = (10.65 \pm 0.10) \text{ kHz}
+\end{equation*}
+
+Gli andamenti delle ampiezze sono stati coerenti con le aspettative, ovvero si
+sono osservati i comportamenti di un filtro passa-basso per il woofer, un
+filtro passa-banda per il midrange e un filtro passa-alto per il tweeter.
+Tuttavia il modello risulta applicabile solamente in un range ristretto di
+frequenze (\err{specificarlo?}), oltre il quale si osservano deviazioni non
+previste.
+
+\err{fare un'analisi quantitativa delle fasi}
 
 \appendix
 \section{Appendici}
