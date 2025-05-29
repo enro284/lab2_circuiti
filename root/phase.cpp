@@ -15,9 +15,9 @@ struct Plot
     TMultiGraph *mg;
     std::array<TF1 *, 4> functions;
 
-    void draw(TPad* pad)
+    void draw(TPad *pad)
     {
-        auto legend = new TLegend(0.6, 0.7, .89, .89);
+        auto legend = new TLegend(0.6, 0.65, .89, .89);
         legend->SetTextSizePixels(20);
 
         pad->cd();
@@ -29,11 +29,13 @@ struct Plot
         mg->GetXaxis()->SetTitle("Frequenza (Hz)");
         mg->GetXaxis()->SetMaxDigits(3);
         mg->GetXaxis()->SetNdivisions(520);
-        for (auto func : functions){
+        for (auto func : functions)
+        {
             std::cout << "nome  " << func->GetName() << '\n';
             func->Draw("same");
             legend->AddEntry(func);
         }
+        legend->AddEntry(mg, "Dati sperimentali", "p");
         legend->Draw();
     }
 };
@@ -201,7 +203,7 @@ Plot func_fit(const char *data_g = "data/phase_g.txt", const char *data_w = "dat
         }
 
         graph->SetMarkerStyle(20);
-        graph->SetMarkerSize(0.5);
+        graph->SetMarkerSize(1);
         mg->Add(graph);
     }
 
@@ -293,7 +295,7 @@ void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/p
     p1->Draw();
     TPad *p2 = new TPad("p2", "p2", 0.58, 0, 1, 1);
     p2->Draw();
-    
+
     func_fit().draw(p1);
     lin_fit().draw(p2);
 

@@ -57,13 +57,13 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     mg->Add(graph_g);
 
     graph_g->SetMarkerStyle(20);
-    graph_g->SetMarkerSize(0.6);
+    graph_g->SetMarkerSize(1);
     graph_w->SetMarkerStyle(20);
-    graph_w->SetMarkerSize(0.6);
+    graph_w->SetMarkerSize(1);
     graph_m->SetMarkerStyle(20);
-    graph_m->SetMarkerSize(0.6);
+    graph_m->SetMarkerSize(1);
     graph_t->SetMarkerStyle(20);
-    graph_t->SetMarkerSize(0.6);
+    graph_t->SetMarkerSize(1);
 
     mg->GetXaxis()->SetLimits(f_min, f_max);
     mg->SetMinimum(0.);
@@ -147,12 +147,13 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     func_m->Draw("SAME");
     func_t->Draw("SAME");
 
-    auto leg = new TLegend(0.7, 0.5, .89, .7);
+    auto leg = new TLegend(0.7, 0.45, .89, 0.7);
     leg->SetTextSizePixels(40);
     leg->AddEntry(func_g, "Fit Generatore", "l");
     leg->AddEntry(func_w, "Fit Woofer", "l");
     leg->AddEntry(func_m, "Fit Midrange", "l");
     leg->AddEntry(func_t, "Fit Tweeter", "l");
+    leg->AddEntry(graph_g, "Dati sperimentali", "p");
     leg->Draw();
     canvas->SaveAs("fig_amp.png");
 
