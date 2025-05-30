@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   
 jobs:
-  presentation:
+  build_and_upload:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,7 +16,7 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           working_directory : relazione
-          root_file: relazione/main.tex
+          root_file: main.tex
           extra_fonts: |
             ./relazione/fonts/calibri/*ttf
           latexmk_use_lualatex: true
