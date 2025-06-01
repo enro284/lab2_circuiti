@@ -31,7 +31,6 @@ struct Plot
         mg->GetXaxis()->SetNdivisions(520);
         for (auto func : functions)
         {
-            std::cout << "nome  " << func->GetName() << '\n';
             func->Draw("same");
             legend->AddEntry(func);
         }
@@ -128,23 +127,24 @@ Plot lin_fit(const char *data_g = "data/phase_g.txt", const char *data_w = "data
     //
     // Misure
     //
-    auto func_sum = new TF1("differenza di fase t-w", [=](double *x, double *par)
+    auto func_sum = new TF1("somma fasi t-w", [=](double *x, double *par)
                             { return func_t->Eval(*x) + func_w->Eval(*x); }, fit_min, fit_max, 0);
     double cross_freq_phase = func_sum->GetX(0, fit_min, fit_max);
-
     double res_freq = func_m->GetX(0, fit_min, fit_max);
+    
+    double var_w_x = pow(func_w->GetParError(0) / func_w->GetParameter(1), 2) + pow(cross_freq_phase * func_w->GetParError(1) / func_w->GetParameter(1), 2);
+    double var_m_x = pow(func_m->GetParError(0) / func_m->GetParameter(1), 2) + pow(cross_freq_phase * func_m->GetParError(1) / func_m->GetParameter(1), 2);
+    double var_t_x = pow(func_t->GetParError(0) / func_t->GetParameter(1), 2) + pow(cross_freq_phase * func_t->GetParError(1) / func_t->GetParameter(1), 2);
+    double sigma_cross_freq_phase = sqrt(var_w_x + var_t_x);
 
-    double cross_freq_exp = 10686;
+    std::cout << "Crossover frequency from phase = " << cross_freq_phase << "    sigma = " << sigma_cross_freq_phase << '\n';
+    std::cout << "Resonance frequency from phase = " << res_freq << "    sigma = " << sqrt(var_m_x) << '\n';
 
-    double var_w = pow(func_w->GetParError(0) / func_w->GetParameter(1), 2) + pow(cross_freq_phase * func_w->GetParError(1) / func_w->GetParameter(1), 2);
-    double var_m = pow(func_m->GetParError(0) / func_m->GetParameter(1), 2) + pow(cross_freq_phase * func_m->GetParError(1) / func_m->GetParameter(1), 2);
-    double var_t = pow(func_t->GetParError(0) / func_t->GetParameter(1), 2) + pow(cross_freq_phase * func_t->GetParError(1) / func_t->GetParameter(1), 2);
-
-    std::cout << "Expected crossover frequency = " << cross_freq_exp << '\n';
-    std::cout << "Phase difference at expected crossover frequency = " << func_sum->Eval(cross_freq_exp) << '\n';
-
-    std::cout << "Crossover frequency from phase = " << cross_freq_phase << "    sigma = " << sqrt(var_w + var_t) << '\n';
-    std::cout << "Resonance frequency from phase = " << res_freq << "    sigma = " << sqrt(var_m) << '\n';
+    double phase_diff = func_t->Eval(cross_freq_phase) - func_w->Eval(cross_freq_phase);
+    double var_t_y = pow(func_t->GetParError(0), 2) + pow(cross_freq_phase * func_t->GetParError(1), 2) + pow(func_t->GetParameter(1) * sigma_cross_freq_phase, 2);
+    double var_w_y = pow(func_w->GetParError(0), 2) + pow(cross_freq_phase * func_w->GetParError(1), 2) + pow(func_w->GetParameter(1) * sigma_cross_freq_phase, 2);
+    double sigma_phase_diff = sqrt(var_t_y + var_w_y);
+    std::cout << "Phase difference at crossover = " << phase_diff << "\t sigma = " << sigma_phase_diff << '\n';
 
     return {mg, {func_g, func_w, func_m, func_t}};
 }

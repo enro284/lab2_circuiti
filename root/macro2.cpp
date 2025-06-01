@@ -5,9 +5,10 @@
 #include "TF1.h"
 #include "TH1F.h"
 #include "TStyle.h"
+#include "TLegend.h"
 
 #include "formule2.cpp" //si lo so, non si fa
-// DEFINITiVO NON TOCCARE RANGE O PARAMETRI, FAI SOLO ESTETICA
+// DEFINITIVO NON TOCCARE RANGE O PARAMETRI, FAI SOLO ESTETICA
 const double f_min = 1E3;
 const double f_max = 50E3;
 const double fit_min = 7E3;
@@ -164,6 +165,21 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
 
     double res_freq = func_m->GetMaximumX(f_min, f_max);
     std::cout << "Resonance frequency = " << res_freq << std::endl;
+
+    double q = sqrt(46.8E-3 / 4.76E-9) / 3287;
+    double sigma_q = q * ((2 / 3287) + (0.25 / 46.8) + (0.025 / 4.76));
+    std::cout << "Midrange Q factor expected = " << q << "\t sigma = " << sigma_q << '\n';
+
+    double mid_half_power = func_m->Eval(res_freq) / sqrt(2);
+    double w_1 = func_m->GetX(mid_half_power, 5E3, 10E3);
+    double w_2 = func_m->GetX(mid_half_power, 15E3, 20E3);
+    double bandwidth = w_2 - w_1;
+    q = res_freq / bandwidth;
+
+    double rel_err_res_freq = 160 / res_freq;
+    double rel_err_bandwidth = 0.05 + 0.09; // sigma_R/R + sigma_L/L
+    sigma_q = q * sqrt(pow(rel_err_bandwidth, 2) + pow(rel_err_res_freq, 2));
+    std::cout << "Midrange Q factor measured from bandwidth = " << q << "\t sigma = " << sigma_q << '\n';
 }
 
 void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/phase_w.txt", const char *data_m = "data/phase_m.txt", const char *data_t = "data/phase_t.txt")

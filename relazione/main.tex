@@ -102,11 +102,17 @@ Il circuito scelto (\cref{fig:schema_elettrico}) è un crossover a tre vie: un
 circuito filtrante che divide un segnale su tre canali al fine di ottimizzare
 la riproduzione sonora per tutta la gamma di frequenze. Nel canale del woofer
 si trova un filtro passa-basso (RL serie), nel midrange un filtro passa-banda
-(RLC serie) e infine nel tweeter un filtro passa-alto (RC serie). Dalla legge
-di Ohm e dalle leggi di Kirchhoff simboliche per tensioni e correnti,
-utilizzando il metodo dei fasori, è stata ricavata la soluzione stazionaria
-della differenza di potenziale ai capi del generatore e ai capi delle
-resistenze di woofer, medi e tweeter. Riportiamo qui le loro ampiezze
+(RLC serie) e infine nel tweeter un filtro passa-alto (RC serie). I componenti
+sono stati scelti per avere una frequenza di risonanza del midrange vicina alla
+frequenza di crossover e per far si che il filtro passa-banda avesse un fattore
+di qualità di circa $1$, parametro che verrà poi verificato sperimentalmente.
+Si è deciso di misurare anche la differenza di fase tra i canali alla frequenza
+di crossover, valore che per un crossover audio può essere importante.
+
+Dalla legge di Ohm e dalle leggi di Kirchhoff simboliche per tensioni e
+correnti, utilizzando il metodo dei fasori, è stata ricavata la soluzione
+stazionaria della differenza di potenziale ai capi del generatore e ai capi
+delle resistenze di woofer, medi e tweeter. Riportiamo qui le loro ampiezze
 
 \begin{equation}
 	\left| \mathbf{V_{g}}(\omega) \right| = \left| 1 - \frac{R_g}
@@ -337,6 +343,28 @@ dunque
 Poichè gli intervalli di incertezza delle due stime sperimentali si
 sovrappongono a quelli delle rispettive stime teoriche, possiamo affermare che
 queste risultano compatibili.
+
+Sul canale dei medi è stato misurato il fattore di qualità. Dai parametri del
+circuito ci si aspetta:
+
+\begin{equation*}
+	Q^{teo} = 0.954 \pm 0.010
+\end{equation*}
+Sperimentalmente è stata misurata prima la larghezza di banda
+quando l'ampiezza vale $1/\sqrt{2}$ dell'ampiezza massima. Il fattore di
+qualità ne deriva come rapporto tra questa e la frequenza di risonanza:
+\begin{equation*}
+	Q^{sper} = 0.88 \pm 0.12
+\end{equation*}
+essendo dati ricavati dal fit, questa incertezza è statistica.
+
+Infine dal grafico delle fasi è stato misurato lo sfasamento alla frequenza di
+crossover. Il tweeter è risultato in anticipo di fase sul crossover di:
+
+\begin{equation*}
+	\Delta \phi = 81.08^\circ \pm 0.12^\circ
+\end{equation*}
+\err{sempre sigma con k=3. Appena mettiamo incertezza fasi confrontare!!!}
 
 \section*{Conclusioni}
 
