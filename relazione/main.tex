@@ -139,7 +139,7 @@ delle resistenze di woofer, medi e tweeter. Riportiamo qui le loro ampiezze
 \end{equation}
 
 \noindent
-e le rispettive fasi (\err{decidere dove esplicitare e definire simboli, togli fase del generatore giustificando in appendice}) (\ref{sec:fasi})
+e le rispettive fasi
 
 \begin{equation}
 	\phi_{g}(\omega) = Arg(\mathbf{V_{g}}(\omega))
@@ -160,8 +160,8 @@ e le rispettive fasi (\err{decidere dove esplicitare e definire simboli, togli f
 tutto in funzione della pulsazione del generatore.
 
 Per quanto riguarda le ampiezze delle tensioni in funzione della frequenza ci
-aspettiamo che: il woofer abbia un massimo a basse frequenze e un andamento
-decrescente asintoticamente a zero per le alte, il tweeter tenda
+aspettiamo che: il woofer \err{abbia un massimo} a basse frequenze e un
+andamento decrescente asintoticamente a zero per le alte, il tweeter tenda
 asintoticamente al generatore, mentre il midrange dovrà avere un picco alla
 frequenza di risonanza. Invece, per quanto riguarda le fasi, woofer e tweeter
 dovrebbero essere in fase con il generatore rispettivamente a basse e alte
@@ -205,7 +205,7 @@ breadboard. La scheda NI ELVIS II \footnote{NI ELVIS II+ di National
 come dispositivo DAQ unitamente ad un computer dotato di software apposito
 all'acquisizione e all'elaborazione delle misure. Per l'analisi in frequenza di
 ampiezza e fase è stato acquisito ciascun canale separatamente, con sweep
-ripetuti. In ogni prova l'analog input \texttt{A1} è stato collegato al canale
+ripetuti. In ogni misura l'analog input \texttt{A1} è stato collegato al canale
 di interesse mentre il canale \texttt{A0} è rimasto collegato al generatore di
 tensione, utilizzandolo come trigger e riferimento per la fase. Per gli sweep è
 stato scelto un range di frequenze di $1$ kHz - $50$ kHz, questo per
@@ -218,13 +218,13 @@ per includere almeno $4$ periodi a qualsiasi frequenza del range.
 
 I componenti del circuito sono stati misurati tramite il multimetro di ELVIS
 II, i loro valori e le rispettive incertezze (strumentali) si trovano in
-\cref{tab:componenti} \begin{table}[h] \begin{alignat*}{6}                            & R_w                               &     & =(3293 \pm
-                2) \text{ \Omega} \hspace{2cm} &                                   & R_m &            & =(3287 \pm 2) \text{ \Omega}
-                \hspace{2cm}                   &                                   & R_t &            & =(3295 \pm 2) \text{ \Omega}                                \\                 & L_w &     & =(47.1 \pm
-                0.5) \text{ mH}                &                                   & L_m &            & =(46.8 \pm 0.5) \text{ mH}        &   & C_t &  & =(4.68 \pm
+\cref{tab:componenti}. \begin{table}[h] \begin{alignat*}{6}                                & R_w                               &     & =(3293
+                \pm 2) \text{ \Omega} \hspace{2cm} &                                   & R_m &        & =(3287 \pm 2) \text{ \Omega}
+                \hspace{2cm}                       &                                   & R_t &        & =(3295 \pm 2) \text{ \Omega}                                \\                 & L_w &     & =(47.1 \pm
+                0.5) \text{ mH}                    &                                   & L_m &        & =(46.8 \pm 0.5) \text{ mH}        &   & C_t &  & =(4.68 \pm
                 0.05) \text{ nF}                                                                                                                                    \\  & R_{Lw}                            &  & =(120.00 \pm 0.15) \text{ \Omega} &  & R_{Lm}              &
-                                               & =(120.70 \pm 0.15) \text{ \Omega} &     &            &                                   &                         \\                  &  &     &  &                                   & C_m &  & =(4.76 \pm
-                0.05) \text{ nF}               &                                   & R_g &            & =50 \text{ \Omega \ (dichiarata)}\end{alignat*}
+                                                   & =(120.70 \pm 0.15) \text{ \Omega} &     &        &                                   &                         \\                  &  &     &  &                                   & C_m &  & =(4.76 \pm
+                0.05) \text{ nF}                   &                                   & R_g &        & =50 \text{ \Omega \ (dichiarata)}\end{alignat*}
 	\caption{Valori dei componentidel circuito.} \label{tab:componenti} \end{table}
 
 \section*{Risultati e discussione}
@@ -385,17 +385,21 @@ Gli andamenti delle ampiezze sono stati coerenti con le aspettative, ovvero si
 sono osservati i comportamenti di un filtro passa-basso per il woofer, un
 filtro passa-banda per il midrange e un filtro passa-alto per il tweeter.
 Tuttavia il modello risulta applicabile solamente in un range ristretto di
-frequenze (\err{specificarlo?}), oltre il quale si osservano deviazioni non
+frequenze ($7$ kHz - $14$ kHz), oltre il quale si osservano deviazioni non
 previste.
 
-\err{fare un'analisi quantitativa delle fasi}
+Invece, l'andamento delle fasi si è discostato in maniera significativa dal
+comportamento atteso su tutto il range di acquisiszione: in particolare a basse
+frequenze si osserva un aumento anomalo della fase del tweeter e midrange.
+\err{Escludendo errori sistematici}, possiamo concludere che questo è un
+fenomeno fisico non previsto dal nostro modello.
 
 \appendix
 \section{Appendici}
 \subsection{Frequenza di risonanza}\label{sec:resFreq}
-La prima misura è data dalla relazione ideale Eq. \eqref{eq:fr}; la seconda
-tiene conto anche degli effetti non ideali ed è stata ricavata numericamente
-come frequenza corrispondente al massimo di Eq. \eqref{eq:Vm}.
+La prima misura è data dalla relazione ideale \eqref{eq:fr}, la seconda tiene
+conto anche degli effetti non ideali ed è stata ricavata numericamente come
+frequenza corrispondente al massimo dell'equazione \eqref{eq:Vm}.
 
 \begin{equation*}
 	f_{r}^{\text{(ideale)}} = 10652 \text{ Hz} \hspace{2cm} f_{r}^{\text{(reale)}} = 10651 \text{ Hz}
@@ -414,22 +418,4 @@ risulta essere
 	\end{alignedat}
 \end{equation*}
 ossia due ordini di grandezza più grande di $\varepsilon_{f_r}$
-
-\subsection{Incertezze}
-
-\noindent
-\err{TOGLIERE QUESTO PARAGRAFO?}
-mentre per la miglior stima sulla sua incertezza abbiamo propagato linearmente
-le incertezze strumentali dovute alla misura dei componenti (\err{sistema cifre dec})
-
-\begin{equation*}
-	\begin{alignedat}{5}
-		\Delta f_{c} = & \left|\frac{\partial f_{c}}{\partial R_{w}}\right| \Delta R_{w} &  & +  \left|\frac{\partial f_{c}}{\partial R_{Lw}}\right| \Delta R_{Lw} &  & + \left|\frac{\partial f_{c}}{\partial L_{w}}\right| \Delta L_{w} &  & + \left|\frac{\partial f_{c}}{\partial R_{t}}\right| \Delta R_{t} &  & + \left|\frac{\partial f_{c}}{\partial C_{t}}\right| \Delta C_{t} \\
-		=              & ( 3.16                                                          &  & +  0.269                                                             &  & + \colorbox{yellow}{52.9}                                         &  & + 3.28                                                            &  & + \colorbox{yellow}{56.9} ) \text{ Hz}                            \\
-		=              & 117 \text{ Hz}
-	\end{alignedat}
-\end{equation*}
-
-\noindent
-dove sono stati evidenziati i termini più significativi.
 \end{document}
