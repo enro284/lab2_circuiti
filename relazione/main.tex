@@ -30,21 +30,30 @@
 \section*{Abstract}
 
 L'esperimento ha avuto come obiettivo la progettazione e la realizzazione di un
-crossover RLC a tre vie (woofer, midrange, tweeter), corredato dallo studio
-analitico del comportamento in regime sinusoidale e dal confronto con le misure
-sperimentali. Dal punto di vista qualitativo si è osservato che la risposta in
+crossover RLC a tre vie, corredato dallo studio analitico del comportamento in
+regime sinusoidale e dal confronto di alcune misure sperimentali con i valori
+attesi. Dal punto di vista qualitativo si è osservato che la risposta in
 ampiezza del woofer decresce verso zero alle alte frequenze, quella del tweeter
 cresce asintoticamente al valore del generatore e il midrange presenta un picco
 alla risonanza; le misure di fase confermano la coerenza nella banda passante
 ma lo sfasamento fuori banda risulta inferiore a quello atteso. Presentiamo ora
-le misure sperimentali affiancate dal valore atteso ricavato dalle leggi di
-Kirchhoff e dai valori dei componenti del circuito.\\ Frequenza di crossover:
-\begin{equation*} f_{c}^{sper} = (10.61 \pm 0.03) \text{ kHz} \hspace{2cm}
-	f_{c}^{teo} = (10.50 \pm 0.12) \text{ kHz} \end{equation*} \noindent Frequenza
-di risonanza: \begin{equation*} f_{r}^{sper} = (10.80 \pm 0.09) \text{ kHz}
-	\hspace{2cm} f_{r}^{teo} = (10.65 \pm 0.10) \text{ kHz} \end{equation*}
+le misure sperimentali affiancate dal valore previsto dalle leggi di Kirchhoff
+e dai valori dei componenti.\\ Frequenza di crossover: \begin{equation*}
+	f_{c}^{sper} = (10.61 \pm 0.03) \text{ kHz} \hspace{2cm} f_{c}^{teo} = (10.50
+	\pm 0.12) \text{ kHz} \end{equation*}
 
-\err{aggiungere anche differenza di fase al crossover? Fare abstract più corto}
+\noindent
+Frequenza di risonanza:
+\begin{equation*}
+	f_{r}^{sper} = (10.80 \pm 0.09) \text{ kHz} \hspace{2cm} f_{r}^{teo} = (10.65
+	\pm 0.10) \text{ kHz}
+\end{equation*}
+
+\noindent
+Fattore di qualità del passa-banda dei medi:
+\begin{equation*}
+	Q^{sper} = 0.88 \pm 0.12  \hspace{2cm}  Q^{teo} = 0.954 \pm 0.010
+\end{equation*}
 
 \section*{Introduzione}
 
@@ -184,16 +193,13 @@ attesa del midrange \eqref{eq:fr} (vedi \cref{sec:resFreq}).
 	\label{eq:fr}
 \end{equation}
 
-Come ultima misura si propone il fattore di qualità. Per un circuito RLC serie questo vale:
-\begin{equation*}
-	Q = \frac{1}{R_m}\sqrt{\frac{L_m}{C_m}}
-\end{equation*}
-Sperimentalmente può essere misurato come:
-\begin{equation*}
-	Q = \frac{f_r}{\Delta f}
-\end{equation*}
-con $\Delta f$ larghezza a metà ampiezza della funzione di risposta, o, equivalentemente,
-larghezza di banda quando l'ampiezza vale $1/\sqrt{2}$ dell'ampiezza massima.
+Come ultima misura si propone il fattore di qualità del ramo dei medi. Per un
+circuito RLC serie questo vale: \begin{equation*} Q =
+	\frac{1}{R_m}\sqrt{\frac{L_m}{C_m}} \end{equation*} Sperimentalmente può essere
+misurato come: \begin{equation*} Q = \frac{f_r}{\Delta f} \end{equation*} con
+$\Delta f$ larghezza a metà ampiezza della funzione di risposta, o,
+equivalentemente, larghezza di banda quando l'ampiezza vale $1/\sqrt{2}$
+dell'ampiezza massima.
 
 \section*{Apparato sperimentale e svolgimento}
 
@@ -217,14 +223,18 @@ per includere almeno $4$ periodi a qualsiasi frequenza del range.
 
 I componenti del circuito sono stati misurati tramite il multimetro di ELVIS
 II, i loro valori e le rispettive incertezze (strumentali) si trovano in
-\cref{tab:componenti}. \begin{table}[h] \begin{alignat*}{6}                                & R_w                               &     & =(3293
-                \pm 2) \text{ \Omega} \hspace{2cm} &                                   & R_m &        & =(3287 \pm 2) \text{ \Omega}
-                \hspace{2cm}                       &                                   & R_t &        & =(3295 \pm 2) \text{ \Omega}                                \\                 & L_w &     & =(47.1 \pm
-                0.5) \text{ mH}                    &                                   & L_m &        & =(46.8 \pm 0.5) \text{ mH}        &   & C_t &  & =(4.68 \pm
-                0.05) \text{ nF}                                                                                                                                    \\  & R_{Lw}                            &  & =(120.00 \pm 0.15) \text{ \Omega} &  & R_{Lm}              &
-                                                   & =(120.70 \pm 0.15) \text{ \Omega} &     &        &                                   &                         \\                  &  &     &  &                                   & C_m &  & =(4.76 \pm
-                0.05) \text{ nF}                   &                                   & R_g &        & =50 \text{ \Omega \ (dichiarata)}\end{alignat*}
-	\caption{Valori dei componentidel circuito.} \label{tab:componenti} \end{table}
+\cref{tab:componenti}.
+
+\begin{table}[h]
+	\begin{alignat*}{6}
+		 & R_w                               &  & =(3293 \pm 2) \text{ \Omega} \hspace{2cm} &  & R_m    &   & =(3287 \pm 2) \text{ \Omega} \hspace{2cm} &  & R_t &  & =(3295 \pm 2) \text{ \Omega}      \\
+		 & L_w                               &  & =(47.1 \pm 0.5) \text{ mH}                &  & L_m    &   & =(46.8 \pm 0.5) \text{ mH}                &  & C_t &  & =(4.68 \pm 0.05) \text{ nF}       \\
+		 & R_{Lw}                            &  & =(120.00 \pm 0.15) \text{ \Omega}         &  & R_{Lm} &
+		 & =(120.70 \pm 0.15) \text{ \Omega} &  &                                           &  &                                                                                                        \\
+		 &                                   &  &                                           &  & C_m    &   & =(4.76 \pm 0.05) \text{ nF}               &  & R_g &  & =50 \text{ \Omega \ (dichiarata)}
+	\end{alignat*}
+	\caption{Valori dei componentidel circuito.} \label{tab:componenti}
+\end{table}
 
 \section*{Risultati e discussione}
 Dalle misure delle componenti riportate in \cref{tab:componenti} e
@@ -261,14 +271,14 @@ le nostre misure di frequenza.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{fig_amp.png}
-	\caption{Grafico delle ampiezze delle tensioni in funzione della frequenza per il woofer, midrange, tweeter e generatore. I fit sono eseguiti nel range $7$ kHz - $14$ kHz e le funzioni risultanti disegnate su tutto il range di acquisizione.}\label{fig:fc_fr}
+	\caption{Grafico delle ampiezze delle tensioni in funzione della frequenza per il woofer, midrange, tweeter e generatore. I fit sono eseguiti nel range $7$ kHz - $14$ kHz e le funzioni risultanti graficate su tutto il range di acquisizione.}\label{fig:fc_fr}
 	\label{fig:amp_sweep}
 \end{figure}
 
-Dai dati sperimentali delle ampiezze, $f_{c}$ è stata misurata uguagliando numericamente le
-funzioni del woofer e del tweeter. $f_{r}$ è stata calcolata come
-frequenza corrispondente al massimo della funzione di fit. Le incertezze sono
-state propagate in quadratura a partire dai parametri del fit e vanno
+Dai dati sperimentali delle ampiezze, $f_{c}$ è stata misurata uguagliando
+numericamente le funzioni del woofer e del tweeter. $f_{r}$ è stata calcolata
+come frequenza corrispondente al massimo della funzione di fit. Le incertezze
+sono state propagate in quadratura a partire dai parametri del fit e vanno
 considerate come statistiche.
 
 \begin{equation*}
@@ -286,13 +296,21 @@ passa-basso, un passa-banda e un passa-alto; tuttavia si osserva che il modello
 da noi utilizzato non si adatta ai dati sperimentali per range di frequenze
 così ampi.
 
-\err{aggiungere correzione deriva fasi e incertezza}\\
-Per quanto riguarda le fasi, il grafico (\cref{fig:phase_sweep}) si è
-discostato parecchio dalla funzione attesa, specialmente sotto i $7$ kHz e 
-sopra i $25$ kHz.
-Data la complessità del modello non siamo riusciti a ottenere un fit convergente
-neanche su regioni ristrette, di conseguenza non abbiamo potuto associare
-un incertezza significativa alle misure ricavate in questo modo.
+Le misure di fase in funzione della frequenza presentavano una deriva
+sistematica. Questa è dovuta al fatto che nell'acquisizione la scheda impiega
+$1$ \textmu{s} a cambiare canale da \texttt{A0} a \texttt{A1}, generando uno
+sfasamento proporzionale alla frequenza. Per correggerla si è eseguito un fit
+della fase del generatore sul canale \texttt{A1}, sottraendola poi al grafico
+di ciascun canale. Inoltre per eliminare la dipendenza dal trigger i valori
+delle fasi non sono assoluti ma ottenuti sempre come differenza tra fase di
+\texttt{A1} e di \texttt{A0}; in questo modo la deviazione standard sulle
+misure di fase è di $0.003^\circ$ su tutto il range di frequenze. Nonostante
+queste correzioni i punti sperimentali (\cref{fig:phase_sweep}) si sono
+discostati parecchio dalla funzione attesa, specialmente sotto i $7$ kHz e
+sopra i $25$ kHz. Data la complessità del modello non siamo riusciti a ottenere
+un fit convergente neanche su regioni ristrette, di conseguenza non abbiamo
+potuto associare un incertezza significativa alle misure ricavate in questo
+modo.
 
 \begin{equation*}
 	f_{c} = 10.601 \text{ kHz} \hspace{2cm} f_{r} = 10.791 \text{ kHz}
@@ -317,7 +335,6 @@ misurato:
 		fit ristretto al range $8$ kHz - $16$ kHz. A destra: fit lineare degli stessi dati da $10$ kHz a $11.2$ kHz.}\label{fig:phase_sweep}
 \end{figure}
 
-
 La media pesata delle due misure sperimentali è:
 
 \begin{equation*}
@@ -330,7 +347,7 @@ La media pesata delle due misure sperimentali è:
 \noindent
 Assumendo che le incertezze statistiche provengano da una popolazione
 gaussiana, utilizziamo un fattore di copertura $k = 3$ per ottenere un
-$\text{C.L}\approx 99 \ \% $ e trattare le incertezze come assolute. Otteniamo
+$\text{C.L.}\approx 99 \ \% $ e trattare le incertezze come assolute. Otteniamo
 dunque
 
 \begin{equation*}
@@ -352,18 +369,17 @@ circuito ci si aspetta:
 \begin{equation*}
 	Q^{teo} = 0.954 \pm 0.010
 \end{equation*}
-Sperimentalmente:
+mentre sperimentalmente:
 \begin{equation*}
 	Q^{sper} = 0.88 \pm 0.12
 \end{equation*}
-essendo dati ricavati dal fit, quest'ultima incertezza è statistica.
-\err{sempre sigma con k=3. Appena mettiamo incertezza fasi confrontare!!!}
+sempre considerando un fattore di copertura $3$.
 
 \section*{Conclusioni}
 
 Dunque, per la frequenza di crossover e per quella di risonanza abbiamo
-ottenuto due stime, una teorica e una sperimentale, compatibili tra
-loro.
+ottenuto due stime \err{misure}, una teorica e una sperimentale, compatibili
+tra loro.
 
 \begin{equation*}
 	f_{c}^{sper} = (10.61 \pm 0.03) \text{ kHz} \hspace{2cm}
@@ -377,15 +393,14 @@ loro.
 Gli andamenti delle ampiezze sono stati coerenti con le aspettative, ovvero si
 sono osservati i comportamenti di un filtro passa-basso per il woofer, un
 filtro passa-banda per il midrange e un filtro passa-alto per il tweeter.
-Tuttavia il modello risulta applicabile solamente in un range ristretto di
-frequenze ($7$ kHz - $14$ kHz), oltre il quale si osservano deviazioni non
-previste.
+Tuttavia, pur tenendo conto degli effetti non ideali dei componenti, il modello
+non è esatto su tutto il range di frequenze ma risulta compatibile con i dati
+solamente in un intervallo ristretto ($7$ kHz - $14$ kHz).
 
 Invece, l'andamento delle fasi si è discostato in maniera significativa dal
-comportamento atteso su tutto il range di acquisiszione: in particolare a basse
-frequenze si osserva un aumento anomalo della fase del tweeter e midrange.
-\err{Escludendo errori sistematici}, possiamo concludere che questo è un
-fenomeno fisico non previsto dal nostro modello.
+comportamento atteso. Per tweeter e medi, sotto i $6$ kHz si osserva una
+decrescita anomala che non siamo riusciti a spiegare. Mentre sulle alte
+frequenze i dati hanno un asintoto diverso da quello previsto.
 
 \appendix
 \section{Appendici}
@@ -410,5 +425,5 @@ risulta essere
 		= 0.010 = 1.0 \ \%
 	\end{alignedat}
 \end{equation*}
-ossia due ordini di grandezza più grande di $\varepsilon_{f_r}$
+ossia due ordini di grandezza maggiore di $\varepsilon_{f_r}$
 \end{document}
