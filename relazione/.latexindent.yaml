@@ -3,11 +3,10 @@ modifyLineBreaks:
   condenseMultipleBlankLinesInto: 1  
   textWrapOptions:
     columns: 80
-    environments:
-      BeginStartsOnOwnLine: 1
-      EndStartsOnOwnLine: 1
-      BlockStartsOnOwnLine: 1
-      
+  environments:
+    BeginStartsOnOwnLine: 1
+    EndStartsOnOwnLine: 1
+    BlockStartsOnOwnLine: 1
     blocksEndBefore:
       commentOnOwnLine: 1
       verbatim: 1    
