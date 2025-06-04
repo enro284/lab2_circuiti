@@ -231,14 +231,16 @@ Per l'analisi in frequenza di ampiezza e fase è stato acquisito ciascun canale
 separatamente, con sweep ripetuti. In ogni misura l'analog input \texttt{A1} è
 stato collegato al canale di interesse mentre il canale \texttt{A0} è rimasto
 sempre collegato al generatore di tensione, utilizzandolo come trigger e
-riferimento per la fase. Per gli sweep è stato scelto un range di frequenze di
-$1$ kHz - $50$ kHz, questo per evidenziare il punto di crossover ma anche per
-vedere l'andamento a basse e alte frequenze. Al fine di massimizzare la
+riferimento per la fase. Al fine di massimizzare la
 frequenza di campionamento, le tensioni sono state misurate in modalità
 referenced single ended collegando a massa il ramo in comune alle resistenze.
 Ciò ha permesso un campionamento a $500$ kHz per canale, con $2000$ sample per
 ciascuna acquisizione, abbastanza per includere almeno $4$ periodi a qualsiasi
-frequenza del range.
+frequenza del range. Dalle differenze di tensione acquisite nel dominio dei
+tempi sono state estratte automaticamente fasi e ampiezze in funzione della
+frequenza. Per gli sweep è stato scelto un range di frequenze di
+$1$ kHz - $50$ kHz, questo per evidenziare il punto di crossover ma anche per
+vedere l'andamento a basse e alte frequenze.
 
 \section*{Risultati e discussione}
 Dalle misure delle componenti riportate in \cref{tab:componenti} e
