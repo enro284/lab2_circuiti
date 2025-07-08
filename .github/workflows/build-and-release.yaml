@@ -3,6 +3,7 @@ on:
   push:
     paths: 
       - 'relazione/**'
+      - 'presentazione/**'
   workflow_dispatch:
   
 jobs:
@@ -12,15 +13,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Compile LaTeX
+      - name: Compile LaTeX (relazione)
         uses: xu-cheng/latex-action@v3
         with:
           working_directory : relazione
-          root_file: main.tex
-          extra_fonts: |
-            ./relazione/fonts/calibri/*ttf
+          root_file: relazione.tex
           latexmk_use_lualatex: true
       
+      - name: Compile LaTeX (presentazione)
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory : presentazione
+          root_file: presentazione.tex
+          latexmk_use_lualatex: true
+
       - name: Get timestamp
         run: echo "TIMESTAMP=$(date +'%Y-%m-%d %T')" >> $GITHUB_ENV
       
@@ -28,5 +34,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: Draft ${{ env.TIMESTAMP }}
-          files: relazione/main.pdf
+          files: 
+          - relazione/relazione.pdf
+          - presentazione/presentazione.pdf
           draft: true

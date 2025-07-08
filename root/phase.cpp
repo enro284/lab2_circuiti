@@ -8,8 +8,13 @@
 #include "TVirtualFitter.h"
 #include "TMatrixD.h"
 #include "TLegend.h"
+#include "TLine.h"
 
 #include "formule3.cpp" //si lo so, non si fa
+
+double cross_freq_phase;
+double res_freq;
+
 struct Plot
 {
     TMultiGraph *mg;
@@ -131,7 +136,7 @@ Plot lin_fit(const char *data_g = "data/phase_g.txt", const char *data_w = "data
                             { return func_t->Eval(*x) + func_w->Eval(*x); }, fit_min, fit_max, 0);
     double cross_freq_phase = func_sum->GetX(0, fit_min, fit_max);
     double res_freq = func_m->GetX(0, fit_min, fit_max);
-    
+
     double var_w_x = pow(func_w->GetParError(0) / func_w->GetParameter(1), 2) + pow(cross_freq_phase * func_w->GetParError(1) / func_w->GetParameter(1), 2);
     double var_m_x = pow(func_m->GetParError(0) / func_m->GetParameter(1), 2) + pow(cross_freq_phase * func_m->GetParError(1) / func_m->GetParameter(1), 2);
     double var_t_x = pow(func_t->GetParError(0) / func_t->GetParameter(1), 2) + pow(cross_freq_phase * func_t->GetParError(1) / func_t->GetParameter(1), 2);
@@ -258,9 +263,9 @@ Plot func_fit(const char *data_g = "data/phase_g.txt", const char *data_w = "dat
 
     auto func_sum = new TF1("differenza di fase t-w", [=](double *x, double *par)
                             { return func_t->Eval(*x) + func_w->Eval(*x); }, fit_min, fit_max, 0);
-    double cross_freq_phase = func_sum->GetX(0, fit_min, fit_max);
+    cross_freq_phase = func_sum->GetX(0, fit_min, fit_max);
 
-    double res_freq = func_m->GetX(0, fit_min, fit_max);
+    res_freq = func_m->GetX(0, fit_min, fit_max);
 
     double cross_freq_exp = 10686;
 
@@ -292,11 +297,15 @@ void phase(const char *data_g = "data/phase_g.txt", const char *data_w = "data/p
     c->Draw();
 
     TPad *p1 = new TPad("p1", "p1", 0, 0, 0.58, 1);
-    p1->Draw();
     TPad *p2 = new TPad("p2", "p2", 0.58, 0, 1, 1);
+    p1->Draw();
     p2->Draw();
-
     func_fit().draw(p1);
+    auto line_c = new TLine(cross_freq_phase, 41, cross_freq_phase, -95);
+    auto line_r = new TLine(res_freq, 0, res_freq, -95);
+    line_c->Draw();
+    line_r->Draw();
+
     lin_fit().draw(p2);
 
     c->SaveAs("fig_fase.png");

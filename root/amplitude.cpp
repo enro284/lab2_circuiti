@@ -6,6 +6,7 @@
 #include "TH1F.h"
 #include "TStyle.h"
 #include "TLegend.h"
+#include "TLine.h"
 
 #include "formule2.cpp" //si lo so, non si fa
 // DEFINITIVO NON TOCCARE RANGE O PARAMETRI, FAI SOLO ESTETICA
@@ -155,14 +156,23 @@ void amplitude(const char *data_g = "data/amp_g.txt", const char *data_w = "data
     leg->AddEntry(func_t, "Fit Tweeter", "l");
     leg->AddEntry(graph_g, "Dati sperimentali", "p");
     leg->Draw();
-    canvas->SaveAs("fig_amp.png");
 
     auto diff_func = new TF1("diff_func", [&](double *x, double *)
-                             { return func_w->Eval(x[0]) - func_t->Eval(x[0]); }, f_min, f_max, 0);
+    { return func_w->Eval(x[0]) - func_t->Eval(x[0]); }, f_min, f_max, 0);
     double cross_freq = diff_func->GetX(0, f_min, f_max);
     std::cout << "Crossover frequency = " << cross_freq << std::endl;
-
+    
     double res_freq = func_m->GetMaximumX(f_min, f_max);
     std::cout << "Resonance frequency = " << res_freq << std::endl;
+    
+    auto line_c = new TLine(cross_freq, 0, cross_freq, 3.4);
+    auto line_r = new TLine(res_freq, 0, res_freq, 4.5);
+    line_c->Draw();
+    line_r->Draw();
 
+    auto line_fit = new TLine(fit_min, 0, fit_max, 0);
+    line_fit->SetLineWidth(5);
+    line_fit->Draw();
+
+    canvas->SaveAs("fig_amp.png");
 }
