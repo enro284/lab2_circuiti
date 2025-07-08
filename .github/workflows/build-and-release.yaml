@@ -34,7 +34,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: Draft ${{ env.TIMESTAMP }}
-          files: 
-          - relazione/relazione.pdf
-          - presentazione/presentazione.pdf
+          files: |
+            relazione/relazione.pdf
+            presentazione/presentazione.pdf
           draft: true
