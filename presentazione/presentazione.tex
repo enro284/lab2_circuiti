@@ -40,21 +40,21 @@
 
 \begin{frame}{Circuito e scelta dei componenti}
     \begin{columns}
-        \begin{column}{0.6\textwidth}
+        \begin{column}{0.65\textwidth}
             \centering
-            \begin{circuitikz}[scale=0.65, transform shape]
+            \begin{circuitikz}[scale=0.6, transform shape]
                 % generatore
-                \draw (8,0) --
-                (-1,0) --
-                (-1,1.5) to[sinusoidal voltage source, label=$v_0$]
-                (-1,3) to[R, l=$R_g$, color=cambridgeusred, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
-                (-1,4) --
-                (-1,5.5) --
-                (8,5.5);
+                \draw (9.5,0) --
+                (0,0) --
+                (0,1.5) to[sinusoidal voltage source, label=$v_0$]
+                (0,3) to[R, l=$R_g$, color=cambridgeusred, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
+                (0,4) --
+                (0,5.5) --
+                (9.5,5.5);
 
-                \draw(-1,4.5) to[short, -o]
-                (-1.6,4.5) node[left]{$v_g$};
-                \draw (-1,1) -- (-1.6,1) node[ground]{};
+                \draw(0,4.5) to[short, -o]
+                (-0.6,4.5) node[left]{$v_g$};
+                \draw (0,1) -- (-0.6,1) node[ground]{};
 
                 % woofer
                 \draw (3,5.5) --
@@ -65,20 +65,38 @@
                 \draw (3,2) to [short, -o] (3.6, 2) node[right]{$v_w$};
 
                 % mid
-                \draw (5.5,5.5) to [C=$C_m$]
-                (5.5,4.25) to [L=$L_m$]
-                (5.5,3.25) to [R, l=$R_{Lm}$, color=cambridgeusred, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
-                (5.5,2.25) --
-                (5.5,2) to[R=$R_m$] (5.5,0);
+                \draw (6, 5.5) -- (6, 5.25);
 
-                \draw (5.5,2) to [short, -o] (6.1, 2) node[right]{$v_m$};
+                \draw (6, 5.25) -- (6.5,5.25) to [C=$C_m$] (6.5,4.25) -- (6, 4.25);
+
+                \draw (6, 5.25) --
+                (5.5, 5.25) to [R, l_=$R_{Cm}$, color=cambridgeusred, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
+                (5.5, 4.25) --
+                (6, 4.25);
+
+                \draw(6,4.25) to [L=$L_m$]
+                (6,3) to [R, l=$R_{Lm}$, color=cambridgeusred, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
+                (6,2) --
+                (6,2) to[R=$R_m$] (6,0);
+
+                \draw (6,2) to [short, -o] (6.6, 2) node[right]{$v_m$};
 
                 %tweeter
-                \draw (8,5.5) to[C=$C_t$]
-                (8,2) to[R=$R_t$] (8,0);
+                \draw (9.5,5.5) --
+                (9.5, 4.25);
 
-                \draw (8,2) to
-                [short, -o] (8.6, 2) node[right]{$v_t$};
+                \draw (9.5, 4.25) -- (10,4.25) to [C=$C_m$] (10,3.25) -- (9.5, 3.25);
+
+                \draw (9.5, 4.25) --
+                (9, 4.25) to [R, l_=$R_{Cm}$, color=cambridgeusred, bipoles/resistor/height=0.15, bipoles/resistor/width=0.5]
+                (9, 3.25) --
+                (9.5, 3.25);
+
+                \draw(9.5, 3.25) --
+                (9.5,2) to[R=$R_t$] (9.5,0);
+
+                \draw (9.5,2) to
+                [short, -o] (10.1, 2) node[right]{$v_t$};
             \end{circuitikz}
         \end{column}
         \begin{column}{0.2\textwidth}
@@ -101,7 +119,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Acquisizione ed elaborazione dati}
+\begin{frame}{Acquisizione dati}
     Componenti misurati con multimetro digitale di Elvis II.
 
     \bigskip
@@ -112,7 +130,18 @@
         \item Misure di tensioni in modalià RSE
     \end{itemize}
 
-    Da ciascun campione di onda sinusoidale sono stati estratti e graficati frequenza, ampiezza e fase.
+\end{frame}
+\begin{frame}{Elaborazione dati}
+    Da ciascun campione di onda sinusoidale sono stati estratti e graficati ampiezza e fase in funzione della frequenza.
+
+    \begin{itemize}
+        \item Incertezza sulla fase: deviazione standard su misure ripetute \rightarrow\ $\sigma_\phi = 0.003^\circ$
+        \item Incertezza statistica sull'ampiezza inferiore alla risoluzione strumentale
+              \rightarrow\ risoluzione della scheda: $\Delta V = 1.9$ mV
+    \end{itemize}
+
+    Le fasi sono calcolate come differenza di fase tra \texttt{A1} e \texttt{A0}.
+    Per correggere la deriva dovuta al multiplexing: fit lineare sul generatore connesso ad \texttt{A1}.
 \end{frame}
 
 \begin{frame}{Grafico ampiezza - frequenza}
@@ -128,9 +157,10 @@
 
 \begin{frame}{Grafico fase - frequenza}
     \includegraphics[width=\textwidth]{fig_fase.png}
-    Anomalia su tweeter e midrange per basse frequenze; asintoti differenti da quelli previsti sulle alte frequenze.
-
+    Difficoltà nell'ottenere un fit convergente, grande instabilità nei parametri e dipendenza dal range di fit.
     Per ottenere misure significative: fit lineare su range ristretto.
+
+    Sotto i $\sim 5$ kHz: abbassamento fase su midrange e tweeter, modellato dalla resistenza in parallelo dei condensatori.
 \end{frame}
 
 \begin{frame}{Misure attese e misure sperimentali}
@@ -157,12 +187,18 @@
 \end{frame}
 
 \begin{frame}{Conclusioni}
-    Le misure sperimentali di $f_c$, $f_r$, $Q$ risultano compatibili con i valori attesi.
-
-    Pur tenendo conto di effetti non ideali il modello non è perfetto.
     \begin{itemize}
-        \item Per le ampiezze il modello è accurato ma si può dire propriamente compatibile solo su range ristretto
-        \item Per le fasi ci sono importanti effetti sistematici sia ad alte che basse frequenze
+        \item Le misure sperimentali di $f_c$, $f_r$, $Q$ risultano compatibili con i valori attesi.
+
+        \item Pur tenendo conto di effetti non ideali il modello non è perfetto.
+              \begin{itemize}
+                  \item Per le ampiezze il modello è accurato ma si può dire propriamente compatibile solo su range ristretto
+                  \item Per le fasi ci sono importanti effetti sistematici sulle alte frequenze
+              \end{itemize}
+
+        \item L'abbassamento delle fasi a basse frequenze su tweeter e woofer può essere dovuto a correnti
+              di dispersione nei condensatori, modellate come resistenze in parallelo.
+              Dal fit $R_{Cm} \approx R_{Ct} \approx 40$ k\Omega, ma misurando con il multimetro risulta un circuito aperto.
     \end{itemize}
 \end{frame}
 
@@ -170,9 +206,9 @@
     \Large\centerline{Fine della presentazione.}
 
     \vspace{8em}
-    
+
     \small
     La relazione completa, i dati e le macro per l'analisi sono reperibili al seguente link:
-    \url{https://github.com/enro284/lab2_circuiti}
+    \url{github.com/enro284/lab2_circuiti}
 \end{frame}
 \end{document}

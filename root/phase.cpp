@@ -158,8 +158,8 @@ Plot func_fit(const char *data_g = "data/phase_g.txt", const char *data_w = "dat
 {
     double plot_min{1E3};
     double plot_max{50E3};
-    double fit_min{8E3};
-    double fit_max{16E3};
+    double fit_min{1E3};
+    double fit_max{30E3};
 
     //
     // Baseline
@@ -228,28 +228,29 @@ Plot func_fit(const char *data_g = "data/phase_g.txt", const char *data_w = "dat
     auto func_g = new TF1("Fase Generatore", "[0]", fit_min, fit_max);
     func_g->SetNameTitle("Fit Generatore", "Fit Generatore");
 
-    auto func_w = new TF1("Fase Woofer", p_w, fit_min, fit_max, 6);
+    auto func_w = new TF1("Fase Woofer", p_w, fit_min, fit_max, 7);
     func_w->SetNameTitle("Fit Woofer", "Fit Woofer");
-    func_w->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9, 0);
+    func_w->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9, 0, 4E4);
     func_w->SetParLimits(0, 2E3, 4E3);
     func_w->SetParLimits(1, 50, 200);
     func_w->SetParLimits(2, 30, 70);
     func_w->SetParLimits(3, 0.02, 0.06);
     func_w->SetParLimits(4, 3E-9, 7E-9);
+    func_w->FixParameter(6, 4E4);
 
-    auto func_m = new TF1("Fase Mid", p_m, fit_min, fit_max, 6);
+    auto func_m = new TF1("Fase Mid", p_m, fit_min, fit_max, 7);
     func_m->SetNameTitle("Fit Midrange", "Fit Midrange");
 
-    func_m->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9, 0);
+    func_m->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9, 0, 4E4);
     func_m->SetParLimits(0, 2E3, 4E3);
     func_m->SetParLimits(1, 50, 200);
     func_m->SetParLimits(2, 30, 70);
     func_m->SetParLimits(3, 0.02, 0.06);
     func_m->SetParLimits(4, 3E-9, 7E-9);
 
-    auto func_t = new TF1("Fase Tweeter", p_t, fit_min, fit_max, 6);
+    auto func_t = new TF1("Fase Tweeter", p_t, fit_min, fit_max, 7);
     func_t->SetNameTitle("Fit Tweeter", "Fit Tweeter");
-    func_t->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9, 0);
+    func_t->SetParameters(3.3E3, 120, 50, 47E-3, 4.7E-9, 0, 4E4);
     func_t->SetParLimits(0, 2E3, 4E3);
     func_t->SetParLimits(1, 50, 200);
     func_t->SetParLimits(2, 30, 70);

@@ -123,10 +123,11 @@ double p_w(double *f, double *par)
     TComplex Z_gen{par[2], 0.};
     TComplex Z_L{0, W * par[3]};
     TComplex Z_C{0, -1 / (W * par[4])};
+    TComplex Z_RC{par[6], 0};
 
     TComplex Z_W = Z_R + Z_L + Z_RL;
-    TComplex Z_M = Z_R + Z_L + Z_C + Z_RL;
-    TComplex Z_T = Z_R + Z_C;
+    TComplex Z_M = Z_R + Z_L + 1. / (1. / Z_C + 1. / Z_RC) + Z_RL;
+    TComplex Z_T = Z_R + 1. / (1. / Z_C + 1. / Z_RC);
 
     TComplex Z_load = 1. / (1. / Z_W + 1. / Z_M + 1. / Z_T);
 
@@ -146,10 +147,11 @@ double p_m(double *f, double *par)
     TComplex Z_gen{par[2], 0.};
     TComplex Z_L{0, W * par[3]};
     TComplex Z_C{0, -1 / (W * par[4])};
+    TComplex Z_RC{par[6], 0};
 
     TComplex Z_W = Z_R + Z_L + Z_RL;
-    TComplex Z_M = Z_R + Z_L + Z_C + Z_RL;
-    TComplex Z_T = Z_R + Z_C;
+    TComplex Z_M = Z_R + Z_L + 1. / (1. / Z_C + 1. / Z_RC) + Z_RL;
+    TComplex Z_T = Z_R + 1. / (1. / Z_C + 1. / Z_RC);
 
     TComplex Z_load = 1. / (1. / Z_W + 1. / Z_M + 1. / Z_T);
 
@@ -167,10 +169,11 @@ double p_t(double *f, double *par)
     TComplex Z_gen{par[2], 0.};
     TComplex Z_L{0, W * par[3]};
     TComplex Z_C{0, -1 / (W * par[4])};
+    TComplex Z_RC{par[6], 0};
 
     TComplex Z_W = Z_R + Z_L + Z_RL;
-    TComplex Z_M = Z_R + Z_L + Z_C + Z_RL;
-    TComplex Z_T = Z_R + Z_C;
+    TComplex Z_M = Z_R + Z_L + 1. / (1. / Z_C + 1. / Z_RC) + Z_RL;
+    TComplex Z_T = Z_R + 1. / (1. / Z_C + 1. / Z_RC);
 
     TComplex Z_load = 1. / (1. / Z_W + 1. / Z_M + 1. / Z_T);
 
